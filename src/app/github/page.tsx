@@ -20,6 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Navigation } from "@/components/navigation";
 import Link from "next/link";
+import constants from "@/libs/constants";
 
 export default function GitHubPage() {
   return (
@@ -80,20 +81,20 @@ export default function GitHubPage() {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button className="gap-2" size="lg" asChild>
-                  <Link href="https://github.com/JeelDobariya38/Passcodes">
+                  <Link href={constants.GITHUB_REPO_URL}>
                     <Code className="h-5 w-5" />
                     View on GitHub
                     <ExternalLink className="h-4 w-4" />
                   </Link>
                 </Button>
                 <Button variant="outline" className="gap-2" size="lg" asChild>
-                  <Link href="https://github.com/JeelDobariya38/Passcodes/releases/latest">
+                  <Link href={constants.GITHUB_LATEST_RELEASE_URL}>
                     <Download className="h-5 w-5" />
                     Download Latest Release
                   </Link>
                 </Button>
                 <Button variant="outline" className="gap-2" size="lg" asChild>
-                  <Link href="https://github.com/JeelDobariya38/Passcodes/fork">
+                  <Link href={constants.GITHUB_REPO_FORK_URL}>
                     <GitBranch className="h-5 w-5" />
                     Fork Repository
                   </Link>
@@ -279,17 +280,14 @@ export default function GitHubPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="gap-2" asChild>
-                  <Link
-                    href="https://github.com/JeelDobariya38/Passcodes"
-                    target="_blank"
-                  >
+                  <Link href={constants.GITHUB_REPO_URL} target="_blank">
                     <Code className="h-5 w-5" />
                     Start Contributing
                     <ExternalLink className="h-4 w-4" />
                   </Link>
                 </Button>
                 <Button variant="outline" size="lg" className="gap-2" asChild>
-                  <Link href="https://t.me/passcodescommunity" target="_blank">
+                  <Link href={constants.TELEGRAM_COMMUNITY_URL} target="_blank">
                     <Users className="h-5 w-5" />
                     Join Telegram Community
                   </Link>

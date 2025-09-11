@@ -5,6 +5,7 @@ import { Shield, Code, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./theme-toggle";
 import { useState } from "react";
+import constants from "@/libs/constants";
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,7 +40,7 @@ export function Navigation() {
           </Link>
           <ThemeToggle />
           <Button variant="outline" className="gap-2" asChild>
-            <Link href="https://github.com/JeelDobariya38/Passcodes">
+            <Link href={constants.GITHUB_REPO_URL}>
               <Code className="h-4 w-4" />
               View Source
             </Link>
@@ -90,7 +91,7 @@ export function Navigation() {
             </Link>
             <Button variant="outline" className="gap-2 w-fit" asChild>
               <Link
-                href="https://github.com/JeelDobariya38/Passcodes"
+                href={constants.GITHUB_REPO_URL}
                 onClick={() => setIsMenuOpen(false)}
               >
                 <Code className="h-4 w-4" />

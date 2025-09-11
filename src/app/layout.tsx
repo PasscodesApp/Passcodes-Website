@@ -6,30 +6,30 @@ import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://jeeldobariya38.github.io/Passcodes-Website/"),
+  metadataBase: new URL("https://passcodesapp.github.io/Passcodes-Website/"),
   title: {
     default: "Passcodes - Open Source Password Manager",
     template: "%s | Passcodes",
   },
   description: "Take Down the Headache of Remembering Passwords!!",
   // alternates: {
-  //   canonical: "https://jeeldobariya38.github.io/Passcodes-Website/",
+  //   canonical: "https://passcodesapp.github.io/Passcodes-Website/",
   //   languages: {
-  //     "en-US": "https://jeeldobariya38.github.io/Passcodes-Website//en-US",
-  //     "de-DE": "https://jeeldobariya38.github.io/Passcodes-Website//de-DE",
+  //     "en-US": "https://passcodesapp.github.io/Passcodes-Website//en-US",
+  //     "de-DE": "https://passcodesapp.github.io/Passcodes-Website//de-DE",
   //   },
   // },
   openGraph: {
     title: "Passcodes - Open Source Password Manager",
     description: "Take Down the Headache of Remembering Passwords!!",
-    url: "https://jeeldobariya38.github.io/Passcodes-Website",
+    url: "https://passcodesapp.github.io/Passcodes-Website",
     siteName: "Passcodes",
     images: [
       {
-        url: "https://jeeldobariya38.github.io/Passcodes-Website/public/passcodes-banner.png",
+        url: "https://passcodesapp.github.io/Passcodes-Website/public/passcodes-banner.png",
       },
       {
-        url: "https://jeeldobariya38.github.io/Passcodes-Website/public/passcodes.png",
+        url: "https://passcodesapp.github.io/Passcodes-Website/public/passcodes.png",
       },
     ],
   },

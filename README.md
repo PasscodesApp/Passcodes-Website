@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![🚀 Deploy Next.js Based Website to GitHub Pages](https://github.com/JeelDobariya38/Passcodes-Website/actions/workflows/nextjs-build-githubpages.yml/badge.svg)](https://github.com/JeelDobariya38/Passcodes-Website/actions/workflows/nextjs-build-githubpages.yml)
+[![🚀 Deploy Next.js Based Website to GitHub Pages](https://github.com/PasscodesApp/Passcodes-Website/actions/workflows/nextjs-build-githubpages.yml/badge.svg)](https://github.com/PasscodesApp/Passcodes-Website/actions/workflows/nextjs-build-githubpages.yml)
 
 </div>
 
@@ -10,7 +10,7 @@
   <img width="512"src="https://github.com/user-attachments/assets/88e63483-9930-4ce0-a01e-4564e18b3c71" alt="passcodes play store banner"  />
 </div>
 
-This repository contains the source code for the website of the Passcodes Android App, maintained within the seperate repository — [JeelDobariya38/Passcodes](https://github.com/JeelDobariya38/Passcodes).
+This repository contains the source code for the website of the Passcodes Android App, maintained within the seperate repository — [PasscodesApp/Passcodes](https://github.com/PasscodesApp/Passcodes).
 
 ## Building && Previewing
 
@@ -22,15 +22,15 @@ npm run preview
 
 We appreciate the contribuation to website...
 
-Before, contributing to this website project, you should have knowledge of the [CONTRIBUTING.md](https://github.com/JeelDobariya38/Passcodes/blob/main/CONTRIBUTING.md) & [MIT License (app)](https://github.com/JeelDobariya38/Passcodes/blob/main/LICENSE.txt) provide in [app repository](https://github.com/JeelDobariya38/Passcodes). and also you should have basic knowledge of app repository codebase.
+Before, contributing to this website project, you should have knowledge of the [CONTRIBUTING.md](https://github.com/PasscodesApp/Passcodes/blob/main/CONTRIBUTING.md) & [MIT License (app)](https://github.com/PasscodesApp/Passcodes/blob/main/LICENSE.txt) provide in [app repository](https://github.com/PasscodesApp/Passcodes). and also you should have basic knowledge of app repository codebase.
 
 ## 📫 Questions or Issues?
 
-Free free to [open an issue](https://github.com/JeelDobariya38/Passcodes-Website/issues) or start a discussion in the [repository](https://github.com/JeelDobariya38/Passcodes-Website) if you need help contributing or have questions about passcodes website.
+Free free to [open an issue](https://github.com/PasscodesApp/Passcodes-Website/issues) or start a discussion in the [repository](https://github.com/PasscodesApp/Passcodes-Website) if you need help contributing or have questions about passcodes website.
 
 ## Security Policy
 
-We follow the same security policy as the [app repository](https://github.com/JeelDobariya38/Passcodes). which is avaiable in app repository over [here](https://github.com/JeelDobariya38/Passcodes/blob/main/SECURITY.md).
+We follow the same security policy as the [app repository](https://github.com/PasscodesApp/Passcodes). which is avaiable in app repository over [here](https://github.com/PasscodesApp/Passcodes/blob/main/SECURITY.md).
 
 ---
 

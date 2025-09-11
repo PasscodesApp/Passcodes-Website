@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import constants from "@/libs/constants";
 
 type Asset = {
   url: string;
@@ -27,9 +28,7 @@ export async function getLatestDownloadableUniversalApkAssetData() {
   try {
     console.groupCollapsed("Github Release API Call:-");
 
-    let res = await fetch(
-      "https://api.github.com/repos/JeelDobariya38/Passcodes/releases/latest"
-    );
+    let res = await fetch(constants.GITHUB_LATEST_RELEASE_API_URL);
     let latestRelease: Release = await res.json();
     console.log("Response:", latestRelease);
 
@@ -63,10 +62,10 @@ type ApkDownloadButtonProps = {
 };
 
 export function ApkDownloadButton({
-  fallbackUrl = "https://github.com/JeelDobariya38/Passcodes/releases",
+  fallbackUrl = constants.GITHUB_RELEASE_URL,
 }: ApkDownloadButtonProps) {
   const [downloadUrl, setDownloadUrl] = useState<string>(
-    "https://github.com/JeelDobariya38/Passcodes"
+    constants.GITHUB_REPO_URL
   );
   const [downloadCount, setDownloadCount] = useState<number>(-1);
 
