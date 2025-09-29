@@ -22,7 +22,9 @@ npm run preview
 
 We appreciate the contribuation to website...
 
-Before, contributing to this website project, you should have knowledge of the [CONTRIBUTING.md](https://github.com/PasscodesApp/Passcodes/blob/main/CONTRIBUTING.md) & [MIT License (app)](https://github.com/PasscodesApp/Passcodes/blob/main/LICENSE.txt) provide in [app repository](https://github.com/PasscodesApp/Passcodes). and also you should have basic knowledge of app repository codebase.
+By, contributing to this website project, you conform that you have knowledge of & are accept the [CONTRIBUTING.md](https://github.com/PasscodesApp/Passcodes-Docs/blob/main/CONTRIBUTING.md) & [MIT License](https://github.com/PasscodesApp/Passcodes-Docs/blob/main/LICENSE.txt) provide in [PasscodesApp/Passcodes-Docs](https://github.com/PasscodesApp/Passcodes-Docs) Repository. And also you should have basic knowledge of App Repository Codebase.
+
+For more info, read `README` on [Passcodes](https://github.com/PasscodesApp) github organization homepage.
 
 ## 📫 Questions or Issues?
 
@@ -30,7 +32,7 @@ Free free to [open an issue](https://github.com/PasscodesApp/Passcodes-Website/i
 
 ## Security Policy
 
-We follow the same security policy as the [app repository](https://github.com/PasscodesApp/Passcodes). which is avaiable in app repository over [here](https://github.com/PasscodesApp/Passcodes/blob/main/SECURITY.md).
+We follow the same security policy as the [docs repository](https://github.com/PasscodesApp/Passcodes-Docs) for entire organization. which is avaiable in our docs repository over [PasscodesApp/Passcodes-Docs](https://github.com/PasscodesApp/Passcodes-Docs/blob/main/SECURITY.md).
 
 ---
 
