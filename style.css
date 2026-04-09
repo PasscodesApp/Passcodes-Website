@@ -15,7 +15,7 @@ body {
     flex-direction: column;
 
     /* Gradient background */
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    background: linear-gradient(135deg, #061023, #343f53);
     color: white;
 }
 
@@ -26,7 +26,7 @@ h1 {
     letter-spacing: 2px;
 
     /* Glow effect */
-    text-shadow: 0 0 10px rgba(255,255,255,0.7),
+    text-shadow: 0 0 10px rgba(249, 211, 211, 0.7),
                  0 0 20px rgba(255,255,255,0.5);
 }
 
