@@ -1,0 +1,77 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Background */
+body {
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    /* Gradient background */
+    background: linear-gradient(135deg, #061023, #343f53);
+    color: white;
+}
+
+/* Heading */
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+
+    /* Glow effect */
+    text-shadow: 0 0 10px rgba(249, 211, 211, 0.7),
+                 0 0 20px rgba(255,255,255,0.5);
+}
+
+/* Link as button */
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px 25px;
+    border-radius: 30px;
+
+    /* Gradient button */
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+
+    /* Smooth transition */
+    transition: all 0.3s ease;
+
+    margin-bottom: 20px;
+
+    /* Shadow */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Hover effect */
+a:hover {
+    transform: scale(1.1) translateY(-3px);
+
+    /* Glow */
+    box-shadow: 0 10px 25px rgba(255, 75, 43, 0.6);
+
+    background: linear-gradient(45deg, #ff4b2b, #ff416c);
+}
+
+/* Click effect */
+a:active {
+    transform: scale(0.95);
+}
+
+/* Add subtle floating animation */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+h1 {
+    animation: float 3s ease-in-out infinite;
+}

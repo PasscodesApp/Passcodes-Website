@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![🚀 Deploy Next.js Based Website to GitHub Pages](https://github.com/PasscodesApp/Passcodes-Website/actions/workflows/nextjs-build-githubpages.yml/badge.svg)](https://github.com/PasscodesApp/Passcodes-Website/actions/workflows/nextjs-build-githubpages.yml)
+<!---[![🚀 Deploy Next.js Based Website to GitHub Pages](https://github.com/PasscodesApp/Passcodes-Website/actions/workflows/nextjs-build-githubpages.yml/badge.svg)](https://github.com/PasscodesApp/Passcodes-Website/actions/workflows/nextjs-build-githubpages.yml)--->
 
 </div>
 
@@ -12,11 +12,11 @@
 
 This repository contains the source code for the website of the Passcodes Android App, maintained within the seperate repository — [PasscodesApp/Passcodes](https://github.com/PasscodesApp/Passcodes).
 
+**Maintain by** : [@jainil63](https://github.com/jainil63)
+
 ## Building && Previewing
 
-```pwershell
-npm run preview
-```
+Open `index.html` in your browser.
 
 ## Contribution Are Appreciated!!!
 
