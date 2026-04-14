@@ -39,7 +39,7 @@ a {
     border-radius: 30px;
 
     /* Gradient button */
-    background: linear-gradient(#3e57a8, #3e57a8, #3e57a8);
+    background: linear-gradient(45deg, #3e57a8, #3e57a8);
 
     /* Smooth transition */
     transition: all 0.3s ease;
@@ -55,9 +55,9 @@ a:hover {
     transform: scale(1.1) translateY(-3px);
 
     /* Glow */
-    box-shadow: 0 10px 25px rgba(255, 75, 43, 0.6);
+    box-shadow: 0 10px 25px #3e57a8(255, 75, 43, 0.6);
 
-    background: linear-gradient(#3e57a8, #3e57a8 , #3e57a8);
+    background: linear-gradient(45deg, #3e57a8 , #3e57a8);
 }
 
 /* Click effect */
@@ -75,21 +75,3 @@ a:active {
 h1 {
     animation: float 3s ease-in-out infinite;
 }
-
-nav-links {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: white;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 0 0 10px rgba(249, 211, 211, 0.7);
-}
-

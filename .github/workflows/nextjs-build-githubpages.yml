@@ -1,0 +1,71 @@
+name: 🚀 Deploy Next.js Based Website to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+env:
+  BASE_PATH: "/${{ github.event.repository.name }}"
+  ASSET_PREFIX: "/${{ github.event.repository.name }}/"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: "package.json"
+          cache: npm
+          cache-dependency-path: "package-lock.json"
+
+      - name: 📦 Install Dependencies (npm)
+        run: |
+          npm ci
+
+      - name: 🧪 Lint The Code
+        run: |
+          npm run lint
+
+      - name: 🧪 Test The Site
+        run: |
+          npm test
+
+      - name: 🛠️ Build and Export Site
+        run: |
+          npm run build
+
+      - name: ©️ Copy Public Assest In Out
+        run: |
+          npm run copydependency
+
+      - name: 📤 Upload Static Site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
