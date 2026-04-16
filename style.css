@@ -75,3 +75,72 @@ a:active {
 h1 {
     animation: float 3s ease-in-out infinite;
 }
+
+/* Navbar */
+.nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(6, 16, 35, 0.9);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+/* Navbar container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+}
+
+/* Logo */
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: white;
+    text-shadow: 0 0 10px rgba(255,255,255,0.7);
+}
+
+/* Nav links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+/* Nav link style */
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+/* Hover effect */
+
+/* Fix body overlap due to fixed navbar */
+body {
+    padding-top: 80px;
+}
+
+.nav-links li a:active {
+    transform: scale(0.92);
+
+    /* Pressed shadow */
+    box-shadow: 0 3px 8px rgba(0,0,0,0.6);
+}
+
+.navbar {
+    justify-content: center;
+    display: flex;
+    gap: 20px;
+}
+
+.footer {
+    margin-top: 200px;
+}
