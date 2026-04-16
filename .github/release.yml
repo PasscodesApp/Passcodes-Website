@@ -2,23 +2,32 @@
 
 changelog:
   categories:
-    - title: Highlights 🌟
+    - title: 🌟 Highlights
       labels:
-        - Highlights
-   
-    - title: New Features 🚀
+        - highlights
+
+    - title: 🚀 New Features
       labels:
         - feature
         - enhancement
-    
-    - title: Bug Fixes 🐛
+
+    - title: 🐛 Bug Fixes
       labels:
         - bug
-    
-    - title: Documentation 📚
+
+    - title: 🛠 Code Refactoring
+      labels:
+        - refactor
+
+    - title: 📚 Documentation
       labels:
         - documentation
-    
+
+    - title: 📦 Dependency Updates
+      labels:
+        - dependencies
+        - dependabot
+
     - title: Other Changes
       labels:
         - "*"

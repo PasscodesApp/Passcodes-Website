@@ -1,8 +1,11 @@
+# This CI workflow is not use anymore, but is just here!
+
 name: 🚀 Deploy Next.js Based Website to GitHub Pages
 
 on:
-  push:
-    branches: ["main"]
+  # push:
+  #   branches: ["main"]
+  
   workflow_dispatch:
 
 env:
