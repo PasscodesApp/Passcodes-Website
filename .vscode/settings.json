@@ -5,5 +5,6 @@
     "files.autoSave": "onFocusChange",
     "prettier.tabWidth": 4,
     "prettier.useTabs": false,
-    "files.insertFinalNewline": true
+    "files.insertFinalNewline": true,
+    "printWidth": 120
 }

@@ -8,7 +8,7 @@
 /* Background */
 body {
     height: 100vh;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: "Segoe UI", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,12 +26,13 @@ h1 {
     letter-spacing: 2px;
 
     /* Glow effect */
-    text-shadow: 0 0 10px rgba(249, 211, 211, 0.7),
-                 0 0 20px rgba(255,255,255,0.5);
+    text-shadow:
+        0 0 10px rgba(249, 211, 211, 0.7),
+        0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 /* Link as button */
-a {
+.link {
     text-decoration: none;
     color: white;
     font-size: 1.2rem;
@@ -51,27 +52,109 @@ a {
 }
 
 /* Hover effect */
-a:hover {
+.link:hover {
     transform: scale(1.1) translateY(-3px);
 
     /* Glow */
     box-shadow: 0 10px 25px #3e57a8(255, 75, 43, 0.6);
 
-    background: linear-gradient(45deg, #3e57a8 , #3e57a8);
+    background: linear-gradient(45deg, #3e57a8, #3e57a8);
 }
 
 /* Click effect */
-a:active {
+.link:active {
     transform: scale(0.95);
 }
 
 /* Add subtle floating animation */
 @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 h1 {
     animation: float 3s ease-in-out infinite;
+}
+
+/* Navbar */
+.nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(6, 16, 35, 0.9);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+/* Navbar container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+}
+
+/* Logo */
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+/* Nav links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+/* Nav link style */
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+/* Hover effect */
+
+/* Fix body overlap due to fixed navbar */
+body {
+    padding-top: 80px;
+}
+
+.nav-links li a:active {
+    transform: scale(0.92);
+
+    /* Pressed shadow */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+}
+
+.navbar {
+    justify-content: center;
+    display: flex;
+    gap: 20px;
+}
+
+footer {
+    margin-top: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100vw;
+}
+
+a {
+    color: #ffffff;
 }
