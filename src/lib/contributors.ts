@@ -45,6 +45,9 @@ export const FEATURED_CONTRIBUTORS: ContributorProfile[] = [
     {
         name: "A Guy",
         role: "Community Manager",
+        login: "I-A-GUY",
+        github: "https://github.com/I-A-GUY",
+        avatar: "https://github.com/I-A-GUY.png",
     },
     {
         name: "hexCode",

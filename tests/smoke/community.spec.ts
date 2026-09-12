@@ -14,7 +14,7 @@ test.describe("Community Page Smoke Tests", () => {
         await expect(page.getByRole("heading", { name: "Harsha Vardhan Burra" })).toBeVisible();
     });
 
-    test("A Guy community manager card renders without misleading links", async ({ page }) => {
+    test("A Guy community manager card renders with appropriate GitHub link", async ({ page }) => {
         // Find "A Guy" contributor card
         const guyCard = page.locator(".card").filter({ hasText: "A Guy" });
         await expect(guyCard).toBeVisible();
@@ -23,9 +23,9 @@ test.describe("Community Page Smoke Tests", () => {
         // Role should be Community Manager
         await expect(guyCard.locator(".role")).toHaveText("Community Manager");
 
-        // The card must not have empty or misleading external links
-        const externalLinks = guyCard.locator("a");
-        await expect(externalLinks).toHaveCount(0);
+        // Verify GitHub link points to exact profile
+        const githubLink = guyCard.locator("a[href='https://github.com/I-A-GUY']");
+        await expect(githubLink).toBeVisible();
     });
 
     test("established contributors have appropriate social/GitHub links", async ({ page }) => {
