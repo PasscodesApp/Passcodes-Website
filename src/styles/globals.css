@@ -20,7 +20,7 @@
     /* Typography Colors (Slate Precision) */
     --text: #f8fafc;
     --text-muted: #94a3b8;
-    --text-dim: #64748b;
+    --text-dim: #8295ab;
 
     /* Refined Sapphire / Azure Accent (Dark Mode) */
     --primary: #3b82f6;
@@ -85,7 +85,7 @@ html.light {
 
     --text: #0f172a;
     --text-muted: #475569;
-    --text-dim: #94a3b8;
+    --text-dim: #54667a;
 
     /* Refined Sapphire / Azure Accent (Light Mode) */
     --primary: #2563eb;
@@ -178,18 +178,16 @@ html.light {
     line-height: 1.6;
 }
 
-/* Route transition (Tier 1/2: fast, subtle 4px) */
+/* Route transition (Restrained, opacity-only to prevent layout shifts) */
 .page-enter {
     animation: pageEnter 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 @keyframes pageEnter {
     from {
         opacity: 0.96;
-        transform: translate3d(0, 4px, 0);
     }
     to {
         opacity: 1;
-        transform: translate3d(0, 0, 0);
     }
 }
 
@@ -482,6 +480,8 @@ html.light .active-nav {
 /* ============================= */
 .store-section {
     max-width: 680px;
+    min-height: 180px;
+    contain: layout;
     margin: 0 auto 2rem;
     padding: 1.75rem;
     text-align: center;
@@ -516,7 +516,9 @@ html.light .active-nav {
 }
 .store-badge img {
     max-width: 190px;
+    width: 100%;
     height: auto;
+    aspect-ratio: 574 / 287;
     display: block;
 }
 

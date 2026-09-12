@@ -22,6 +22,8 @@ const nextConfig = {
       { protocol: 'https', hostname: 'raw.githubusercontent.com' },
     ],
   },
+
+  productionBrowserSourceMaps: true,
 };
 
 export default nextConfig;

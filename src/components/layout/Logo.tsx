@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { Lock } from "lucide-react";
-import { LOGO_SRC } from "@/lib/constants";
+import { LOGO_SRC, LOGO_WEBP } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-/** Real logo with a graceful icon fallback (never shows a broken image). */
+/** Real logo with modern WebP negotiation and graceful icon fallback. */
 export function Logo({
     className = "h-10 w-10 rounded-xl",
 }: {
@@ -28,12 +28,19 @@ export function Logo({
     }
 
     return (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-            src={LOGO_SRC}
-            alt="Passcodes logo"
-            className={cn("object-cover", className)}
-            onError={() => setFailed(true)}
-        />
+        <picture>
+            <source type="image/webp" srcSet={LOGO_WEBP} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+                src={LOGO_SRC}
+                alt="Passcodes logo"
+                width={40}
+                height={40}
+                loading="lazy"
+                decoding="async"
+                className={cn("object-cover", className)}
+                onError={() => setFailed(true)}
+            />
+        </picture>
     );
 }

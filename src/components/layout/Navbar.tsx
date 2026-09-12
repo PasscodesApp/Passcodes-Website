@@ -80,7 +80,7 @@ export function Navbar() {
                     <Link
                         href="/downloads"
                         className="btn btn-filled btn-small ml-1"
-                        aria-label="Download Passcodes"
+                        aria-label="Get App - Download Passcodes"
                     >
                         <Download className="h-3.5 w-3.5" aria-hidden="true" />
                         <span>Get App</span>
