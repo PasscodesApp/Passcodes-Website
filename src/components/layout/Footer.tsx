@@ -145,10 +145,25 @@ export function Footer() {
                 </div>
 
                 <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[var(--border-light)] pt-8 text-xs text-[var(--footer-muted)] sm:flex-row">
-                    <p>
-                        Copyright &copy; Jeel Dobariya 2025–2026. All rights
-                        reserved.
-                    </p>
+                    <div className="flex flex-col items-center gap-1 text-center sm:items-start sm:text-left">
+                        <p>
+                            Copyright &copy; Jeel Dobariya 2025–2026. All rights
+                            reserved.
+                        </p>
+                        <p>
+                            Design by{" "}
+                            <Link
+                                href="https://github.com/harsha-vardhan-burra"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[var(--footer-muted)] underline underline-offset-2 transition-colors hover:text-[var(--text)]"
+                                title="Harsha Vardhan Burra"
+                                aria-label="Harsha Vardhan Burra (@harsha-vardhan-burra) on GitHub"
+                            >
+                                @harsha-vardhan-burra
+                            </Link>
+                        </p>
+                    </div>
                     <p className="text-[var(--text-dim)]">
                         Crafted for privacy and local control.
                     </p>
