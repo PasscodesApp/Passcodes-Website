@@ -46,7 +46,9 @@ export const DOCS_RELEASE_NOTES_URL =
     "https://passcodesapp.github.io/Passcodes-Docs/user-docs/release-notes/";
 export const CONTACT_EMAIL = "jeeldobariya38@gmail.com";
 export const LOGO_SRC = `${process.env.BASE_PATH || ""}/logo.png`;
+export const LOGO_WEBP = `${process.env.BASE_PATH || ""}/logo.webp`;
 export const KOMI_BADGE_SRC = `${process.env.BASE_PATH || ""}/komi-store-badge.png`;
+export const KOMI_BADGE_WEBP = `${process.env.BASE_PATH || ""}/komi-store-badge.webp`;
 export const DISCORD_URL = "https://discord.gg/kSSkYq7KAQ";
 export const TELEGRAM_URL = "https://t.me/passcodescommunity";
 export const KOMI_STORE_URL =

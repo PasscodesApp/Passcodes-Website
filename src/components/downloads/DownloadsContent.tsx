@@ -14,7 +14,11 @@ import {
     getLatestStableRelease,
     classifyRelease,
 } from "@/hooks/useGithubRelease";
-import { KOMI_STORE_URL, KOMI_BADGE_SRC } from "@/lib/constants";
+import {
+    KOMI_STORE_URL,
+    KOMI_BADGE_SRC,
+    KOMI_BADGE_WEBP,
+} from "@/lib/constants";
 import Link from "next/link";
 
 type FilterChannel = "all" | "stable" | "beta" | "alpha";
@@ -57,12 +61,19 @@ function KomiSection() {
                     className="store-badge"
                     aria-label="Get it on Komi Store"
                 >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                        src={KOMI_BADGE_SRC}
-                        alt="Get it on Komi Store"
-                        onError={() => setBadgeFailed(true)}
-                    />
+                    <picture>
+                        <source type="image/webp" srcSet={KOMI_BADGE_WEBP} />
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                            src={KOMI_BADGE_SRC}
+                            alt="Get it on Komi Store"
+                            width={287}
+                            height={144}
+                            loading="lazy"
+                            decoding="async"
+                            onError={() => setBadgeFailed(true)}
+                        />
+                    </picture>
                 </Link>
             )}
         </section>
@@ -146,12 +157,12 @@ export function DownloadsContent() {
                         <ScrollReveal delay={60}>
                             <div className="mb-12">
                                 <div className="mb-3 flex items-center justify-between">
-                                    <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--accent-light)]">
-                                        <Cpu className="h-4 w-4" />
+                                    <h2 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--accent-light)]">
+                                        <Cpu className="h-4 w-4" aria-hidden="true" />
                                         <span>
                                             Recommended Production Build
                                         </span>
-                                    </div>
+                                    </h2>
                                 </div>
                                 <DownloadCard
                                     release={latestRelease}

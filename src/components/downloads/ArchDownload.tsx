@@ -59,7 +59,6 @@ export function ArchDownload({ assets, variant = "full", className }: Props) {
                     <Link
                         href={primary.browser_download_url}
                         download
-                        aria-label={`Download ${ARCH_META[primaryArch].label} APK`}
                         className="btn btn-filled btn-small"
                     >
                         <Download className="h-4 w-4" aria-hidden="true" />{" "}
@@ -105,7 +104,6 @@ export function ArchDownload({ assets, variant = "full", className }: Props) {
             <Link
                 href={primary.browser_download_url}
                 download
-                aria-label={`Download ${ARCH_META[primaryArch].label} APK, ${formatFileSize(primary.size)}`}
                 className="btn btn-filled w-full sm:w-auto"
             >
                 <Download className="h-5 w-5" aria-hidden="true" />
@@ -145,7 +143,6 @@ function Chip({ v }: { v: { key: ArchKey; asset: GithubReleaseAsset } }) {
         <Link
             href={v.asset.browser_download_url}
             download
-            aria-label={`Download ${m.label} APK, ${formatFileSize(v.asset.size)}`}
             className="group inline-flex items-center gap-2 rounded-xl border border-[var(--border-light)] bg-[var(--card-bg)] px-3 py-2 text-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--border)] hover:bg-[var(--card-bg-hover)]"
         >
             <Download
@@ -167,7 +164,6 @@ function VariantRow({ v }: { v: { key: ArchKey; asset: GithubReleaseAsset } }) {
             <Link
                 href={v.asset.browser_download_url}
                 download
-                aria-label={`Download ${m.label} APK, ${formatFileSize(v.asset.size)}`}
                 className="flex items-center justify-between gap-3 rounded-xl border border-[var(--border-light)] bg-[var(--card-bg)] px-3 py-2 transition-colors hover:border-[var(--border)] hover:bg-[var(--card-bg-hover)]"
             >
                 <span className="min-w-0">

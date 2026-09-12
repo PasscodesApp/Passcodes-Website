@@ -433,6 +433,14 @@ async function main() {
         const category = editorial.category || inferCategory(parsedSections);
         const isMajor = editorial.isMajor ?? (version.endsWith(".0.0") || releaseType === "Stable");
 
+        // Deprecation rule: v1.x and v2.x releases are deprecated (superseded by newer database architecture in later releases).
+        const majorMatch = version.match(/^v?(\d+)\./i);
+        const majorVersion = majorMatch ? parseInt(majorMatch[1], 10) : undefined;
+        const isDeprecated = majorVersion === 1 || majorVersion === 2;
+        const deprecatedReason = isDeprecated
+            ? "Superseded by the newer database architecture introduced in later releases."
+            : undefined;
+
         const entry = {
             slug,
             version,
@@ -450,6 +458,8 @@ async function main() {
             isMajor,
             isYanked: isYanked || false,
             yankedReason: editorial.yankedReason || undefined,
+            isDeprecated,
+            deprecatedReason,
             assetsCount: assetsCount > 0 ? assetsCount : undefined,
             downloadCount: downloadCount > 0 ? downloadCount : undefined,
         };

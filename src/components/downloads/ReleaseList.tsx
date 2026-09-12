@@ -1,9 +1,9 @@
 "use client";
 
-import { Download, Calendar, ExternalLink } from "lucide-react";
+import { Download, Calendar, ExternalLink, AlertTriangle } from "lucide-react";
 import { ArchDownload } from "@/components/downloads/ArchDownload";
 import { formatNumber, formatDate } from "@/lib/utils";
-import { classifyRelease, isYankedRelease } from "@/hooks/useGithubRelease";
+import { classifyRelease, isYankedRelease, isDeprecatedRelease } from "@/hooks/useGithubRelease";
 import type { GithubRelease } from "@/types/github";
 import Link from "next/link";
 
@@ -45,15 +45,24 @@ export function ReleaseList({
                 );
                 const channel = classifyRelease(release);
                 const isYanked = isYankedRelease(release);
+                const isDeprecated = isDeprecatedRelease(release);
 
                 return (
-                    <div key={release.id} className="release-card">
+                    <div
+                        key={release.id}
+                        className={`release-card ${isDeprecated ? "deprecated" : ""}`}
+                    >
                         <div className="release-top">
                             <div className="min-w-0">
-                                <h3 className="flex items-center gap-2">
+                                <h3 className="flex flex-wrap items-center gap-2">
                                     <span className="truncate">
                                         {release.name || release.tag_name}
                                     </span>
+                                    {isDeprecated && (
+                                        <span className="tag deprecated shrink-0">
+                                            deprecated
+                                        </span>
+                                    )}
                                     {isYanked && (
                                         <span className="tag alpha shrink-0">
                                             yanked
@@ -81,6 +90,18 @@ export function ReleaseList({
                                 {formatNumber(totalDownloads)}
                             </span>
                         </div>
+
+                        {isDeprecated && (
+                            <div className="mt-3 rounded-lg border border-red-500/25 bg-red-500/5 p-2.5 text-xs leading-relaxed text-red-700 dark:text-red-300">
+                                <div className="flex items-center gap-1.5 font-semibold text-red-600 dark:text-red-400">
+                                    <AlertTriangle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                                    <span>Deprecated Release</span>
+                                </div>
+                                <p className="mt-1 text-[var(--text-muted)]">
+                                    This release is no longer supported. Superseded by the newer database architecture introduced in later releases. Please use a current release instead.
+                                </p>
+                            </div>
+                        )}
 
                         <div className="release-actions mt-3 flex-wrap items-center justify-between border-t border-[var(--border-light)] pt-3">
                             <ArchDownload

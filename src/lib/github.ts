@@ -89,6 +89,18 @@ export function isYankedRelease(release: GithubRelease): boolean {
 }
 
 /**
+ * Check if a release is deprecated.
+ * v1.x and v2.x releases are deprecated (superseded by newer database architecture).
+ */
+export function isDeprecatedRelease(release: GithubRelease): boolean {
+    const text = release.tag_name || release.name || "";
+    const match = text.match(/v?(\d+)\./i);
+    if (!match) return false;
+    const major = parseInt(match[1], 10);
+    return major === 1 || major === 2;
+}
+
+/**
  * Classify a release into Stable, Beta, or Alpha channels based on metadata and naming conventions.
  * Primary classification:
  * - inspect explicit alpha/beta markers in release title or tag name
@@ -127,7 +139,7 @@ export function classifyRelease(release: GithubRelease): ReleaseChannel {
  * Find the latest stable release from a list of releases.
  * Follows GitHub's /releases/latest semantics:
  * - not a draft
- * - classified as stable (not prerelease, not alpha/beta, not yanked)
+ * - classified as stable (not prerelease, not alpha/beta, not yanked, not deprecated)
  * - newest according to created_at
  * Pure function that does not mutate the source array.
  */
@@ -135,7 +147,7 @@ export function getLatestStableRelease(
     releases: GithubRelease[]
 ): GithubRelease | undefined {
     return releases.reduce<GithubRelease | undefined>((latest, release) => {
-        if (release.draft || isYankedRelease(release)) return latest;
+        if (release.draft || isYankedRelease(release) || isDeprecatedRelease(release)) return latest;
         if (classifyRelease(release) !== "stable") return latest;
         if (!latest) return release;
 

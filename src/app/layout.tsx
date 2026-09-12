@@ -1,17 +1,43 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Space_Grotesk } from "next/font/google";
 import { QueryProvider } from "@/providers/QueryProvider";
 import { ThemeProvider, THEME_INIT_SCRIPT } from "@/providers/ThemeProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageTransition } from "@/components/layout/PageTransition";
-import { GithubStarDialog } from "@/components/shared/GithubStarDialog";
 import { SITE_META } from "@/lib/constants";
-import { PowerShortcuts } from "@/components/layout/PowerShortcuts";
 import { AmbientBackground } from "@/components/visuals/AmbientBackground";
 import "@/styles/globals.css";
 
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], display: "swap" });
+const GithubStarDialog = dynamic(
+    () =>
+        import("@/components/shared/GithubStarDialog").then(
+            (m) => m.GithubStarDialog
+        ),
+    { ssr: false }
+);
+
+const PowerShortcuts = dynamic(
+    () =>
+        import("@/components/layout/PowerShortcuts").then(
+            (m) => m.PowerShortcuts
+        ),
+    { ssr: false }
+);
+
+const spaceGrotesk = Space_Grotesk({
+    subsets: ["latin"],
+    display: "swap",
+    fallback: [
+        "system-ui",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "Roboto",
+        "sans-serif",
+    ],
+});
 
 export const metadata: Metadata = {
     title: { default: SITE_META.title, template: "%s | Passcodes" },

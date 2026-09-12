@@ -48,8 +48,9 @@
     "compareUrl": "https://github.com/PasscodesApp/Passcodes/compare/v3.2.0...v3.2.1",
     "isMajor": true,
     "isYanked": false,
+    "isDeprecated": false,
     "assetsCount": 5,
-    "downloadCount": 24
+    "downloadCount": 31
   },
   {
     "slug": "v3-2-0-stable",
@@ -95,6 +96,7 @@
     "compareUrl": "https://github.com/PasscodesApp/Passcodes/compare/v3.1.0...v3.2.0",
     "isMajor": true,
     "isYanked": false,
+    "isDeprecated": false,
     "assetsCount": 5,
     "downloadCount": 69
   },
@@ -151,6 +153,7 @@
     "compareUrl": "https://github.com/PasscodesApp/Passcodes/compare/v3.0.0...v3.1.0",
     "isMajor": true,
     "isYanked": false,
+    "isDeprecated": false,
     "assetsCount": 5,
     "downloadCount": 67
   },
@@ -189,6 +192,7 @@
     "compareUrl": "https://github.com/PasscodesApp/Passcodes/compare/v2.1.1...v3.0.0",
     "isMajor": true,
     "isYanked": false,
+    "isDeprecated": false,
     "assetsCount": 5,
     "downloadCount": 65
   },
@@ -259,6 +263,8 @@
     "compareUrl": "https://github.com/PasscodesApp/Passcodes/compare/v2.1.0...v2.1.1",
     "isMajor": false,
     "isYanked": false,
+    "isDeprecated": true,
+    "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
     "downloadCount": 37
   },
@@ -320,6 +326,8 @@
     "compareUrl": "https://github.com/PasscodesApp/Passcodes/compare/v2.0.0...v2.1.0",
     "isMajor": false,
     "isYanked": false,
+    "isDeprecated": true,
+    "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
     "downloadCount": 40
   },
@@ -387,6 +395,8 @@
     "compareUrl": "https://github.com/PasscodesApp/Passcodes/compare/v1.2.1...v2.0.0",
     "isMajor": true,
     "isYanked": false,
+    "isDeprecated": true,
+    "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
     "downloadCount": 42
   },
@@ -422,6 +432,8 @@
     "compareUrl": "https://github.com/PasscodesApp/Passcodes/compare/v1.2.0...v1.2.1",
     "isMajor": false,
     "isYanked": false,
+    "isDeprecated": true,
+    "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
     "downloadCount": 48
   },
@@ -465,6 +477,8 @@
     "isMajor": false,
     "isYanked": true,
     "yankedReason": "Yanked release: version name was mistakenly kept as v1.1.2-Alpha during release packaging. Superseded immediately by v1.2.1.",
+    "isDeprecated": true,
+    "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
     "downloadCount": 13
   },
@@ -519,6 +533,8 @@
     "compareUrl": "https://github.com/PasscodesApp/Passcodes/compare/v1.1.1...v1.1.2",
     "isMajor": false,
     "isYanked": false,
+    "isDeprecated": true,
+    "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
     "downloadCount": 49
   },
@@ -554,6 +570,8 @@
     "compareUrl": "https://github.com/PasscodesApp/Passcodes/compare/v1.1.0...v1.1.1",
     "isMajor": false,
     "isYanked": false,
+    "isDeprecated": true,
+    "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
     "downloadCount": 56
   },
@@ -608,6 +626,8 @@
     "compareUrl": "https://github.com/PasscodesApp/Passcodes/compare/v1.0.0...v1.1.0",
     "isMajor": false,
     "isYanked": false,
+    "isDeprecated": true,
+    "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
     "downloadCount": 31
   },
@@ -657,6 +677,8 @@
     "compareUrl": "https://github.com/PasscodesApp/Passcodes/compare/v0.1.0...v1.0.0",
     "isMajor": true,
     "isYanked": false,
+    "isDeprecated": true,
+    "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
     "downloadCount": 66
   },
@@ -706,6 +728,7 @@
     "isMajor": true,
     "isYanked": true,
     "yankedReason": "Yanked prototype release: very early premature prototype published under com.passwordmanager. Kept strictly for documentation and project history.",
+    "isDeprecated": false,
     "assetsCount": 6,
     "downloadCount": 98
   }

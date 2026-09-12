@@ -68,7 +68,7 @@
         "state": "uploaded",
         "size": 35922426,
         "digest": "sha256:b8d20f36f9b87dcc31e5ca10ab4b0d1db7f485cf4907bfc39f53e811daa997b8",
-        "download_count": 0,
+        "download_count": 1,
         "created_at": "2026-08-02T14:54:35Z",
         "updated_at": "2026-08-02T15:02:05Z",
         "browser_download_url": "https://github.com/PasscodesApp/Passcodes/releases/download/v3.2.1/v3.2.1-passcodes-x86_64-app.apk"
@@ -140,7 +140,7 @@
         "state": "uploaded",
         "size": 97593756,
         "digest": "sha256:bf839ba66057169219d13c9c9fc883548f4eda26075a0df9311f6840f870d6fc",
-        "download_count": 0,
+        "download_count": 2,
         "created_at": "2026-08-02T14:57:32Z",
         "updated_at": "2026-08-02T15:02:05Z",
         "browser_download_url": "https://github.com/PasscodesApp/Passcodes/releases/download/v3.2.1/v3.2.1-passcodes-universal-app.apk"
@@ -176,7 +176,7 @@
         "state": "uploaded",
         "size": 28447625,
         "digest": "sha256:110e35124036cd19002f3d838f0b559e3840c4b5fd8ec4a087e9fd1862174411",
-        "download_count": 0,
+        "download_count": 1,
         "created_at": "2026-08-02T15:00:28Z",
         "updated_at": "2026-08-02T15:02:05Z",
         "browser_download_url": "https://github.com/PasscodesApp/Passcodes/releases/download/v3.2.1/v3.2.1-passcodes-armeabi_v7a-app.apk"
@@ -212,7 +212,7 @@
         "state": "uploaded",
         "size": 35428199,
         "digest": "sha256:1db1e993f9421007bab6601e16453d90883384608345be3bff351aefc2db7f96",
-        "download_count": 24,
+        "download_count": 27,
         "created_at": "2026-08-02T15:00:58Z",
         "updated_at": "2026-08-02T15:02:05Z",
         "browser_download_url": "https://github.com/PasscodesApp/Passcodes/releases/download/v3.2.1/v3.2.1-passcodes-arm64_v8a-app.apk"

@@ -9,10 +9,12 @@ import {
     ArrowRight,
     Calendar,
     GitCommit,
+    AlertTriangle,
 } from "lucide-react";
 import {
     CHANGELOG_ENTRIES,
     CHANGELOG_CATEGORIES,
+    isDeprecatedEntry,
     type CategoryFilter,
 } from "@/lib/changelog";
 import { GITHUB_RELEASES_URL, DOCS_RELEASE_NOTES_URL } from "@/lib/constants";
@@ -248,17 +250,29 @@ export default function ChangelogPage() {
                             );
                         }
 
+                        const isDeprecated = isDeprecatedEntry(entry);
+
                         return (
                             <ScrollReveal
                                 key={entry.slug}
                                 delay={Math.min(index * 50, 150)}
                                 distance={16}
                             >
-                                <article className="relative grid gap-6 border-b border-[var(--border-light)] pb-12 sm:grid-cols-12 sm:gap-8">
+                                <article
+                                    className={cn(
+                                        "relative grid gap-6 border-b border-[var(--border-light)] pb-12 sm:grid-cols-12 sm:gap-8",
+                                        isDeprecated && "opacity-95"
+                                    )}
+                                >
                                     {/* Left Column: Metadata & Category Node */}
                                     <div className="sm:col-span-4 lg:col-span-3">
                                         <div className="sticky top-24 flex flex-col gap-2.5">
                                             <div className="flex flex-wrap items-center gap-2">
+                                                {isDeprecated && (
+                                                    <span className="tag deprecated">
+                                                        Deprecated
+                                                    </span>
+                                                )}
                                                 {entry.isYanked ? (
                                                     <span className="tag border-amber-500/40 bg-amber-500/10 font-semibold text-amber-600 dark:text-amber-400">
                                                         Yanked
@@ -294,7 +308,14 @@ export default function ChangelogPage() {
                                             </div>
 
                                             <div className="flex items-center gap-2">
-                                                <span className="font-mono text-sm font-bold text-[var(--text)]">
+                                                <span
+                                                    className={cn(
+                                                        "font-mono text-sm font-bold",
+                                                        isDeprecated
+                                                            ? "text-red-500 dark:text-red-400"
+                                                            : "text-[var(--text)]"
+                                                    )}
+                                                >
                                                     {entry.version}
                                                 </span>
                                             </div>
@@ -319,7 +340,7 @@ export default function ChangelogPage() {
                                                 <span className="inline-flex items-center gap-1.5 rounded-md border border-[var(--border-light)] bg-[var(--card-bg)] px-2.5 py-1">
                                                     <ReleaseVisual
                                                         category={
-                                                            entry.category
+                                                             entry.category
                                                         }
                                                         className="h-3.5 w-3.5"
                                                     />
@@ -368,6 +389,19 @@ export default function ChangelogPage() {
                                                 {entry.title}
                                             </Link>
                                         </h2>
+
+                                        {isDeprecated && (
+                                            <div className="mt-3 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-xs leading-relaxed text-red-700 dark:text-red-300">
+                                                <div className="flex items-center gap-1.5 font-semibold text-red-600 dark:text-red-400">
+                                                    <AlertTriangle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                                                    <span>Deprecated Release</span>
+                                                </div>
+                                                <p className="mt-1 text-[var(--text-muted)]">
+                                                    {entry.deprecatedReason ||
+                                                        "This release is no longer supported. Superseded by the newer database architecture introduced in later releases. Please use a current release instead."}
+                                                </p>
+                                            </div>
+                                        )}
 
                                         {entry.isYanked && entry.yankedReason && (
                                             <div className="mt-3 rounded-lg border border-amber-500/30 bg-amber-500/10 p-3 text-xs leading-relaxed text-amber-700 dark:text-amber-300">
