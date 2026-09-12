@@ -15,6 +15,7 @@ import {
     CHANGELOG_ENTRIES,
     getChangelogEntryBySlug,
     getAdjacentEntries,
+    isDeprecatedEntry,
 } from "@/lib/changelog";
 import { SITE_META } from "@/lib/constants";
 import { ReleaseVisual } from "@/components/visuals/ReleaseVisual";
@@ -59,6 +60,7 @@ export default function ChangelogEntryPage({
     if (!entry) notFound();
 
     const { prev, next } = getAdjacentEntries(params.slug);
+    const isDeprecated = isDeprecatedEntry(entry);
 
     return (
         <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-20">
@@ -76,6 +78,11 @@ export default function ChangelogEntryPage({
 
                 <header className="mb-10 space-y-4">
                     <div className="flex flex-wrap items-center gap-2.5">
+                        {isDeprecated && (
+                            <span className="tag deprecated">
+                                Deprecated Release
+                            </span>
+                        )}
                         {entry.isYanked ? (
                             <span className="tag border-amber-500/40 bg-amber-500/10 font-semibold text-amber-600 dark:text-amber-400">
                                 Yanked Release
@@ -111,7 +118,14 @@ export default function ChangelogEntryPage({
                             </time>
                         </span>
 
-                        <span className="inline-flex items-center gap-1 rounded-md border border-[var(--border-light)] bg-[var(--card-bg)] px-2.5 py-1 font-mono text-xs text-[var(--accent-light)]">
+                        <span
+                            className={cn(
+                                "inline-flex items-center gap-1 rounded-md border border-[var(--border-light)] bg-[var(--card-bg)] px-2.5 py-1 font-mono text-xs",
+                                isDeprecated
+                                    ? "text-red-500 dark:text-red-400"
+                                    : "text-[var(--accent-light)]"
+                            )}
+                        >
                             <Tag className="h-3.5 w-3.5" />
                             {entry.version}
                         </span>
@@ -161,6 +175,20 @@ export default function ChangelogEntryPage({
                         )}
                     </div>
                 </header>
+
+                {/* Deprecated Notice */}
+                {isDeprecated && (
+                    <div className="mb-8 rounded-xl border border-red-500/30 bg-red-500/10 p-5 text-sm text-red-700 dark:text-red-300">
+                        <div className="flex items-center gap-2 font-semibold text-red-600 dark:text-red-400">
+                            <AlertTriangle className="h-4 w-4 shrink-0" aria-hidden="true" />
+                            <span>Deprecated Release Notice</span>
+                        </div>
+                        <p className="mt-1.5 leading-relaxed text-xs sm:text-sm text-[var(--text-muted)]">
+                            {entry.deprecatedReason ||
+                                "This release is no longer supported. Superseded by the newer database architecture introduced in later releases. Please use a current release instead."}
+                        </p>
+                    </div>
+                )}
 
                 {/* Yanked Notice */}
                 {entry.isYanked && (

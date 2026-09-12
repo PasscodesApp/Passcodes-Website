@@ -39,6 +39,8 @@ export interface ChangelogEntry {
     isMajor?: boolean;
     isYanked?: boolean;
     yankedReason?: string;
+    isDeprecated?: boolean;
+    deprecatedReason?: string;
     isMilestone?: boolean;
     assetsCount?: number;
     downloadCount?: number;
@@ -89,4 +91,18 @@ export function getAdjacentEntries(currentSlug: string): {
                 : null,
         next: index > 0 ? CHANGELOG_ENTRIES[index - 1] : null,
     };
+}
+
+/**
+ * Check if a changelog entry is deprecated.
+ * v1.x and v2.x releases are deprecated (superseded by newer database architecture).
+ */
+export function isDeprecatedEntry(entry: ChangelogEntry): boolean {
+    if (typeof entry.isDeprecated === "boolean") {
+        return entry.isDeprecated;
+    }
+    const match = entry.version.match(/^v?(\d+)\./i);
+    if (!match) return false;
+    const major = parseInt(match[1], 10);
+    return major === 1 || major === 2;
 }

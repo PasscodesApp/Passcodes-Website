@@ -7,6 +7,7 @@ import {
     getLatestStableRelease,
     classifyRelease,
     isYankedRelease,
+    isDeprecatedRelease,
     type ReleaseChannel,
     GithubRateLimitError,
 } from "@/lib/github";
@@ -47,4 +48,4 @@ export function isRateLimitError(error: Error | null): boolean {
     return error instanceof GithubRateLimitError;
 }
 
-export { getLatestStableRelease, classifyRelease, isYankedRelease, type ReleaseChannel };
+export { getLatestStableRelease, classifyRelease, isYankedRelease, isDeprecatedRelease, type ReleaseChannel };
