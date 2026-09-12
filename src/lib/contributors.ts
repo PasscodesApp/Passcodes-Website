@@ -43,6 +43,10 @@ export const FEATURED_CONTRIBUTORS: ContributorProfile[] = [
         avatar: "https://github.com/kudanilll.png",
     },
     {
+        name: "A Guy",
+        role: "Community Manager",
+    },
+    {
         name: "hexCode",
         role: "Contributor",
         login: "hexCode63",
