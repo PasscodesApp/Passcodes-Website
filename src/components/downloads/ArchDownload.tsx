@@ -10,11 +10,11 @@ import {
     groupApksByArch,
     orderVariants,
     pickRecommendedApk,
-    formatFileSize,
     cn,
 } from "@/lib/utils";
 import type { GithubReleaseAsset } from "@/types/github";
 import Link from "next/link";
+import { formatFileSize } from "@passcodes/passalgo";
 
 interface Props {
     assets: GithubReleaseAsset[];
