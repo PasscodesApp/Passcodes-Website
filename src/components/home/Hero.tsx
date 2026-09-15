@@ -18,7 +18,7 @@ import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { useDownloadCount } from "@/hooks/useDownloadCount";
 import { useLatestRelease } from "@/hooks/useGithubRelease";
 import { getLatestChangelogEntry } from "@/lib/changelog";
-import { formatNumber } from "@/lib/utils";
+import { formatNumber } from "@passcodes/passalgo";
 import { GITHUB_REPO_URL, DISCORD_URL, USER_GUIDE_URL } from "@/lib/constants";
 
 export function Hero() {
@@ -181,7 +181,7 @@ export function Hero() {
                             <div className="from-[var(--card-bg-solid)]/90 relative overflow-hidden rounded-2xl border border-[var(--border-light)] bg-gradient-to-b via-[var(--card-bg)] to-[var(--bg-base)] p-5 shadow-xl shadow-black/25 backdrop-blur-md transition-colors duration-300 hover:border-[var(--border)] sm:p-7">
                                 {/* Subtle Ambient Radial Accent (Engineered, not glowing blob) */}
                                 <div
-                                    className="pointer-events-none absolute -top-24 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full bg-[var(--accent)]/10 blur-3xl"
+                                    className="bg-[var(--accent)]/10 pointer-events-none absolute -top-24 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full blur-3xl"
                                     aria-hidden="true"
                                 />
 

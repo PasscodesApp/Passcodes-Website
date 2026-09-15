@@ -4,7 +4,7 @@ import { Star } from "lucide-react";
 import { Dialog } from "@/components/ui/Dialog";
 import { useGithubStars } from "@/hooks/useGithubStars";
 import { GITHUB_REPO_URL } from "@/lib/constants";
-import { formatNumber } from "@/lib/utils";
+import { formatNumber } from "@passcodes/passalgo";
 import { GithubIcon } from "@/components/ui/BrandIcons";
 import Link from "next/link";
 

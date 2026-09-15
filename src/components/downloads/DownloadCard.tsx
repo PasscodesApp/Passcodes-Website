@@ -5,9 +5,14 @@ import { Download, Calendar, Tag, AlertTriangle } from "lucide-react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ArchDownload } from "@/components/downloads/ArchDownload";
-import { formatNumber, formatDate, cn } from "@/lib/utils";
-import { classifyRelease, isYankedRelease, isDeprecatedRelease } from "@/hooks/useGithubRelease";
+import { cn } from "@/lib/utils";
+import {
+    classifyRelease,
+    isYankedRelease,
+    isDeprecatedRelease,
+} from "@/hooks/useGithubRelease";
 import type { GithubRelease } from "@/types/github";
+import { formatDate, formatNumber } from "@passcodes/passalgo";
 
 export function DownloadCard({
     release,
@@ -26,12 +31,20 @@ export function DownloadCard({
     const isDeprecated = isDeprecatedRelease(release);
 
     return (
-        <div className={cn("release-card", isLatest && "latest", isDeprecated && "deprecated")}>
+        <div
+            className={cn(
+                "release-card",
+                isLatest && "latest",
+                isDeprecated && "deprecated"
+            )}
+        >
             <div className="release-top">
                 <h3>{release.name || release.tag_name}</h3>
                 <div className="flex items-center gap-2">
                     {isLatest && <span className="tag stable">Latest</span>}
-                    {isDeprecated && <span className="tag deprecated">Deprecated</span>}
+                    {isDeprecated && (
+                        <span className="tag deprecated">Deprecated</span>
+                    )}
                     {isYanked && <span className="tag alpha">Yanked</span>}
                     {channel === "beta" && (
                         <span className="tag beta">Beta</span>
@@ -66,11 +79,16 @@ export function DownloadCard({
             {isDeprecated && (
                 <div className="mt-3.5 rounded-xl border border-red-500/30 bg-red-500/10 p-3.5 text-xs leading-relaxed text-red-700 dark:text-red-300">
                     <div className="flex items-center gap-1.5 font-semibold text-red-600 dark:text-red-400">
-                        <AlertTriangle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                        <AlertTriangle
+                            className="h-3.5 w-3.5 shrink-0"
+                            aria-hidden="true"
+                        />
                         <span>Deprecated Release</span>
                     </div>
                     <p className="mt-1 text-[var(--text-muted)]">
-                        This release is no longer supported. Superseded by the newer database architecture introduced in later releases. Please use a current release instead.
+                        This release is no longer supported. Superseded by the
+                        newer database architecture introduced in later
+                        releases. Please use a current release instead.
                     </p>
                 </div>
             )}

@@ -17,7 +17,7 @@ import {
     GITHUB_ISSUES_URL,
     PASSCODES_CONTRIBUTING_URL,
 } from "@/lib/constants";
-import { formatNumber } from "@/lib/utils";
+import { formatNumber } from "@passcodes/passalgo";
 import { Star, GitFork, Users, BookOpen, Code2 } from "lucide-react";
 import { GithubIcon } from "@/components/ui/BrandIcons";
 

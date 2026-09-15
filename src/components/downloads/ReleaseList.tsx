@@ -2,10 +2,14 @@
 
 import { Download, Calendar, ExternalLink, AlertTriangle } from "lucide-react";
 import { ArchDownload } from "@/components/downloads/ArchDownload";
-import { formatNumber, formatDate } from "@/lib/utils";
-import { classifyRelease, isYankedRelease, isDeprecatedRelease } from "@/hooks/useGithubRelease";
+import {
+    classifyRelease,
+    isYankedRelease,
+    isDeprecatedRelease,
+} from "@/hooks/useGithubRelease";
 import type { GithubRelease } from "@/types/github";
 import Link from "next/link";
+import { formatDate } from "@passcodes/passalgo";
 
 export function ReleaseList({
     releases,
@@ -87,18 +91,24 @@ export function ReleaseList({
                                     className="mr-1 inline h-3 w-3"
                                     aria-hidden="true"
                                 />
-                                {formatNumber(totalDownloads)}
+                                {totalDownloads}
                             </span>
                         </div>
 
                         {isDeprecated && (
                             <div className="mt-3 rounded-lg border border-red-500/25 bg-red-500/5 p-2.5 text-xs leading-relaxed text-red-700 dark:text-red-300">
                                 <div className="flex items-center gap-1.5 font-semibold text-red-600 dark:text-red-400">
-                                    <AlertTriangle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                                    <AlertTriangle
+                                        className="h-3.5 w-3.5 shrink-0"
+                                        aria-hidden="true"
+                                    />
                                     <span>Deprecated Release</span>
                                 </div>
                                 <p className="mt-1 text-[var(--text-muted)]">
-                                    This release is no longer supported. Superseded by the newer database architecture introduced in later releases. Please use a current release instead.
+                                    This release is no longer supported.
+                                    Superseded by the newer database
+                                    architecture introduced in later releases.
+                                    Please use a current release instead.
                                 </p>
                             </div>
                         )}
