@@ -7,16 +7,19 @@ interface QueryProviderProps {
     children: ReactNode;
 }
 
+const HOUR = 60 * 60 * 1000;
+
 export function QueryProvider({ children }: QueryProviderProps) {
     const [queryClient] = useState(
         () =>
             new QueryClient({
                 defaultOptions: {
                     queries: {
-                        staleTime: 5 * 60 * 1000,
-                        gcTime: 10 * 60 * 1000,
+                        staleTime: HOUR,
+                        gcTime: 12 * HOUR,
                         retry: 2,
                         refetchOnWindowFocus: false,
+                        networkMode: "offlineFirst",
                     },
                 },
             })
