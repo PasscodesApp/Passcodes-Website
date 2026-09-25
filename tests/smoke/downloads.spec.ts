@@ -21,6 +21,16 @@ test.describe("Downloads Page Smoke & Regression Tests", () => {
         // Download controls are rendered
         const downloadOptions = page.locator(".arch-download-btn, .arch-dropdown, a[href*='.apk']");
         await expect(downloadOptions.first()).toBeVisible();
+
+        // Link to release notes & milestones in /changelog
+        const releaseNotesLink = page.getByRole("link", { name: /Release notes & milestones/i });
+        await expect(releaseNotesLink).toBeVisible();
+        await expect(releaseNotesLink).toHaveAttribute("href", /\/changelog\/?/);
+
+        // Download cards contain "View in Project Updates" link
+        const updatesLink = page.getByRole("link", { name: /View in Project Updates/i }).first();
+        await expect(updatesLink).toBeVisible();
+        await expect(updatesLink).toHaveAttribute("href", /\/changelog/);
     });
 
     test("deprecated v1.x and v2.x releases display deprecation indicators while v3.x does not", async ({ page }) => {

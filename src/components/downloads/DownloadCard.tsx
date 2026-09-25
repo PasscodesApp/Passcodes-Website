@@ -1,7 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Download, Calendar, Tag, AlertTriangle } from "lucide-react";
+import Link from "next/link";
+import {
+    Download,
+    Calendar,
+    Tag,
+    AlertTriangle,
+    ArrowRight,
+    BookOpen,
+    ExternalLink,
+} from "lucide-react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ArchDownload } from "@/components/downloads/ArchDownload";
@@ -13,6 +22,8 @@ import {
 } from "@/hooks/useGithubRelease";
 import type { GithubRelease } from "@/types/github";
 import { formatDate, formatNumber } from "@passcodes/passalgo";
+import { USER_GUIDE_URL } from "@/lib/constants";
+import { getChangelogEntryByTagName } from "@/lib/changelog";
 
 export function DownloadCard({
     release,
@@ -29,6 +40,7 @@ export function DownloadCard({
     const channel = classifyRelease(release);
     const isYanked = isYankedRelease(release);
     const isDeprecated = isDeprecatedRelease(release);
+    const changelogEntry = getChangelogEntryByTagName(release.tag_name);
 
     return (
         <div
@@ -126,6 +138,32 @@ export function DownloadCard({
 
             {/* Architecture-aware download (replaces the old single universal button) */}
             <ArchDownload assets={release.assets} variant="full" />
+
+            {/* Discovery & Navigation Links */}
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--border-light)] pt-3 text-xs">
+                <Link
+                    href={
+                        changelogEntry
+                            ? `/changelog/${changelogEntry.slug}`
+                            : "/changelog"
+                    }
+                    className="inline-flex items-center gap-1.5 font-medium text-[var(--accent-light)] transition-opacity hover:opacity-80"
+                >
+                    <span>View in Project Updates</span>
+                    <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                </Link>
+
+                <Link
+                    href={USER_GUIDE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
+                >
+                    <BookOpen className="h-3.5 w-3.5" aria-hidden="true" />
+                    <span>Setup Guide</span>
+                    <ExternalLink className="h-3 w-3 opacity-60" aria-hidden="true" />
+                </Link>
+            </div>
         </div>
     );
 }

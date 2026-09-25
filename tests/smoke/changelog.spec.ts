@@ -108,6 +108,14 @@ test.describe("Changelog Smoke & Detail Page Tests", () => {
         // Documentation resources are visible
         await expect(page.getByText(/Relevant Documentation/i)).toBeVisible();
 
+        // Breadcrumb navigation is visible
+        await expect(page.getByRole("navigation", { name: "Breadcrumb" })).toBeVisible();
+
+        // Next Steps journey card is visible
+        await expect(page.getByRole("heading", { name: "Ready to run Passcodes?" })).toBeVisible();
+        await expect(page.getByRole("link", { name: "Download APK" })).toHaveAttribute("href", /\/downloads\/?/);
+        await expect(page.getByRole("link", { name: "All Updates", exact: true })).toHaveAttribute("href", /\/changelog\/?/);
+
         // Download APK button is visible for stable release
         await expect(
             page.getByRole("link", { name: /Get v3\.2\.1 APK/i })

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search, XCircle, AlertTriangle, Cpu, Layers } from "lucide-react";
+import { Search, XCircle, AlertTriangle, Cpu, Layers, ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { DeviceWarning } from "@/components/downloads/DeviceWarning";
 import { DownloadCard } from "@/components/downloads/DownloadCard";
@@ -156,13 +156,20 @@ export function DownloadsContent() {
                     latestRelease && (
                         <ScrollReveal delay={60}>
                             <div className="mb-12">
-                                <div className="mb-3 flex items-center justify-between">
+                                <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                                     <h2 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--accent-light)]">
                                         <Cpu className="h-4 w-4" aria-hidden="true" />
                                         <span>
                                             Recommended Production Build
                                         </span>
                                     </h2>
+                                    <Link
+                                        href="/changelog"
+                                        className="inline-flex items-center gap-1 text-xs font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--accent-light)]"
+                                    >
+                                        <span>Release notes &amp; milestones</span>
+                                        <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                                    </Link>
                                 </div>
                                 <DownloadCard
                                     release={latestRelease}

@@ -70,6 +70,25 @@ export function getChangelogEntryBySlug(
     return CHANGELOG_ENTRIES.find((entry) => entry.slug === slug);
 }
 
+export function getChangelogEntryByTagName(
+    tagName: string
+): ChangelogEntry | undefined {
+    const cleanTag = tagName.trim().toLowerCase();
+    const tagWithoutV = cleanTag.startsWith("v") ? cleanTag.slice(1) : cleanTag;
+    const tagWithV = cleanTag.startsWith("v") ? cleanTag : `v${cleanTag}`;
+
+    return CHANGELOG_ENTRIES.find((entry) => {
+        const v = entry.version.toLowerCase();
+        return (
+            v === cleanTag ||
+            v === tagWithV ||
+            v === tagWithoutV ||
+            entry.slug === cleanTag ||
+            entry.slug.startsWith(cleanTag)
+        );
+    });
+}
+
 export function getLatestChangelogEntry(): ChangelogEntry {
     return (
         CHANGELOG_ENTRIES.find((e) => !e.isMilestone) || CHANGELOG_ENTRIES[0]

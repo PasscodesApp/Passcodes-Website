@@ -17,14 +17,18 @@ import { GithubIcon, DiscordIcon } from "@/components/ui/BrandIcons";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { useDownloadCount } from "@/hooks/useDownloadCount";
 import { useLatestRelease } from "@/hooks/useGithubRelease";
-import { getLatestChangelogEntry } from "@/lib/changelog";
+import {
+    getLatestProductionRelease,
+    getLatestChangelogEntry,
+} from "@/lib/changelog";
 import { formatNumber } from "@passcodes/passalgo";
 import { GITHUB_REPO_URL, DISCORD_URL, USER_GUIDE_URL } from "@/lib/constants";
 
 export function Hero() {
     const { data: downloadStats } = useDownloadCount();
     const { data: latestRelease } = useLatestRelease();
-    const latestEntry = getLatestChangelogEntry();
+    const latestEntry =
+        getLatestProductionRelease() || getLatestChangelogEntry();
 
     const displayVersion = latestRelease
         ? `v${latestRelease.tag_name.replace(/^v/, "")}`

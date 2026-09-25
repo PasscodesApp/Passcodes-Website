@@ -5,9 +5,11 @@ import {
     ExternalLink,
     Calendar,
     CheckCircle2,
+    BookOpen,
 } from "lucide-react";
 import type { ChangelogEntry } from "@/lib/changelog";
 import { formatDate } from "@passcodes/passalgo";
+import { USER_GUIDE_URL } from "@/lib/constants";
 
 interface CurrentReleaseHeroProps {
     release: ChangelogEntry;
@@ -88,7 +90,7 @@ export function CurrentReleaseHero({ release }: CurrentReleaseHeroProps) {
                 {/* Build Specifications Pill Group */}
                 {release.internalDetails && (
                     <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-[var(--text-dim)]">
-                        <span className="font-medium text-[var(--text-muted)]">Specifications:</span>
+                        <span className="font-medium text-[var(--text-muted)]">Specs:</span>
                         {release.internalDetails.expoSdk && (
                             <span className="rounded-md border border-[var(--border-light)] bg-[var(--card-bg)] px-2 py-0.5 font-mono text-[11px]">
                                 Expo SDK {release.internalDetails.expoSdk}
@@ -102,11 +104,6 @@ export function CurrentReleaseHero({ release }: CurrentReleaseHeroProps) {
                         {release.internalDetails.masterDbVersion && (
                             <span className="rounded-md border border-[var(--border-light)] bg-[var(--card-bg)] px-2 py-0.5 font-mono text-[11px]">
                                 DB Schema {release.internalDetails.masterDbVersion}
-                            </span>
-                        )}
-                        {release.internalDetails.packageName && (
-                            <span className="hidden sm:inline-block rounded-md border border-[var(--border-light)] bg-[var(--card-bg)] px-2 py-0.5 font-mono text-[11px]">
-                                {release.internalDetails.packageName}
                             </span>
                         )}
                     </div>
@@ -130,12 +127,23 @@ export function CurrentReleaseHero({ release }: CurrentReleaseHeroProps) {
                         <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                     </Link>
 
+                    <Link
+                        href={USER_GUIDE_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-ghost btn-small inline-flex items-center gap-1.5"
+                    >
+                        <BookOpen className="h-3.5 w-3.5" aria-hidden="true" />
+                        <span>Documentation</span>
+                        <ExternalLink className="h-3 w-3 opacity-60" aria-hidden="true" />
+                    </Link>
+
                     {release.githubUrl && (
                         <Link
                             href={release.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="btn btn-ghost btn-small inline-flex items-center gap-1.5"
+                            className="btn btn-ghost btn-small inline-flex items-center gap-1.5 text-[var(--text-dim)]"
                         >
                             <span>GitHub Release</span>
                             <ExternalLink className="h-3 w-3 opacity-60" aria-hidden="true" />
