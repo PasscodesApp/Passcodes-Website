@@ -39,6 +39,20 @@ test.describe("Downloads Channel Filter & Search Functional Tests", () => {
         await expect(archiveCards.locator(".tag.alpha").first()).toBeVisible();
         await expect(archiveCards.locator(".tag.stable")).toHaveCount(0);
 
+        // Filter by Deprecated
+        const deprecatedFilterBtn = page.getByRole("button", { name: "Deprecated", exact: true });
+        await deprecatedFilterBtn.click();
+        await expect(deprecatedFilterBtn).toHaveClass(/active/);
+        await expect(archiveCards.first()).toBeVisible();
+        await expect(archiveCards.locator(".tag.deprecated").first()).toBeVisible();
+
+        // Filter by Yanked
+        const yankedFilterBtn = page.getByRole("button", { name: "Yanked", exact: true });
+        await yankedFilterBtn.click();
+        await expect(yankedFilterBtn).toHaveClass(/active/);
+        await expect(archiveCards.first()).toBeVisible();
+        await expect(archiveCards.locator(".tag").filter({ hasText: /yanked/i }).first()).toBeVisible();
+
         // Reset to All
         await allFilterBtn.click();
         await expect(allFilterBtn).toHaveClass(/active/);
@@ -66,5 +80,21 @@ test.describe("Downloads Channel Filter & Search Functional Tests", () => {
         await clearBtn.click();
         await expect(searchInput).toHaveValue("");
         await expect(archiveCards.count()).resolves.toBeGreaterThan(1);
+    });
+
+    test("unmatched query shows friendly empty state with working reset button", async ({ page }) => {
+        const searchInput = page.getByLabel("Search releases");
+        await searchInput.fill("nonexistentquery9999");
+
+        const emptyMessage = page.getByText(/No releases match your/i);
+        await expect(emptyMessage).toBeVisible();
+
+        const resetBtn = page.getByRole("button", { name: "Reset filters" });
+        await expect(resetBtn).toBeVisible();
+        await resetBtn.click();
+
+        await expect(searchInput).toHaveValue("");
+        const archiveCards = page.locator(".release-card:not(.latest)");
+        await expect(archiveCards.first()).toBeVisible();
     });
 });

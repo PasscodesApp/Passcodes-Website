@@ -70,6 +70,25 @@ export function getChangelogEntryBySlug(
     return CHANGELOG_ENTRIES.find((entry) => entry.slug === slug);
 }
 
+export function getChangelogEntryByTagName(
+    tagName: string
+): ChangelogEntry | undefined {
+    const cleanTag = tagName.trim().toLowerCase();
+    const tagWithoutV = cleanTag.startsWith("v") ? cleanTag.slice(1) : cleanTag;
+    const tagWithV = cleanTag.startsWith("v") ? cleanTag : `v${cleanTag}`;
+
+    return CHANGELOG_ENTRIES.find((entry) => {
+        const v = entry.version.toLowerCase();
+        return (
+            v === cleanTag ||
+            v === tagWithV ||
+            v === tagWithoutV ||
+            entry.slug === cleanTag ||
+            entry.slug.startsWith(cleanTag)
+        );
+    });
+}
+
 export function getLatestChangelogEntry(): ChangelogEntry {
     return (
         CHANGELOG_ENTRIES.find((e) => !e.isMilestone) || CHANGELOG_ENTRIES[0]
@@ -105,4 +124,159 @@ export function isDeprecatedEntry(entry: ChangelogEntry): boolean {
     if (!match) return false;
     const major = parseInt(match[1], 10);
     return major === 1 || major === 2;
+}
+
+export type ReleaseState =
+    | "Stable"
+    | "Beta"
+    | "Alpha"
+    | "Deprecated"
+    | "Yanked"
+    | "Milestone";
+
+/**
+ * Classify a changelog entry into its primary semantic release state.
+ */
+export function getReleaseState(entry: ChangelogEntry): ReleaseState {
+    if (entry.isMilestone) return "Milestone";
+    if (entry.isYanked) return "Yanked";
+    if (isDeprecatedEntry(entry)) return "Deprecated";
+    return entry.releaseType;
+}
+
+/**
+ * Get the current stable production release.
+ * Excludes milestones, yanked releases, deprecated releases, and non-stable channels.
+ */
+export function getLatestProductionRelease(): ChangelogEntry | undefined {
+    return CHANGELOG_ENTRIES.find(
+        (entry) =>
+            !entry.isMilestone &&
+            !entry.isYanked &&
+            !isDeprecatedEntry(entry) &&
+            entry.releaseType === "Stable"
+    );
+}
+
+/**
+ * Get the most recent meaningful updates (active, non-milestone releases).
+ */
+export function getRecentUpdates(count: number = 3): ChangelogEntry[] {
+    return CHANGELOG_ENTRIES.filter(
+        (entry) =>
+            !entry.isMilestone &&
+            !isDeprecatedEntry(entry) &&
+            !entry.isYanked
+    ).slice(0, count);
+}
+
+/**
+ * Get documented major architectural milestones.
+ * Includes the explicit architecture transition milestone and major version baseline releases.
+ */
+export function getProjectMilestones(): ChangelogEntry[] {
+    return CHANGELOG_ENTRIES.filter(
+        (entry) =>
+            entry.isMilestone ||
+            (entry.isMajor &&
+                ["v3.0.0", "v2.0.0", "v1.0.0"].includes(entry.version))
+    );
+}
+
+export const RELEASE_CHANNEL_FILTERS = [
+    "All",
+    "Stable",
+    "Beta",
+    "Alpha",
+    "Milestones",
+    "Deprecated",
+    "Yanked",
+] as const;
+
+export type ReleaseChannelFilter = (typeof RELEASE_CHANNEL_FILTERS)[number];
+
+/**
+ * Search across version, title, summary, highlights, technical details, and release state.
+ */
+export function matchesReleaseSearch(
+    entry: ChangelogEntry,
+    query: string
+): boolean {
+    const searchLower = query.trim().toLowerCase();
+    if (!searchLower) return true;
+
+    const state = getReleaseState(entry).toLowerCase();
+    const releaseType = entry.releaseType.toLowerCase();
+    const isDep = isDeprecatedEntry(entry) ? "deprecated" : "";
+    const isYank = entry.isYanked ? "yanked" : "";
+    const isMs = entry.isMilestone ? "milestone" : "";
+
+    // Version, title, summary, tldr
+    if (entry.version.toLowerCase().includes(searchLower)) return true;
+    if (entry.title.toLowerCase().includes(searchLower)) return true;
+    if (entry.summary.toLowerCase().includes(searchLower)) return true;
+    if (entry.tldr?.toLowerCase().includes(searchLower)) return true;
+
+    // Highlights
+    if (entry.highlights?.some((h) => h.toLowerCase().includes(searchLower))) {
+        return true;
+    }
+
+    // Sections
+    if (
+        entry.sections?.some(
+            (s) =>
+                s.title.toLowerCase().includes(searchLower) ||
+                s.items.some((item) =>
+                    item.toLowerCase().includes(searchLower)
+                )
+        )
+    ) {
+        return true;
+    }
+
+    // Release states & channels
+    if (
+        state.includes(searchLower) ||
+        releaseType.includes(searchLower) ||
+        isDep.includes(searchLower) ||
+        isYank.includes(searchLower) ||
+        isMs.includes(searchLower)
+    ) {
+        return true;
+    }
+
+    // Technical build & runtime details
+    if (entry.internalDetails) {
+        const details = entry.internalDetails;
+        if (details.packageName?.toLowerCase().includes(searchLower)) {
+            return true;
+        }
+        if (details.versionName?.toLowerCase().includes(searchLower)) {
+            return true;
+        }
+        if (details.masterDbVersion?.toLowerCase().includes(searchLower)) {
+            return true;
+        }
+        if (details.minAndroid?.toLowerCase().includes(searchLower)) {
+            return true;
+        }
+        if (details.maxAndroid?.toLowerCase().includes(searchLower)) {
+            return true;
+        }
+        if (
+            details.expoSdk &&
+            String(details.expoSdk).toLowerCase().includes(searchLower)
+        ) {
+            return true;
+        }
+        if (
+            details.versionCode &&
+            String(details.versionCode).includes(searchLower)
+        ) {
+            return true;
+        }
+    }
+
+    return false;
 }

@@ -21,6 +21,23 @@ test.describe("Downloads Page Smoke & Regression Tests", () => {
         // Download controls are rendered
         const downloadOptions = page.locator(".arch-download-btn, .arch-dropdown, a[href*='.apk']");
         await expect(downloadOptions.first()).toBeVisible();
+
+        // Link to release notes & milestones in /changelog
+        const releaseNotesLink = page.getByRole("link", { name: /Release notes & milestones/i });
+        await expect(releaseNotesLink).toBeVisible();
+        await expect(releaseNotesLink).toHaveAttribute("href", /\/changelog\/?/);
+
+        // Download cards contain "View in Project Updates" link
+        const updatesLink = page.getByRole("link", { name: /View in Project Updates/i }).first();
+        await expect(updatesLink).toBeVisible();
+        await expect(updatesLink).toHaveAttribute("href", /\/changelog/);
+
+        // Setup guide link prompt is visible below recommended build
+        const setupLink = page.getByRole("link", { name: "Installation & Setup Guide" });
+        await expect(setupLink).toBeVisible();
+
+        // Channel explanation text is visible
+        await expect(page.getByText(/Displaying all recorded releases across active/i)).toBeVisible();
     });
 
     test("deprecated v1.x and v2.x releases display deprecation indicators while v3.x does not", async ({ page }) => {
@@ -48,5 +65,17 @@ test.describe("Downloads Page Smoke & Regression Tests", () => {
         // Both distinct statuses coexist
         await expect(v120Card.locator(".tag.deprecated")).toBeVisible();
         await expect(v120Card.locator(".tag").filter({ hasText: /yanked/i })).toBeVisible();
+    });
+
+    test("archive release item allows expanding architecture variants", async ({ page }) => {
+        const buildsToggle = page.locator(".release-card:not(.latest) button", { hasText: /builds/i }).first();
+        if (await buildsToggle.isVisible()) {
+            await expect(buildsToggle).toHaveAttribute("aria-expanded", "false");
+            await buildsToggle.click();
+            await expect(buildsToggle).toHaveAttribute("aria-expanded", "true");
+            // Expanded variants list should now be visible
+            const variantLinks = page.locator(".release-card:not(.latest) ul a[href*='.apk']");
+            await expect(variantLinks.first()).toBeVisible();
+        }
     });
 });

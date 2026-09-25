@@ -44,6 +44,24 @@ test.describe("Changelog Search Functional Tests", () => {
         expect(restoredCount).toBeGreaterThan(5);
     });
 
+    test("searching by release state filters to deprecated or yanked entries", async ({ page }) => {
+        const searchInput = page.getByLabel("Search changelog entries");
+
+        // Search for "yanked"
+        await searchInput.fill("yanked");
+        const yankedArticles = page.locator("article").filter({
+            has: page.locator(".tag").filter({ hasText: /yanked/i }),
+        });
+        await expect(yankedArticles.first()).toBeVisible();
+
+        // Search for "deprecated"
+        await searchInput.fill("deprecated");
+        const deprecatedArticles = page.locator("article").filter({
+            has: page.locator(".tag.deprecated"),
+        });
+        await expect(deprecatedArticles.first()).toBeVisible();
+    });
+
     test("no results message appears on unmatched query and reset works", async ({ page }) => {
         const searchInput = page.getByLabel("Search changelog entries");
         await searchInput.fill("nonexistent-release-query-xyz");

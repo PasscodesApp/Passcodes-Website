@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search, XCircle, AlertTriangle, Cpu, Layers } from "lucide-react";
+import { Search, XCircle, AlertTriangle, Cpu, Layers, ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { DeviceWarning } from "@/components/downloads/DeviceWarning";
 import { DownloadCard } from "@/components/downloads/DownloadCard";
@@ -13,22 +13,42 @@ import {
     isRateLimitError,
     getLatestStableRelease,
     classifyRelease,
+    isYankedRelease,
+    isDeprecatedRelease,
 } from "@/hooks/useGithubRelease";
 import {
     KOMI_STORE_URL,
     KOMI_BADGE_SRC,
     KOMI_BADGE_WEBP,
+    USER_GUIDE_URL,
 } from "@/lib/constants";
 import Link from "next/link";
 
-type FilterChannel = "all" | "stable" | "beta" | "alpha";
+type FilterChannel =
+    | "all"
+    | "stable"
+    | "beta"
+    | "alpha"
+    | "deprecated"
+    | "yanked";
 
 const FILTER_CHANNELS: { id: FilterChannel; label: string }[] = [
     { id: "all", label: "All Releases" },
     { id: "stable", label: "Stable" },
     { id: "beta", label: "Beta" },
     { id: "alpha", label: "Alpha" },
+    { id: "deprecated", label: "Deprecated" },
+    { id: "yanked", label: "Yanked" },
 ];
+
+const CHANNEL_EXPLANATIONS: Record<FilterChannel, string> = {
+    all: "Displaying all recorded releases across active, preview, and historical channels.",
+    stable: "Verified production releases thoroughly tested and recommended for general use.",
+    beta: "Pre-release builds for testing upcoming features and bug fixes before production.",
+    alpha: "Early preview builds containing experimental features and rapid architectural changes.",
+    deprecated: "Legacy releases (v1.x and v2.x) superseded by the modern v3 database architecture.",
+    yanked: "Releases withdrawn from active distribution due to known issues; preserved for historical records.",
+};
 
 function KomiSection() {
     const [badgeFailed, setBadgeFailed] = useState(false);
@@ -97,13 +117,30 @@ export function DownloadsContent() {
     const filtered = useMemo(() => {
         const q = query.trim().toLowerCase();
         return (releases ?? []).filter((r) => {
+            const isDep = isDeprecatedRelease(r);
+            const isYank = isYankedRelease(r);
+            const channel = classifyRelease(r);
+
             const matchQ =
                 !q ||
                 (r.name || "").toLowerCase().includes(q) ||
                 r.tag_name.toLowerCase().includes(q) ||
-                (r.body || "").toLowerCase().includes(q);
-            const matchS =
-                status === "all" || classifyRelease(r) === status;
+                (r.body || "").toLowerCase().includes(q) ||
+                channel.includes(q) ||
+                (isDep && "deprecated".includes(q)) ||
+                (isYank && "yanked".includes(q));
+
+            const matchS = (() => {
+                if (status === "all") return true;
+                if (status === "deprecated") return isDep;
+                if (status === "yanked") return isYank;
+                if (status === "stable")
+                    return channel === "stable" && !isDep && !isYank;
+                if (status === "beta") return channel === "beta" && !isYank;
+                if (status === "alpha") return channel === "alpha" && !isYank;
+                return channel === status;
+            })();
+
             return matchQ && matchS;
         });
     }, [releases, query, status]);
@@ -121,7 +158,7 @@ export function DownloadsContent() {
                         as="h1"
                         badge="Verified Binaries"
                         title="Downloads & Releases"
-                        subtitle="Production builds engineered for Android devices with split ABI support. Always free and open source."
+                        subtitle="Verified, privacy-first Android builds with optimized packages for your device architecture. Always free and open source."
                     />
                     <DeviceWarning />
                 </ScrollReveal>
@@ -156,18 +193,37 @@ export function DownloadsContent() {
                     latestRelease && (
                         <ScrollReveal delay={60}>
                             <div className="mb-12">
-                                <div className="mb-3 flex items-center justify-between">
+                                <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                                     <h2 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--accent-light)]">
                                         <Cpu className="h-4 w-4" aria-hidden="true" />
                                         <span>
                                             Recommended Production Build
                                         </span>
                                     </h2>
+                                    <Link
+                                        href="/changelog"
+                                        className="inline-flex items-center gap-1 text-xs font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--accent-light)]"
+                                    >
+                                        <span>Release notes &amp; milestones</span>
+                                        <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                                    </Link>
                                 </div>
                                 <DownloadCard
                                     release={latestRelease}
                                     isLatest
                                 />
+                                <p className="mt-3 text-center text-xs text-[var(--text-muted)]">
+                                    First time installing an Android APK? Follow our{" "}
+                                    <Link
+                                        href={USER_GUIDE_URL}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="font-medium text-[var(--accent-light)] underline hover:no-underline"
+                                    >
+                                        Installation &amp; Setup Guide
+                                    </Link>
+                                    .
+                                </p>
                             </div>
                         </ScrollReveal>
                     )
@@ -221,11 +277,16 @@ export function DownloadsContent() {
                             </div>
                         </div>
 
-                        <div className="release-filters">
+                        <div
+                            className="release-filters"
+                            role="group"
+                            aria-label="Filter releases by channel"
+                        >
                             {FILTER_CHANNELS.map((item) => (
                                 <button
                                     key={item.id}
                                     type="button"
+                                    aria-pressed={status === item.id}
                                     className={`filter-btn ${status === item.id ? "active" : ""}`}
                                     onClick={() => setStatus(item.id)}
                                 >
@@ -233,6 +294,10 @@ export function DownloadsContent() {
                                 </button>
                             ))}
                         </div>
+
+                        <p className="mb-4 text-center text-xs text-[var(--text-dim)]">
+                            {CHANNEL_EXPLANATIONS[status]}
+                        </p>
 
                         {hasControls && (
                             <p className="mb-5 text-center text-sm text-[var(--text-muted)]">
