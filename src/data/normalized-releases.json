@@ -50,7 +50,7 @@
     "isYanked": false,
     "isDeprecated": false,
     "assetsCount": 5,
-    "downloadCount": 31
+    "downloadCount": 43
   },
   {
     "slug": "v3-2-0-stable",
@@ -266,7 +266,7 @@
     "isDeprecated": true,
     "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
-    "downloadCount": 37
+    "downloadCount": 38
   },
   {
     "slug": "v2-1-0-beta",
@@ -573,7 +573,7 @@
     "isDeprecated": true,
     "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
-    "downloadCount": 56
+    "downloadCount": 57
   },
   {
     "slug": "v1-1-0-alpha",
