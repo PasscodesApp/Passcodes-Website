@@ -87,12 +87,20 @@ export default function ChangelogEntryPage({
                         <span>Back to all updates</span>
                     </Link>
 
-                    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-[var(--text-dim)]">
-                        <Link href="/" className="transition-colors hover:text-[var(--text)]">Home</Link>
-                        <span>/</span>
-                        <Link href="/changelog" className="transition-colors hover:text-[var(--text)]">Project Updates</Link>
-                        <span>/</span>
-                        <span className="font-mono text-[var(--text)]">{entry.version}</span>
+                    <nav aria-label="Breadcrumb">
+                        <ol className="flex flex-wrap items-center gap-1.5 text-xs text-[var(--text-dim)]">
+                            <li>
+                                <Link href="/" className="transition-colors hover:text-[var(--text)]">Home</Link>
+                            </li>
+                            <li aria-hidden="true">/</li>
+                            <li>
+                                <Link href="/changelog" className="transition-colors hover:text-[var(--text)]">Project Updates</Link>
+                            </li>
+                            <li aria-hidden="true">/</li>
+                            <li>
+                                <span aria-current="page" className="font-mono text-[var(--text)]">{entry.version}</span>
+                            </li>
+                        </ol>
                     </nav>
                 </div>
 
@@ -471,9 +479,9 @@ export default function ChangelogEntryPage({
                     {next ? (
                         <Link
                             href={`/changelog/${next.slug}`}
-                            className="subtle-card group flex flex-col gap-1 text-right sm:items-end"
+                            className="subtle-card group flex flex-col gap-1 text-left sm:text-right sm:items-end"
                         >
-                            <span className="flex items-center gap-1.5 text-xs text-[var(--text-dim)]">
+                            <span className="flex items-center gap-1.5 text-xs text-[var(--text-dim)] sm:justify-end">
                                 <span>Next Release</span>
                                 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
                             </span>

@@ -76,7 +76,7 @@ export function Hero() {
                                     {displayVersion}
                                 </span>
                                 <span className="font-medium text-[var(--text)]">
-                                    Passcodes {latestEntry.version} is live
+                                    Passcodes {displayVersion} is live
                                 </span>
                                 <span
                                     className="text-[var(--text-dim)]"

@@ -66,4 +66,16 @@ test.describe("Downloads Page Smoke & Regression Tests", () => {
         await expect(v120Card.locator(".tag.deprecated")).toBeVisible();
         await expect(v120Card.locator(".tag").filter({ hasText: /yanked/i })).toBeVisible();
     });
+
+    test("archive release item allows expanding architecture variants", async ({ page }) => {
+        const buildsToggle = page.locator(".release-card:not(.latest) button", { hasText: /builds/i }).first();
+        if (await buildsToggle.isVisible()) {
+            await expect(buildsToggle).toHaveAttribute("aria-expanded", "false");
+            await buildsToggle.click();
+            await expect(buildsToggle).toHaveAttribute("aria-expanded", "true");
+            // Expanded variants list should now be visible
+            const variantLinks = page.locator(".release-card:not(.latest) ul a[href*='.apk']");
+            await expect(variantLinks.first()).toBeVisible();
+        }
+    });
 });

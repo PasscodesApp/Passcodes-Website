@@ -16,7 +16,7 @@ import {
 } from "@/hooks/useGithubRelease";
 import type { GithubRelease } from "@/types/github";
 import Link from "next/link";
-import { formatDate } from "@passcodes/passalgo";
+import { formatDate, formatNumber } from "@passcodes/passalgo";
 import { getChangelogEntryByTagName } from "@/lib/changelog";
 
 export function ReleaseList({
@@ -77,16 +77,16 @@ export function ReleaseList({
                                     </span>
                                     {isDeprecated && (
                                         <span className="tag deprecated shrink-0">
-                                            deprecated
+                                            Deprecated
                                         </span>
                                     )}
                                     {isYanked && (
                                         <span className="tag border-amber-500/40 bg-amber-500/10 font-semibold text-amber-600 dark:text-amber-400 shrink-0">
-                                            yanked
+                                            Yanked
                                         </span>
                                     )}
                                     <span className={`tag ${channel} shrink-0`}>
-                                        {channel}
+                                        {channel === "stable" ? "Stable" : channel === "beta" ? "Beta" : "Alpha"}
                                     </span>
                                 </h3>
                                 <p className="release-date flex items-center gap-1.5">
@@ -104,7 +104,7 @@ export function ReleaseList({
                                     className="mr-1 inline h-3 w-3"
                                     aria-hidden="true"
                                 />
-                                {totalDownloads}
+                                {formatNumber(totalDownloads)}
                             </span>
                         </div>
 

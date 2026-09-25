@@ -102,6 +102,7 @@ export function RecentUpdatesGrid({ entries }: RecentUpdatesGridProps) {
                         <div className="mt-4 pt-3 border-t border-[var(--border-light)]">
                             <Link
                                 href={`/changelog/${entry.slug}`}
+                                aria-label={`Read release notes for ${entry.version}`}
                                 className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--accent-light)] transition-all hover:gap-1.5"
                             >
                                 <span>Read release notes</span>

@@ -298,6 +298,7 @@ export default function ChangelogPage() {
                                         <button
                                             key={channel}
                                             type="button"
+                                            aria-pressed={isSelected}
                                             onClick={() => setActiveChannel(channel)}
                                             className={cn(
                                                 "rounded-lg px-2.5 py-1 text-xs font-medium transition-all duration-150",
@@ -393,6 +394,7 @@ export default function ChangelogPage() {
                                             <div className="mt-6">
                                                 <Link
                                                     href={`/changelog/${entry.slug}`}
+                                                    aria-label={`Read architectural overview for ${entry.title}`}
                                                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--accent-light)] transition-all hover:gap-2"
                                                 >
                                                     <span>
@@ -585,6 +587,7 @@ export default function ChangelogPage() {
                                             <div className="mt-6 flex flex-wrap items-center gap-4">
                                                 <Link
                                                     href={`/changelog/${entry.slug}`}
+                                                    aria-label={`Read full release notes for ${entry.version}`}
                                                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--accent-light)] transition-all hover:gap-2"
                                                 >
                                                     <span>

@@ -47,4 +47,28 @@ test.describe("Mobile Responsive Usability Tests", () => {
 
         expect(hasHorizontalOverflow, "Changelog has unexpected horizontal overflow").toBe(false);
     });
+
+    test("homepage does not horizontally overflow viewport on mobile", async ({ page, isMobile }) => {
+        test.skip(!isMobile, "Horizontal overflow check targeted for mobile viewports");
+
+        await page.goto("/");
+
+        const hasHorizontalOverflow = await page.evaluate(() => {
+            return document.documentElement.scrollWidth > window.innerWidth;
+        });
+
+        expect(hasHorizontalOverflow, "Homepage has unexpected horizontal overflow").toBe(false);
+    });
+
+    test("release detail page does not horizontally overflow viewport on mobile", async ({ page, isMobile }) => {
+        test.skip(!isMobile, "Horizontal overflow check targeted for mobile viewports");
+
+        await page.goto("/changelog/v3-2-1-stable/");
+
+        const hasHorizontalOverflow = await page.evaluate(() => {
+            return document.documentElement.scrollWidth > window.innerWidth;
+        });
+
+        expect(hasHorizontalOverflow, "Release detail page has unexpected horizontal overflow").toBe(false);
+    });
 });

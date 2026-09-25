@@ -277,11 +277,16 @@ export function DownloadsContent() {
                             </div>
                         </div>
 
-                        <div className="release-filters">
+                        <div
+                            className="release-filters"
+                            role="group"
+                            aria-label="Filter releases by channel"
+                        >
                             {FILTER_CHANNELS.map((item) => (
                                 <button
                                     key={item.id}
                                     type="button"
+                                    aria-pressed={status === item.id}
                                     className={`filter-btn ${status === item.id ? "active" : ""}`}
                                     onClick={() => setStatus(item.id)}
                                 >

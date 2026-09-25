@@ -42,7 +42,7 @@ export function MilestonesSection({ milestones }: MilestonesSectionProps) {
                                 <div className="mb-2.5 flex flex-wrap items-center gap-2">
                                     {isExplicitMilestone ? (
                                         <span className="editorial-badge border-[var(--accent-light)]/40 bg-[var(--accent-light)]/15 font-semibold text-[var(--accent-light)]">
-                                            Architecture Shift
+                                            Architecture Milestone
                                         </span>
                                     ) : (
                                         <span className="editorial-badge border-[var(--border-light)] bg-[var(--card-bg-solid)] text-[var(--text-muted)]">
@@ -93,6 +93,7 @@ export function MilestonesSection({ milestones }: MilestonesSectionProps) {
                             <div className="mt-4 pt-3 border-t border-[var(--border-light)]">
                                 <Link
                                     href={`/changelog/${milestone.slug}`}
+                                    aria-label={`Read details for ${milestone.version}`}
                                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--accent-light)] transition-all hover:gap-2"
                                 >
                                     <span>Read details</span>
