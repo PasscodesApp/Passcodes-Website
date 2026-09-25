@@ -44,12 +44,12 @@ export function ArchDownload({ assets, variant = "full", className }: Props) {
           : "Best for most phones";
 
     const note = isDetecting
-        ? "Detecting your device…"
+        ? "Detecting your device architecture…"
         : isAndroid && detected && detected !== primaryArch
           ? `No ${ARCH_META[detected].label} build in this release — ${ARCH_META[primaryArch].label} is the closest match.`
           : isAndroid && detected
-            ? `Detected Android · ${ARCH_META[detected].label} — showing the matching build first.`
-            : `Not on Android, or unsure? ${ARCH_META.arm64.label} fits most phones; ${ARCH_META.universal.label} works on any device.`;
+            ? `Detected Android (${ARCH_META[detected].label}) — recommended package for your hardware.`
+            : `Unsure which to pick? ${ARCH_META.arm64.label} fits almost all modern Android phones; ${ARCH_META.universal.label} works on any device.`;
 
     /* ---------- compact (release-history rows) ---------- */
     if (variant === "compact") {
@@ -122,7 +122,7 @@ export function ArchDownload({ assets, variant = "full", className }: Props) {
             {alts.length > 0 && (
                 <div className="mt-4">
                     <p className="mb-2 text-xs uppercase tracking-wider text-[var(--text-dim)]">
-                        Or pick another build
+                        Or pick another architecture build
                     </p>
                     <div className="flex flex-wrap gap-2">
                         {alts.map((v) => (
@@ -150,8 +150,13 @@ function Chip({ v }: { v: { key: ArchKey; asset: GithubReleaseAsset } }) {
                 aria-hidden="true"
             />
             <span className="font-semibold">{m.short}</span>
+            {m.desc && (
+                <span className="hidden text-[11px] text-[var(--text-dim)] sm:inline">
+                    · {m.desc}
+                </span>
+            )}
             <span className="text-xs text-[var(--text-dim)]">
-                {formatFileSize(v.asset.size)}
+                · {formatFileSize(v.asset.size)}
             </span>
         </Link>
     );

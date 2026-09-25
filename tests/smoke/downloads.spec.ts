@@ -31,6 +31,13 @@ test.describe("Downloads Page Smoke & Regression Tests", () => {
         const updatesLink = page.getByRole("link", { name: /View in Project Updates/i }).first();
         await expect(updatesLink).toBeVisible();
         await expect(updatesLink).toHaveAttribute("href", /\/changelog/);
+
+        // Setup guide link prompt is visible below recommended build
+        const setupLink = page.getByRole("link", { name: "Installation & Setup Guide" });
+        await expect(setupLink).toBeVisible();
+
+        // Channel explanation text is visible
+        await expect(page.getByText(/Displaying all recorded releases across active/i)).toBeVisible();
     });
 
     test("deprecated v1.x and v2.x releases display deprecation indicators while v3.x does not", async ({ page }) => {
