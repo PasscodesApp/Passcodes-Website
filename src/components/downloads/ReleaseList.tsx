@@ -123,6 +123,15 @@ export function ReleaseList({
                                     architecture introduced in later releases.
                                     Please use a current release instead.
                                 </p>
+                                <div className="mt-2">
+                                    <Link
+                                        href="/upgrade"
+                                        className="inline-flex items-center gap-1 font-semibold text-red-700 dark:text-red-300 underline hover:no-underline"
+                                    >
+                                        <span>Upgrade &amp; Migration Guidance</span>
+                                        <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                                    </Link>
+                                </div>
                             </div>
                         )}
 

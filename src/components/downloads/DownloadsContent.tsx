@@ -222,6 +222,13 @@ export function DownloadsContent() {
                                     >
                                         Installation &amp; Setup Guide
                                     </Link>
+                                    {" "}or visit the{" "}
+                                    <Link
+                                        href="/upgrade"
+                                        className="font-medium text-[var(--accent-light)] underline hover:no-underline"
+                                    >
+                                        Upgrade &amp; Migration Center
+                                    </Link>
                                     .
                                 </p>
                             </div>
@@ -229,7 +236,35 @@ export function DownloadsContent() {
                     )
                 )}
 
-                {/* 3. Alternative Distribution */}
+                {/* 3. Upgrade & Migration Guidance */}
+                <ScrollReveal delay={80}>
+                    <div className="mb-10 rounded-2xl border border-[var(--border-light)] bg-[var(--card-bg)] p-5 sm:p-6 backdrop-blur-md">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div className="space-y-1">
+                                <div className="flex items-center gap-2">
+                                    <span className="editorial-badge border border-[var(--border-light)] bg-[var(--card-bg)] text-[var(--accent-light)]">
+                                        Planning an Update?
+                                    </span>
+                                </div>
+                                <h2 className="text-base font-semibold text-[var(--text)]">
+                                    Upgrade &amp; Migration Center
+                                </h2>
+                                <p className="text-xs sm:text-sm text-[var(--text-muted)] max-w-xl">
+                                    Need help deciding how to update safely, switching phones, or upgrading from a deprecated v1.x/v2.x release? Follow our guided decision flow before installing.
+                                </p>
+                            </div>
+                            <Link
+                                href="/upgrade"
+                                className="btn btn-outline btn-small shrink-0 inline-flex items-center gap-1.5 self-start sm:self-center"
+                            >
+                                <span>Get Guidance</span>
+                                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                            </Link>
+                        </div>
+                    </div>
+                </ScrollReveal>
+
+                {/* 4. Alternative Distribution */}
                 <ScrollReveal delay={100}>
                     <KomiSection />
                 </ScrollReveal>

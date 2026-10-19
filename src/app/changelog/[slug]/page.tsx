@@ -234,12 +234,19 @@ export default function ChangelogEntryPage({
                             {entry.deprecatedReason ||
                                 "This release is no longer supported. Superseded by the newer database architecture introduced in later releases. Please use a current release instead."}
                         </p>
-                        <div className="mt-3.5 flex flex-wrap items-center gap-3">
+                        <div className="mt-3.5 flex flex-wrap items-center gap-4">
                             <Link
                                 href="/downloads"
                                 className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 dark:text-red-300 underline hover:no-underline"
                             >
                                 <span>View current production downloads</span>
+                                <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                            </Link>
+                            <Link
+                                href="/upgrade"
+                                className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 dark:text-red-300 underline hover:no-underline"
+                            >
+                                <span>Upgrade &amp; Migration Guidance</span>
                                 <ArrowRight className="h-3 w-3" aria-hidden="true" />
                             </Link>
                         </div>
