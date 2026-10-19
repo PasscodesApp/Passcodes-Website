@@ -71,4 +71,16 @@ test.describe("Mobile Responsive Usability Tests", () => {
 
         expect(hasHorizontalOverflow, "Release detail page has unexpected horizontal overflow").toBe(false);
     });
+
+    test("upgrade page does not horizontally overflow viewport on mobile", async ({ page, isMobile }) => {
+        test.skip(!isMobile, "Horizontal overflow check targeted for mobile viewports");
+
+        await page.goto("/upgrade/");
+
+        const hasHorizontalOverflow = await page.evaluate(() => {
+            return document.documentElement.scrollWidth > window.innerWidth;
+        });
+
+        expect(hasHorizontalOverflow, "Upgrade page has unexpected horizontal overflow").toBe(false);
+    });
 });

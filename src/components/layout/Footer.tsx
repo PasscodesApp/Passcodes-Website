@@ -55,6 +55,14 @@ export function Footer() {
                             </li>
                             <li>
                                 <Link
+                                    href="/upgrade"
+                                    className="text-[var(--footer-muted)] transition-colors hover:text-[var(--text)]"
+                                >
+                                    Upgrade &amp; Migration
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
                                     href={USER_GUIDE_URL}
                                     target="_blank"
                                     rel="noopener noreferrer"
