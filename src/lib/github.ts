@@ -84,7 +84,8 @@ export type ReleaseChannel = "stable" | "beta" | "alpha";
  * Follows the repository's convention: e.g. `[YANKED RELEASE]` or `[Yanked Released]`.
  */
 export function isYankedRelease(release: GithubRelease): boolean {
-    const text = `${release.name || ""} ${release.tag_name || ""}`.toLowerCase();
+    const text =
+        `${release.name || ""} ${release.tag_name || ""}`.toLowerCase();
     return text.includes("yanked");
 }
 
@@ -108,7 +109,8 @@ export function isDeprecatedRelease(release: GithubRelease): boolean {
  * - fallback for pre-releases without alpha/beta keyword defaults to beta
  */
 export function classifyRelease(release: GithubRelease): ReleaseChannel {
-    const text = `${release.name || ""} ${release.tag_name || ""}`.toLowerCase();
+    const text =
+        `${release.name || ""} ${release.tag_name || ""}`.toLowerCase();
 
     // Explicit alpha marker in tag or release title (e.g. "v3.0.0 - Alpha", "v1.1.2-alpha")
     if (text.includes("alpha")) {
@@ -147,7 +149,12 @@ export function getLatestStableRelease(
     releases: GithubRelease[]
 ): GithubRelease | undefined {
     return releases.reduce<GithubRelease | undefined>((latest, release) => {
-        if (release.draft || isYankedRelease(release) || isDeprecatedRelease(release)) return latest;
+        if (
+            release.draft ||
+            isYankedRelease(release) ||
+            isDeprecatedRelease(release)
+        )
+            return latest;
         if (classifyRelease(release) !== "stable") return latest;
         if (!latest) return release;
 

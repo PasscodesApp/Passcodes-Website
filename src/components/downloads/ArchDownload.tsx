@@ -104,9 +104,12 @@ export function ArchDownload({ assets, variant = "full", className }: Props) {
             <Link
                 href={primary.browser_download_url}
                 download
-                className="btn btn-filled w-full sm:w-auto"
+                className="btn btn-filled group w-full shadow-sm sm:w-auto"
             >
-                <Download className="h-5 w-5" aria-hidden="true" />
+                <Download
+                    className="h-5 w-5 transition-transform duration-200 group-hover:-translate-y-0.5"
+                    aria-hidden="true"
+                />
                 Download {ARCH_META[primaryArch].label} APK
                 <span className="opacity-80">
                     · {formatFileSize(primary.size)}
@@ -144,10 +147,10 @@ function Chip({ v }: { v: { key: ArchKey; asset: GithubReleaseAsset } }) {
             href={v.asset.browser_download_url}
             download
             aria-label={`Download ${m.label} APK (${formatFileSize(v.asset.size)})`}
-            className="group inline-flex items-center gap-2 rounded-xl border border-[var(--border-light)] bg-[var(--card-bg)] px-3 py-2 text-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--border)] hover:bg-[var(--card-bg-hover)]"
+            className="shadow-xs group inline-flex items-center gap-2 rounded-xl border border-[var(--border-light)] bg-[var(--card-bg)] px-3 py-2 text-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--border)] hover:bg-[var(--card-bg-hover)] hover:shadow-sm"
         >
             <Download
-                className="h-4 w-4 text-[var(--text-dim)] transition-colors group-hover:text-[var(--accent-light)]"
+                className="h-4 w-4 text-[var(--text-dim)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:text-[var(--accent-light)]"
                 aria-hidden="true"
             />
             <span className="font-semibold">{m.short}</span>
@@ -171,7 +174,7 @@ function VariantRow({ v }: { v: { key: ArchKey; asset: GithubReleaseAsset } }) {
                 href={v.asset.browser_download_url}
                 download
                 aria-label={`Download ${m.label} APK (${formatFileSize(v.asset.size)})`}
-                className="flex items-center justify-between gap-3 rounded-xl border border-[var(--border-light)] bg-[var(--card-bg)] px-3 py-2 transition-colors hover:border-[var(--border)] hover:bg-[var(--card-bg-hover)]"
+                className="shadow-xs group flex items-center justify-between gap-3 rounded-xl border border-[var(--border-light)] bg-[var(--card-bg)] px-3.5 py-2.5 transition-all duration-150 hover:-translate-y-0.5 hover:border-[var(--border)] hover:bg-[var(--card-bg-hover)]"
             >
                 <span className="min-w-0">
                     <span className="font-semibold">{m.label}</span>
@@ -184,7 +187,7 @@ function VariantRow({ v }: { v: { key: ArchKey; asset: GithubReleaseAsset } }) {
                 <span className="flex shrink-0 items-center gap-2 text-xs text-[var(--text-muted)]">
                     {formatFileSize(v.asset.size)}
                     <Download
-                        className="h-4 w-4 text-[var(--accent-light)]"
+                        className="h-4 w-4 text-[var(--accent-light)] transition-transform duration-150 group-hover:-translate-y-0.5"
                         aria-hidden="true"
                     />
                 </span>

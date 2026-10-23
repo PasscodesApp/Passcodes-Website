@@ -1,7 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search, XCircle, AlertTriangle, Cpu, Layers, ArrowRight } from "lucide-react";
+import {
+    Search,
+    XCircle,
+    AlertTriangle,
+    Cpu,
+    Layers,
+    ArrowRight,
+} from "lucide-react";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { DeviceWarning } from "@/components/downloads/DeviceWarning";
 import { DownloadCard } from "@/components/downloads/DownloadCard";
@@ -25,12 +32,7 @@ import {
 import Link from "next/link";
 
 type FilterChannel =
-    | "all"
-    | "stable"
-    | "beta"
-    | "alpha"
-    | "deprecated"
-    | "yanked";
+    "all" | "stable" | "beta" | "alpha" | "deprecated" | "yanked";
 
 const FILTER_CHANNELS: { id: FilterChannel; label: string }[] = [
     { id: "all", label: "All Releases" },
@@ -46,7 +48,8 @@ const CHANNEL_EXPLANATIONS: Record<FilterChannel, string> = {
     stable: "Verified production releases thoroughly tested and recommended for general use.",
     beta: "Pre-release builds for testing upcoming features and bug fixes before production.",
     alpha: "Early preview builds containing experimental features and rapid architectural changes.",
-    deprecated: "Legacy releases (v1.x and v2.x) superseded by the modern v3 database architecture.",
+    deprecated:
+        "Legacy releases (v1.x and v2.x) superseded by the modern v3 database architecture.",
     yanked: "Releases withdrawn from active distribution due to known issues; preserved for historical records.",
 };
 
@@ -101,11 +104,7 @@ function KomiSection() {
 }
 
 export function DownloadsContent() {
-    const {
-        data: releases,
-        isLoading,
-        error,
-    } = useReleases();
+    const { data: releases, isLoading, error } = useReleases();
     const [query, setQuery] = useState("");
     const [status, setStatus] = useState<FilterChannel>("all");
 
@@ -125,7 +124,13 @@ export function DownloadsContent() {
                 !q ||
                 (r.name || "").toLowerCase().includes(q) ||
                 r.tag_name.toLowerCase().includes(q) ||
-                (r.body || "").toLowerCase().includes(q) ||
+                (r.body || "")
+                    .replace(
+                        /https?:\/\/github\.com\/[^\s)]+\/compare\/[^\s)]+/gi,
+                        ""
+                    )
+                    .toLowerCase()
+                    .includes(q) ||
                 channel.includes(q) ||
                 (isDep && "deprecated".includes(q)) ||
                 (isYank && "yanked".includes(q));
@@ -195,7 +200,10 @@ export function DownloadsContent() {
                             <div className="mb-12">
                                 <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                                     <h2 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--accent-light)]">
-                                        <Cpu className="h-4 w-4" aria-hidden="true" />
+                                        <Cpu
+                                            className="h-4 w-4"
+                                            aria-hidden="true"
+                                        />
                                         <span>
                                             Recommended Production Build
                                         </span>
@@ -204,8 +212,13 @@ export function DownloadsContent() {
                                         href="/changelog"
                                         className="inline-flex items-center gap-1 text-xs font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--accent-light)]"
                                     >
-                                        <span>Release notes &amp; milestones</span>
-                                        <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                                        <span>
+                                            Release notes &amp; milestones
+                                        </span>
+                                        <ArrowRight
+                                            className="h-3 w-3"
+                                            aria-hidden="true"
+                                        />
                                     </Link>
                                 </div>
                                 <DownloadCard
@@ -213,7 +226,8 @@ export function DownloadsContent() {
                                     isLatest
                                 />
                                 <p className="mt-3 text-center text-xs text-[var(--text-muted)]">
-                                    First time installing an Android APK? Follow our{" "}
+                                    First time installing an Android APK? Follow
+                                    our{" "}
                                     <Link
                                         href={USER_GUIDE_URL}
                                         target="_blank"
@@ -221,8 +235,8 @@ export function DownloadsContent() {
                                         className="font-medium text-[var(--accent-light)] underline hover:no-underline"
                                     >
                                         Installation &amp; Setup Guide
-                                    </Link>
-                                    {" "}or visit the{" "}
+                                    </Link>{" "}
+                                    or visit the{" "}
                                     <Link
                                         href="/upgrade"
                                         className="font-medium text-[var(--accent-light)] underline hover:no-underline"
@@ -238,8 +252,8 @@ export function DownloadsContent() {
 
                 {/* 3. Upgrade & Migration Guidance */}
                 <ScrollReveal delay={80}>
-                    <div className="mb-10 rounded-2xl border border-[var(--border-light)] bg-[var(--card-bg)] p-5 sm:p-6 backdrop-blur-md">
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="mb-10 rounded-2xl border border-[var(--border-light)] bg-[var(--card-bg)] p-5 backdrop-blur-md sm:p-6">
+                        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                             <div className="space-y-1">
                                 <div className="flex items-center gap-2">
                                     <span className="editorial-badge border border-[var(--border-light)] bg-[var(--card-bg)] text-[var(--accent-light)]">
@@ -249,16 +263,22 @@ export function DownloadsContent() {
                                 <h2 className="text-base font-semibold text-[var(--text)]">
                                     Upgrade &amp; Migration Center
                                 </h2>
-                                <p className="text-xs sm:text-sm text-[var(--text-muted)] max-w-xl">
-                                    Need help deciding how to update safely, switching phones, or upgrading from a deprecated v1.x/v2.x release? Follow our guided decision flow before installing.
+                                <p className="max-w-xl text-xs text-[var(--text-muted)] sm:text-sm">
+                                    Need help deciding how to update safely,
+                                    switching phones, or upgrading from a
+                                    deprecated v1.x/v2.x release? Follow our
+                                    guided decision flow before installing.
                                 </p>
                             </div>
                             <Link
                                 href="/upgrade"
-                                className="btn btn-outline btn-small shrink-0 inline-flex items-center gap-1.5 self-start sm:self-center"
+                                className="btn btn-outline btn-small inline-flex shrink-0 items-center gap-1.5 self-start sm:self-center"
                             >
                                 <span>Get Guidance</span>
-                                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                                <ArrowRight
+                                    className="h-3.5 w-3.5"
+                                    aria-hidden="true"
+                                />
                             </Link>
                         </div>
                     </div>

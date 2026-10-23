@@ -36,8 +36,9 @@ export function ReleaseList({
                 <p className="text-base font-semibold text-[var(--text)]">
                     No releases match your filter
                 </p>
-                <p className="mt-1 text-xs text-[var(--text-muted)] max-w-sm mx-auto">
-                    Try adjusting your search query or channel filter to view available builds.
+                <p className="mx-auto mt-1 max-w-sm text-xs text-[var(--text-muted)]">
+                    Try adjusting your search query or channel filter to view
+                    available builds.
                 </p>
                 {onResetFilters && (
                     <button
@@ -62,7 +63,9 @@ export function ReleaseList({
                 const channel = classifyRelease(release);
                 const isYanked = isYankedRelease(release);
                 const isDeprecated = isDeprecatedRelease(release);
-                const changelogEntry = getChangelogEntryByTagName(release.tag_name);
+                const changelogEntry = getChangelogEntryByTagName(
+                    release.tag_name
+                );
 
                 return (
                     <div
@@ -81,12 +84,16 @@ export function ReleaseList({
                                         </span>
                                     )}
                                     {isYanked && (
-                                        <span className="tag border-amber-500/40 bg-amber-500/10 font-semibold text-amber-600 dark:text-amber-400 shrink-0">
+                                        <span className="tag shrink-0 border-amber-500/40 bg-amber-500/10 font-semibold text-amber-600 dark:text-amber-400">
                                             Yanked
                                         </span>
                                     )}
                                     <span className={`tag ${channel} shrink-0`}>
-                                        {channel === "stable" ? "Stable" : channel === "beta" ? "Beta" : "Alpha"}
+                                        {channel === "stable"
+                                            ? "Stable"
+                                            : channel === "beta"
+                                              ? "Beta"
+                                              : "Alpha"}
                                     </span>
                                 </h3>
                                 <p className="release-date flex items-center gap-1.5">
@@ -126,10 +133,15 @@ export function ReleaseList({
                                 <div className="mt-2">
                                     <Link
                                         href="/upgrade"
-                                        className="inline-flex items-center gap-1 font-semibold text-red-700 dark:text-red-300 underline hover:no-underline"
+                                        className="inline-flex items-center gap-1 font-semibold text-red-700 underline hover:no-underline dark:text-red-300"
                                     >
-                                        <span>Upgrade &amp; Migration Guidance</span>
-                                        <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                                        <span>
+                                            Upgrade &amp; Migration Guidance
+                                        </span>
+                                        <ArrowRight
+                                            className="h-3 w-3"
+                                            aria-hidden="true"
+                                        />
                                     </Link>
                                 </div>
                             </div>
@@ -145,15 +157,16 @@ export function ReleaseList({
                                     <span>Yanked Release</span>
                                 </div>
                                 <p className="mt-1 text-[var(--text-muted)]">
-                                    This release was withdrawn from active distribution.
-                                    Preserved for documentation and project history only.
+                                    This release was withdrawn from active
+                                    distribution. Preserved for documentation
+                                    and project history only.
                                 </p>
                             </div>
                         )}
 
                         <div className="release-actions mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-[var(--border-light)] pt-3">
                             {isYanked ? (
-                                <span className="text-xs text-[var(--text-dim)] italic">
+                                <span className="text-xs italic text-[var(--text-dim)]">
                                     Downloads withdrawn for this release
                                 </span>
                             ) : (
@@ -172,7 +185,10 @@ export function ReleaseList({
                                     className="inline-flex items-center gap-1 text-xs font-medium text-[var(--accent-light)] transition-opacity hover:opacity-80"
                                 >
                                     <span>Project Updates</span>
-                                    <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                                    <ArrowRight
+                                        className="h-3 w-3"
+                                        aria-hidden="true"
+                                    />
                                 </Link>
                                 <Link
                                     href={release.html_url}
@@ -182,7 +198,9 @@ export function ReleaseList({
                                     aria-label="View release notes on GitHub"
                                 >
                                     <ExternalLink className="h-3.5 w-3.5" />
-                                    <span className="hidden sm:inline">GitHub</span>
+                                    <span className="hidden sm:inline">
+                                        GitHub
+                                    </span>
                                 </Link>
                             </div>
                         </div>
