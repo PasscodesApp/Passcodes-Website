@@ -15,6 +15,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Logo } from "@/components/layout/Logo";
 import { GithubIcon, DiscordIcon } from "@/components/ui/BrandIcons";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { AndroidVaultPreview } from "@/components/home/AndroidVaultPreview";
 import { useDownloadCount } from "@/hooks/useDownloadCount";
 import { useLatestRelease } from "@/hooks/useGithubRelease";
 import {
@@ -70,9 +71,13 @@ export function Hero() {
                         >
                             <Link
                                 href={`/changelog/${latestEntry.slug}`}
-                                className="group inline-flex items-center gap-2 rounded-full border border-[var(--border-light)] bg-[var(--card-bg)] px-3.5 py-1 text-xs font-medium text-[var(--text-muted)] backdrop-blur-md transition-all hover:border-[var(--border)] hover:bg-[var(--card-bg-hover)] hover:text-[var(--text)]"
+                                className="group inline-flex items-center gap-2 rounded-full border border-[var(--border-light)] bg-[var(--card-bg)] px-3.5 py-1 text-xs font-medium text-[var(--text-muted)] backdrop-blur-md transition-all duration-200 hover:border-[var(--accent-border)] hover:bg-[var(--card-bg-hover)] hover:text-[var(--text)] hover:shadow-sm hover:shadow-[var(--shadow-accent)]"
                             >
-                                <span className="inline-block rounded-full bg-[var(--accent)] px-2 py-0.5 text-[10px] font-bold text-white">
+                                <span className="shadow-xs inline-flex items-center gap-1.5 rounded-full bg-[var(--accent)] px-2 py-0.5 text-[10px] font-bold text-white">
+                                    <span className="relative flex h-1.5 w-1.5">
+                                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
+                                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />
+                                    </span>
                                     {displayVersion}
                                 </span>
                                 <span className="font-medium text-[var(--text)]">
@@ -84,7 +89,7 @@ export function Hero() {
                                 >
                                     ·
                                 </span>
-                                <span className="flex items-center gap-1 font-semibold text-[var(--accent)] transition-transform group-hover:translate-x-0.5 dark:text-[var(--accent-light)]">
+                                <span className="flex items-center gap-1 font-semibold text-[var(--accent)] transition-transform duration-150 group-hover:translate-x-0.5 dark:text-[var(--accent-light)]">
                                     See what&apos;s new{" "}
                                     <ArrowRight
                                         className="h-3 w-3"
@@ -179,153 +184,79 @@ export function Hero() {
                         </ScrollReveal>
                     </div>
 
-                    {/* RIGHT — PRODUCT IDENTITY PANEL (Desktop: Right Column, Mobile: Supporting Panel) */}
+                    {/* RIGHT — ANDROID VAULT PRODUCT PREVIEW */}
                     <div className="order-2 w-full lg:col-span-5">
                         <ScrollReveal delay={60}>
-                            <div className="from-[var(--card-bg-solid)]/90 relative overflow-hidden rounded-2xl border border-[var(--border-light)] bg-gradient-to-b via-[var(--card-bg)] to-[var(--bg-base)] p-5 shadow-xl shadow-black/25 backdrop-blur-md transition-colors duration-300 hover:border-[var(--border)] sm:p-7">
-                                {/* Subtle Ambient Radial Accent (Engineered, not glowing blob) */}
-                                <div
-                                    className="bg-[var(--accent)]/10 pointer-events-none absolute -top-24 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full blur-3xl"
-                                    aria-hidden="true"
-                                />
-
-                                {/* Brand Mark & Product Label */}
-                                <div className="relative flex items-center gap-4">
-                                    <div className="relative flex shrink-0 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--card-bg-solid)] p-2.5 shadow-md shadow-black/30">
-                                        <Logo className="h-12 w-12 rounded-xl sm:h-14 sm:w-14" />
-                                    </div>
-                                    <div className="min-w-0">
-                                        <div className="flex items-center gap-2">
-                                            <span className="text-xl font-bold tracking-tight text-[var(--text)]">
-                                                Passcodes
-                                            </span>
-                                            <span className="rounded-md border border-[var(--accent-border)] bg-[var(--accent-subtle)] px-2 py-0.5 font-mono text-[10px] font-semibold text-[var(--accent-light)]">
-                                                {displayVersion}
-                                            </span>
-                                        </div>
-                                        <p className="mt-0.5 text-xs font-medium text-[var(--text-muted)]">
-                                            Android Password Manager
-                                        </p>
-                                    </div>
-                                </div>
-
-                                {/* Fine Separator */}
-                                <div className="my-5 border-t border-[var(--border-light)]" />
-
-                                {/* Three Concise Product Principles */}
-                                <div className="space-y-3 text-left">
-                                    <div className="bg-[var(--card-bg)]/50 group rounded-xl border border-[var(--border-lighter)] p-3 transition-colors hover:border-[var(--border-light)] hover:bg-[var(--card-bg)]">
-                                        <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-[var(--accent-light)]">
-                                            <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-light)]" />
-                                            <span>Local-first</span>
-                                        </div>
-                                        <p className="mt-1 text-xs text-[var(--text-muted)] sm:text-sm">
-                                            No cloud account or server required.
-                                        </p>
-                                    </div>
-
-                                    <div className="bg-[var(--card-bg)]/50 group rounded-xl border border-[var(--border-lighter)] p-3 transition-colors hover:border-[var(--border-light)] hover:bg-[var(--card-bg)]">
-                                        <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-[var(--accent-light)]">
-                                            <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-light)]" />
-                                            <span>On-Device</span>
-                                        </div>
-                                        <p className="mt-1 text-xs text-[var(--text-muted)] sm:text-sm">
-                                            Credentials stay on your device.
-                                        </p>
-                                    </div>
-
-                                    <div className="bg-[var(--card-bg)]/50 group rounded-xl border border-[var(--border-lighter)] p-3 transition-colors hover:border-[var(--border-light)] hover:bg-[var(--card-bg)]">
-                                        <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-[var(--accent-light)]">
-                                            <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-light)]" />
-                                            <span>Open source</span>
-                                        </div>
-                                        <p className="mt-1 text-xs text-[var(--text-muted)] sm:text-sm">
-                                            Transparent software you can
-                                            inspect.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                {/* Supporting Capability Detail */}
-                                <div className="mt-5 flex items-center justify-center gap-2 border-t border-[var(--border-light)] pt-3.5 text-[11px] font-medium text-[var(--text-dim)]">
-                                    <span>Local Storage</span>
-                                    <span className="text-[var(--text-dim)]/50">
-                                        ·
-                                    </span>
-                                    <span>Biometric App Lock</span>
-                                    <span className="text-[var(--text-dim)]/50">
-                                        ·
-                                    </span>
-                                    <span>Auto-Lock</span>
-                                </div>
-                            </div>
+                            <AndroidVaultPreview
+                                displayVersion={displayVersion}
+                            />
                         </ScrollReveal>
                     </div>
                 </div>
 
                 {/* Technical Stats & Trust Signals Strip */}
                 <ScrollReveal delay={120} className="mx-auto mt-14 max-w-5xl">
-                    <div className="grid grid-cols-2 gap-4 border-t border-[var(--border-light)] pt-8 sm:grid-cols-4 sm:gap-6">
-                        <div className="flex flex-col items-center">
+                    <div className="grid grid-cols-2 gap-3.5 border-t border-[var(--border-light)] pt-8 sm:grid-cols-4 sm:gap-4">
+                        <div className="bg-[var(--card-bg)]/50 flex flex-col items-center rounded-xl border border-[var(--border-light)] p-4 backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:border-[var(--border)] hover:bg-[var(--card-bg-hover)] hover:shadow-sm">
                             <div className="flex items-center gap-1.5 text-xs text-[var(--text-dim)]">
-                                <HardDrive className="h-3.5 w-3.5" />
+                                <HardDrive className="h-3.5 w-3.5 text-[var(--accent-light)]" />
                                 <span>Downloads</span>
                             </div>
-                            <div className="mt-1 text-lg font-bold text-[var(--text)]">
+                            <div className="mt-1 text-lg font-bold text-[var(--text)] sm:text-xl">
                                 {downloadStats
                                     ? formatNumber(downloadStats.totalDownloads)
                                     : "—"}
                             </div>
                         </div>
 
-                        <div className="flex flex-col items-center">
+                        <div className="bg-[var(--card-bg)]/50 flex flex-col items-center rounded-xl border border-[var(--border-light)] p-4 backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:border-[var(--border)] hover:bg-[var(--card-bg-hover)] hover:shadow-sm">
                             <div className="flex items-center gap-1.5 text-xs text-[var(--text-dim)]">
-                                <Cpu className="h-3.5 w-3.5" />
+                                <Cpu className="h-3.5 w-3.5 text-[var(--accent-light)]" />
                                 <span>Architecture</span>
                             </div>
-                            <div className="mt-1 text-lg font-bold text-[var(--text)]">
+                            <div className="mt-1 text-lg font-bold text-[var(--text)] sm:text-xl">
                                 Split ABIs
                             </div>
                         </div>
 
-                        <div className="flex flex-col items-center">
+                        <div className="bg-[var(--card-bg)]/50 flex flex-col items-center rounded-xl border border-[var(--border-light)] p-4 backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:border-[var(--border)] hover:bg-[var(--card-bg-hover)] hover:shadow-sm">
                             <div className="flex items-center gap-1.5 text-xs text-[var(--text-dim)]">
-                                <ShieldCheck className="h-3.5 w-3.5" />
+                                <ShieldCheck className="h-3.5 w-3.5 text-[var(--accent-light)]" />
                                 <span>Storage</span>
                             </div>
-                            <div className="mt-1 text-lg font-bold text-[var(--text)]">
+                            <div className="mt-1 text-lg font-bold text-[var(--text)] sm:text-xl">
                                 Local (SQLite)
                             </div>
                         </div>
 
-                        <div className="flex flex-col items-center">
+                        <div className="bg-[var(--card-bg)]/50 flex flex-col items-center rounded-xl border border-[var(--border-light)] p-4 backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:border-[var(--border)] hover:bg-[var(--card-bg-hover)] hover:shadow-sm">
                             <div className="flex items-center gap-1.5 text-xs text-[var(--text-dim)]">
-                                <GithubIcon className="h-3.5 w-3.5" />
+                                <GithubIcon className="h-3.5 w-3.5 text-[var(--accent-light)]" />
                                 <span>Version</span>
                             </div>
-                            <div className="mt-1 font-mono text-lg font-bold text-[var(--text)]">
+                            <div className="mt-1 font-mono text-lg font-bold text-[var(--text)] sm:text-xl">
                                 {displayVersion}
                             </div>
                         </div>
                     </div>
 
                     <div className="trust-strip mt-8 border-t border-[var(--border-light)] pt-6">
-                        <span className="trust-item">
+                        <span className="trust-item transition-all duration-150 hover:-translate-y-0.5">
                             <ShieldCheck
                                 className="h-4 w-4"
                                 aria-hidden="true"
                             />
                             MIT Licensed
                         </span>
-                        <span className="trust-item">
+                        <span className="trust-item transition-all duration-150 hover:-translate-y-0.5">
                             <WifiOff className="h-4 w-4" aria-hidden="true" />
                             No Cloud Sync
                         </span>
-                        <span className="trust-item">
+                        <span className="trust-item transition-all duration-150 hover:-translate-y-0.5">
                             <Lock className="h-4 w-4" aria-hidden="true" />
                             Biometric App Lock
                         </span>
-                        <span className="trust-item">
+                        <span className="trust-item transition-all duration-150 hover:-translate-y-0.5">
                             <GithubIcon className="h-4 w-4" />
                             Community Driven
                         </span>
