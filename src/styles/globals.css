@@ -140,12 +140,58 @@ html.light {
     }
     :focus-visible {
         outline: 2px solid var(--accent-light);
-        outline-offset: 2px;
+        outline-offset: 3px;
     }
     ::selection {
         background-color: var(--accent-subtle);
         color: var(--text);
     }
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(148, 163, 184, 0.25);
+        border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(148, 163, 184, 0.45);
+    }
+}
+
+/* Light mode refined elevation */
+html.light .card {
+    box-shadow:
+        0 1px 3px rgba(15, 23, 42, 0.05),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
+}
+html.light .card:hover {
+    box-shadow:
+        0 10px 25px -3px rgba(15, 23, 42, 0.08),
+        inset 0 1px 0 0 #ffffff;
+}
+html.light .subtle-card {
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.04),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
+}
+html.light .subtle-card:hover {
+    box-shadow:
+        0 8px 20px -2px rgba(15, 23, 42, 0.07),
+        inset 0 1px 0 0 #ffffff;
+}
+html.light .feature-card {
+    box-shadow:
+        0 1px 3px rgba(15, 23, 42, 0.05),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
+}
+html.light .feature-card:hover {
+    box-shadow:
+        0 12px 26px -3px rgba(15, 23, 42, 0.08),
+        inset 0 1px 0 0 #ffffff;
 }
 
 /* ============================= */
@@ -196,9 +242,10 @@ html.light {
 /* ============================= */
 .nav-shell {
     background: var(--nav-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border-light);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
 }
 
 .nav-btn {
@@ -206,30 +253,33 @@ html.light {
     align-items: center;
     justify-content: center;
     gap: 6px;
-    padding: 6px 12px;
-    border-radius: 8px;
+    padding: 6px 14px;
+    border-radius: 9999px;
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--text-muted);
     transition:
         color var(--transition-micro),
         background-color var(--transition-micro),
-        transform var(--transition-micro);
+        transform var(--transition-micro),
+        box-shadow var(--transition-micro);
 }
 .nav-btn:hover {
     color: var(--text);
     background-color: var(--card-bg-hover);
 }
 .nav-btn:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
 }
 .active-nav {
     color: var(--text);
     font-weight: 600;
     background-color: var(--card-bg-hover);
+    box-shadow: inset 0 0 0 1px var(--border-light);
 }
 html.light .active-nav {
     background-color: rgba(15, 23, 42, 0.06);
+    box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.08);
 }
 
 /* ============================= */
@@ -267,9 +317,9 @@ html.light .active-nav {
     border: 1px solid var(--text);
 }
 .btn-primary:hover {
-    opacity: 0.92;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px var(--shadow-hover);
+    opacity: 0.94;
+    transform: translateY(-1.5px);
+    box-shadow: 0 6px 20px var(--shadow-hover);
 }
 
 .btn-outline {
@@ -280,18 +330,20 @@ html.light .active-nav {
 .btn-outline:hover {
     background: var(--card-bg-hover);
     border-color: var(--border);
-    transform: translateY(-1px);
+    transform: translateY(-1.5px);
+    box-shadow: 0 4px 14px var(--shadow-hover);
 }
 
 .btn-filled {
     background: var(--accent-gradient);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     color: #ffffff;
+    box-shadow: 0 2px 8px var(--shadow-accent);
 }
 .btn-filled:hover {
-    opacity: 0.95;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px var(--shadow-accent);
+    opacity: 0.98;
+    transform: translateY(-1.5px);
+    box-shadow: 0 6px 24px var(--shadow-accent);
 }
 
 .btn-ghost {
@@ -319,8 +371,9 @@ html.light .active-nav {
     border-radius: 14px;
     background: var(--card-bg);
     border: 1px solid var(--border-light);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     transition:
         border-color var(--transition-micro),
         background-color var(--transition-micro),
@@ -330,7 +383,10 @@ html.light .active-nav {
 .card:hover {
     border-color: var(--border);
     background-color: var(--card-bg-hover);
-    box-shadow: 0 6px 20px var(--shadow-hover);
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 30px -4px var(--shadow-hover),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
 }
 
 .subtle-card {
@@ -338,7 +394,8 @@ html.light .active-nav {
     border: 1px solid var(--border-light);
     background: var(--card-bg);
     padding: 18px;
-    backdrop-filter: blur(6px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
     transition:
         border-color var(--transition-micro),
         background-color var(--transition-micro),
@@ -348,6 +405,10 @@ html.light .active-nav {
 .subtle-card:hover {
     border-color: var(--border);
     background: var(--card-bg-hover);
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 24px -2px var(--shadow-hover),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
 }
 
 /* ============================= */
@@ -382,7 +443,8 @@ html.light .active-nav {
     border-radius: 14px;
     background: var(--card-bg);
     border: 1px solid var(--border-light);
-    backdrop-filter: blur(8px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
     transition:
         border-color var(--transition-micro),
         background-color var(--transition-micro),
@@ -392,8 +454,10 @@ html.light .active-nav {
 .feature-card:hover {
     border-color: var(--border);
     background: var(--card-bg-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px var(--shadow-hover);
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 28px -4px var(--shadow-hover),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
 }
 .feature-card .feature-icon {
     display: inline-flex;
@@ -402,9 +466,16 @@ html.light .active-nav {
     width: 38px;
     height: 38px;
     border-radius: 10px;
-    background: var(--card-bg);
-    border: 1px solid var(--border-light);
+    background: var(--accent-subtle);
+    border: 1px solid var(--accent-border);
     color: var(--accent-light);
+    transition:
+        transform var(--transition-micro),
+        border-color var(--transition-micro);
+}
+.feature-card:hover .feature-icon {
+    transform: scale(1.06);
+    border-color: var(--accent-light);
 }
 
 /* ============================= */
@@ -466,13 +537,23 @@ html.light .active-nav {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    padding: 5px 12px;
+    padding: 6px 14px;
     border-radius: 999px;
     background: var(--card-bg);
     border: 1px solid var(--border-light);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
     font-size: 13px;
     color: var(--text-muted);
     backdrop-filter: blur(8px);
+    transition:
+        border-color var(--transition-micro),
+        transform var(--transition-micro),
+        box-shadow var(--transition-micro);
+}
+.stat-badge:hover {
+    border-color: var(--border);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px var(--shadow-hover);
 }
 
 /* ============================= */
@@ -715,23 +796,6 @@ html.light .tag.alpha {
 html.light .tag.deprecated {
     background: rgba(220, 38, 38, 0.1);
     border-color: rgba(220, 38, 38, 0.32);
-    color: #b91c1c;
-}
-
-/* Light mode high-contrast tag tuning */
-html.light .tag.stable {
-    background: rgba(22, 163, 74, 0.1);
-    border-color: rgba(22, 163, 74, 0.28);
-    color: #15803d;
-}
-html.light .tag.beta {
-    background: rgba(217, 119, 6, 0.1);
-    border-color: rgba(217, 119, 6, 0.28);
-    color: #b45309;
-}
-html.light .tag.alpha {
-    background: rgba(220, 38, 38, 0.1);
-    border-color: rgba(220, 38, 38, 0.28);
     color: #b91c1c;
 }
 
