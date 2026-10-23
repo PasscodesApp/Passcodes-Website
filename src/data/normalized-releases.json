@@ -50,7 +50,7 @@
     "isYanked": false,
     "isDeprecated": false,
     "assetsCount": 5,
-    "downloadCount": 43
+    "downloadCount": 63
   },
   {
     "slug": "v3-2-0-stable",
@@ -98,7 +98,7 @@
     "isYanked": false,
     "isDeprecated": false,
     "assetsCount": 5,
-    "downloadCount": 69
+    "downloadCount": 71
   },
   {
     "slug": "v3-1-0-stable",
@@ -194,7 +194,7 @@
     "isYanked": false,
     "isDeprecated": false,
     "assetsCount": 5,
-    "downloadCount": 65
+    "downloadCount": 66
   },
   {
     "slug": "end-of-android-only",
@@ -266,7 +266,7 @@
     "isDeprecated": true,
     "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
-    "downloadCount": 38
+    "downloadCount": 39
   },
   {
     "slug": "v2-1-0-beta",
@@ -329,7 +329,7 @@
     "isDeprecated": true,
     "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
-    "downloadCount": 40
+    "downloadCount": 42
   },
   {
     "slug": "v2-0-0-beta",
@@ -398,7 +398,7 @@
     "isDeprecated": true,
     "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
-    "downloadCount": 42
+    "downloadCount": 44
   },
   {
     "slug": "v1-2-1-alpha",
@@ -435,7 +435,7 @@
     "isDeprecated": true,
     "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
-    "downloadCount": 48
+    "downloadCount": 49
   },
   {
     "slug": "v1-2-0-alpha-yanked",
@@ -480,7 +480,7 @@
     "isDeprecated": true,
     "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
-    "downloadCount": 13
+    "downloadCount": 18
   },
   {
     "slug": "v1-1-2-alpha",
@@ -536,7 +536,7 @@
     "isDeprecated": true,
     "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
-    "downloadCount": 49
+    "downloadCount": 50
   },
   {
     "slug": "v1-1-1-alpha",
@@ -573,7 +573,7 @@
     "isDeprecated": true,
     "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
-    "downloadCount": 57
+    "downloadCount": 59
   },
   {
     "slug": "v1-1-0-alpha",
@@ -629,7 +629,7 @@
     "isDeprecated": true,
     "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
-    "downloadCount": 31
+    "downloadCount": 32
   },
   {
     "slug": "v1-0-0-stable",
@@ -680,7 +680,7 @@
     "isDeprecated": true,
     "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
-    "downloadCount": 66
+    "downloadCount": 69
   },
   {
     "slug": "v0-1-0-alpha-yanked",
