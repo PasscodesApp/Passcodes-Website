@@ -1,11 +1,7 @@
 import rawEntries from "@/data/normalized-releases.json";
 
 export type ChangelogCategory =
-    | "Features"
-    | "Improvements"
-    | "Fixes"
-    | "Security"
-    | "Architecture";
+    "Features" | "Improvements" | "Fixes" | "Security" | "Architecture";
 
 export interface ChangelogSection {
     title: string;
@@ -127,12 +123,7 @@ export function isDeprecatedEntry(entry: ChangelogEntry): boolean {
 }
 
 export type ReleaseState =
-    | "Stable"
-    | "Beta"
-    | "Alpha"
-    | "Deprecated"
-    | "Yanked"
-    | "Milestone";
+    "Stable" | "Beta" | "Alpha" | "Deprecated" | "Yanked" | "Milestone";
 
 /**
  * Classify a changelog entry into its primary semantic release state.
@@ -164,9 +155,7 @@ export function getLatestProductionRelease(): ChangelogEntry | undefined {
 export function getRecentUpdates(count: number = 3): ChangelogEntry[] {
     return CHANGELOG_ENTRIES.filter(
         (entry) =>
-            !entry.isMilestone &&
-            !isDeprecatedEntry(entry) &&
-            !entry.isYanked
+            !entry.isMilestone && !isDeprecatedEntry(entry) && !entry.isYanked
     ).slice(0, count);
 }
 
@@ -227,9 +216,7 @@ export function matchesReleaseSearch(
         entry.sections?.some(
             (s) =>
                 s.title.toLowerCase().includes(searchLower) ||
-                s.items.some((item) =>
-                    item.toLowerCase().includes(searchLower)
-                )
+                s.items.some((item) => item.toLowerCase().includes(searchLower))
         )
     ) {
         return true;
