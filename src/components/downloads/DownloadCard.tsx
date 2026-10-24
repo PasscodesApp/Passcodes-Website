@@ -115,10 +115,13 @@ export function DownloadCard({
                     <div className="mt-2.5">
                         <Link
                             href="/upgrade"
-                            className="inline-flex items-center gap-1 font-semibold text-red-700 dark:text-red-300 underline hover:no-underline"
+                            className="inline-flex items-center gap-1 font-semibold text-red-700 underline hover:no-underline dark:text-red-300"
                         >
                             <span>Upgrade &amp; Migration Guidance</span>
-                            <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                            <ArrowRight
+                                className="h-3 w-3"
+                                aria-hidden="true"
+                            />
                         </Link>
                     </div>
                 </div>
@@ -134,7 +137,9 @@ export function DownloadCard({
                         <span>Withdrawn / Yanked Release</span>
                     </div>
                     <p className="mt-1 text-[var(--text-muted)]">
-                        This release was withdrawn from active distribution. Preserved for archive documentation and project history only.
+                        This release was withdrawn from active distribution.
+                        Preserved for archive documentation and project history
+                        only.
                     </p>
                 </div>
             )}
@@ -174,7 +179,8 @@ export function DownloadCard({
             {isYanked ? (
                 <div className="mt-4 rounded-xl border border-dashed border-[var(--border)] p-4 text-center">
                     <p className="text-xs text-[var(--text-muted)]">
-                        Downloads are withdrawn for this release. Please use the recommended production build above.
+                        Downloads are withdrawn for this release. Please use the
+                        recommended production build above.
                     </p>
                 </div>
             ) : (
@@ -203,7 +209,10 @@ export function DownloadCard({
                 >
                     <BookOpen className="h-3.5 w-3.5" aria-hidden="true" />
                     <span>Setup Guide</span>
-                    <ExternalLink className="h-3 w-3 opacity-60" aria-hidden="true" />
+                    <ExternalLink
+                        className="h-3 w-3 opacity-60"
+                        aria-hidden="true"
+                    />
                 </Link>
             </div>
         </div>

@@ -8,7 +8,9 @@ import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { cn } from "@/lib/utils";
 
 export function LatestUpdates() {
-    const recent = CHANGELOG_ENTRIES.filter((entry) => !entry.isMilestone).slice(0, 2);
+    const recent = CHANGELOG_ENTRIES.filter(
+        (entry) => !entry.isMilestone
+    ).slice(0, 2);
 
     return (
         <section className="bg-[var(--card-bg)]/30 border-t border-[var(--border-light)] py-16 sm:py-24">
@@ -42,8 +44,12 @@ export function LatestUpdates() {
                         <ScrollReveal key={entry.slug} delay={idx * 100}>
                             <Link
                                 href={`/changelog/${entry.slug}`}
-                                className="subtle-card group flex h-full flex-col justify-between transition-all hover:border-[var(--border)]"
+                                className="subtle-card group relative flex h-full flex-col justify-between overflow-hidden transition-all hover:border-[var(--border)]"
                             >
+                                <div
+                                    className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[var(--accent-light)] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                                    aria-hidden="true"
+                                />
                                 <div>
                                     <div className="mb-3.5 flex items-center justify-between">
                                         <div className="flex items-center gap-2">

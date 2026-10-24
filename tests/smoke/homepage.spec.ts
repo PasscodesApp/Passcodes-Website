@@ -24,7 +24,7 @@ test.describe("Homepage Smoke Tests", () => {
         await expect(githubCTA).toHaveAttribute("href", /github\.com\/PasscodesApp\/Passcodes/);
 
         // Current release announcement badge
-        const releasePill = page.getByRole("link", { name: /v3\.\d+\.\d+.*is live/i });
+        const releasePill = page.getByRole("link", { name: /v\d+\.\d+\.\d+.*is live/i });
         await expect(releasePill).toBeVisible();
     });
 

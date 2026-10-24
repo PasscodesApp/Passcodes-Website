@@ -48,4 +48,10 @@ export function isRateLimitError(error: Error | null): boolean {
     return error instanceof GithubRateLimitError;
 }
 
-export { getLatestStableRelease, classifyRelease, isYankedRelease, isDeprecatedRelease, type ReleaseChannel };
+export {
+    getLatestStableRelease,
+    classifyRelease,
+    isYankedRelease,
+    isDeprecatedRelease,
+    type ReleaseChannel,
+};

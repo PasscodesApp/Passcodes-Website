@@ -96,8 +96,12 @@ export function ContactContent() {
                         {contactOptions.map((option) => (
                             <div
                                 key={option.title}
-                                className="card flex h-full flex-col justify-between text-left transition-all duration-150 hover:border-[var(--border)]"
+                                className="card group relative flex h-full flex-col justify-between overflow-hidden text-left transition-all duration-150 hover:border-[var(--border)]"
                             >
+                                <div
+                                    className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[var(--accent-light)] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                                    aria-hidden="true"
+                                />
                                 <div>
                                     <div className="mb-4 flex items-center justify-between">
                                         <span className="feature-icon">

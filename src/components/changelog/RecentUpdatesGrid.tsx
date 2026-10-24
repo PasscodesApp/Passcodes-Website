@@ -25,7 +25,8 @@ export function RecentUpdatesGrid({ entries }: RecentUpdatesGridProps) {
                     Recent Updates
                 </h2>
                 <p className="mt-1.5 text-sm text-[var(--text-muted)] sm:text-base">
-                    The latest stable releases, iterative improvements, and maintenance builds.
+                    The latest stable releases, iterative improvements, and
+                    maintenance builds.
                 </p>
             </div>
 
@@ -33,8 +34,12 @@ export function RecentUpdatesGrid({ entries }: RecentUpdatesGridProps) {
                 {entries.map((entry) => (
                     <div
                         key={entry.slug}
-                        className="subtle-card group flex h-full flex-col justify-between transition-all hover:border-[var(--accent-border)] hover:shadow-sm"
+                        className="subtle-card group relative flex h-full flex-col justify-between overflow-hidden transition-all hover:border-[var(--accent-border)] hover:shadow-sm"
                     >
+                        <div
+                            className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[var(--accent-light)] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                            aria-hidden="true"
+                        />
                         <div>
                             {/* Card Top: Channel, Date, Category */}
                             <div className="mb-3.5 flex items-center justify-between gap-2">
@@ -42,9 +47,12 @@ export function RecentUpdatesGrid({ entries }: RecentUpdatesGridProps) {
                                     <span
                                         className={cn(
                                             "tag",
-                                            entry.releaseType === "Stable" && "tag stable",
-                                            entry.releaseType === "Beta" && "tag beta",
-                                            entry.releaseType === "Alpha" && "tag alpha"
+                                            entry.releaseType === "Stable" &&
+                                                "tag stable",
+                                            entry.releaseType === "Beta" &&
+                                                "tag beta",
+                                            entry.releaseType === "Alpha" &&
+                                                "tag alpha"
                                         )}
                                     >
                                         {entry.releaseType}
@@ -64,7 +72,10 @@ export function RecentUpdatesGrid({ entries }: RecentUpdatesGridProps) {
 
                             {/* Date */}
                             <div className="mb-2 flex items-center gap-1 text-[11px] text-[var(--text-dim)]">
-                                <Calendar className="h-3 w-3" aria-hidden="true" />
+                                <Calendar
+                                    className="h-3 w-3"
+                                    aria-hidden="true"
+                                />
                                 <time dateTime={entry.date}>
                                     {formatDate(entry.date)}
                                 </time>
@@ -83,30 +94,38 @@ export function RecentUpdatesGrid({ entries }: RecentUpdatesGridProps) {
                             </p>
 
                             {/* Highlights Preview */}
-                            {entry.highlights && entry.highlights.length > 0 && (
-                                <ul className="mt-3 space-y-1.5 border-t border-[var(--border-lighter)] pt-2.5">
-                                    {entry.highlights.slice(0, 2).map((h, i) => (
-                                        <li
-                                            key={i}
-                                            className="flex items-start gap-2 text-[11px] text-[var(--text-dim)]"
-                                        >
-                                            <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-[var(--accent-light)]" />
-                                            <span className="line-clamp-1">{h}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
+                            {entry.highlights &&
+                                entry.highlights.length > 0 && (
+                                    <ul className="mt-3 space-y-1.5 border-t border-[var(--border-lighter)] pt-2.5">
+                                        {entry.highlights
+                                            .slice(0, 2)
+                                            .map((h, i) => (
+                                                <li
+                                                    key={i}
+                                                    className="flex items-start gap-2 text-[11px] text-[var(--text-dim)]"
+                                                >
+                                                    <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-[var(--accent-light)]" />
+                                                    <span className="line-clamp-1">
+                                                        {h}
+                                                    </span>
+                                                </li>
+                                            ))}
+                                    </ul>
+                                )}
                         </div>
 
                         {/* Card Footer Link */}
-                        <div className="mt-4 pt-3 border-t border-[var(--border-light)]">
+                        <div className="mt-4 border-t border-[var(--border-light)] pt-3">
                             <Link
                                 href={`/changelog/${entry.slug}`}
                                 aria-label={`Read release notes for ${entry.version}`}
                                 className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--accent-light)] transition-all hover:gap-1.5"
                             >
                                 <span>Read release notes</span>
-                                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                                <ArrowRight
+                                    className="h-3 w-3 transition-transform group-hover:translate-x-0.5"
+                                    aria-hidden="true"
+                                />
                             </Link>
                         </div>
                     </div>

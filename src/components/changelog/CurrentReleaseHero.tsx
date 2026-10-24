@@ -21,7 +21,7 @@ export function CurrentReleaseHero({ release }: CurrentReleaseHeroProps) {
     return (
         <section
             aria-labelledby="current-production-release-heading"
-            className="relative overflow-hidden rounded-2xl border border-[var(--accent-border)] bg-[var(--card-bg-solid)] p-6 sm:p-8 shadow-sm transition-all"
+            className="relative overflow-hidden rounded-2xl border border-[var(--accent-border)] bg-[var(--card-bg-solid)] p-6 shadow-sm transition-all sm:p-8"
         >
             {/* Ambient subtle glow */}
             <div
@@ -34,7 +34,7 @@ export function CurrentReleaseHero({ release }: CurrentReleaseHeroProps) {
                 <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-light)] pb-5">
                     <div className="flex flex-wrap items-center gap-2.5">
                         <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                            <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
                             Current Production Release
                         </span>
                         <span className="tag stable shrink-0">
@@ -46,7 +46,10 @@ export function CurrentReleaseHero({ release }: CurrentReleaseHeroProps) {
                     </div>
 
                     <div className="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
-                        <Calendar className="h-3.5 w-3.5 text-[var(--text-dim)]" aria-hidden="true" />
+                        <Calendar
+                            className="h-3.5 w-3.5 text-[var(--text-dim)]"
+                            aria-hidden="true"
+                        />
                         <time dateTime={release.date}>
                             {formatDate(release.date)}
                         </time>
@@ -70,7 +73,10 @@ export function CurrentReleaseHero({ release }: CurrentReleaseHeroProps) {
                 {highlights.length > 0 && (
                     <div className="mt-6 rounded-xl border border-[var(--border-light)] bg-[var(--card-bg)] p-4 sm:p-5">
                         <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--text-dim)]">
-                            <CheckCircle2 className="h-3.5 w-3.5 text-[var(--accent-light)]" aria-hidden="true" />
+                            <CheckCircle2
+                                className="h-3.5 w-3.5 text-[var(--accent-light)]"
+                                aria-hidden="true"
+                            />
                             <span>Key Highlights in this Release</span>
                         </div>
                         <ul className="grid gap-2 sm:grid-cols-2">
@@ -80,7 +86,9 @@ export function CurrentReleaseHero({ release }: CurrentReleaseHeroProps) {
                                     className="flex items-start gap-2.5 text-xs text-[var(--text-muted)] sm:text-sm"
                                 >
                                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent-light)]" />
-                                    <span className="leading-relaxed">{item}</span>
+                                    <span className="leading-relaxed">
+                                        {item}
+                                    </span>
                                 </li>
                             ))}
                         </ul>
@@ -90,7 +98,9 @@ export function CurrentReleaseHero({ release }: CurrentReleaseHeroProps) {
                 {/* Build Specifications Pill Group */}
                 {release.internalDetails && (
                     <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-[var(--text-dim)]">
-                        <span className="font-medium text-[var(--text-muted)]">Specs:</span>
+                        <span className="font-medium text-[var(--text-muted)]">
+                            Specs:
+                        </span>
                         {release.internalDetails.expoSdk && (
                             <span className="rounded-md border border-[var(--border-light)] bg-[var(--card-bg)] px-2 py-0.5 font-mono text-[11px]">
                                 Expo SDK {release.internalDetails.expoSdk}
@@ -98,19 +108,26 @@ export function CurrentReleaseHero({ release }: CurrentReleaseHeroProps) {
                         )}
                         {release.internalDetails.minAndroid && (
                             <span className="rounded-md border border-[var(--border-light)] bg-[var(--card-bg)] px-2 py-0.5 font-mono text-[11px]">
-                                Android {release.internalDetails.minAndroid.split(" ")[0]}+
+                                Android{" "}
+                                {
+                                    release.internalDetails.minAndroid.split(
+                                        " "
+                                    )[0]
+                                }
+                                +
                             </span>
                         )}
                         {release.internalDetails.masterDbVersion && (
                             <span className="rounded-md border border-[var(--border-light)] bg-[var(--card-bg)] px-2 py-0.5 font-mono text-[11px]">
-                                DB Schema {release.internalDetails.masterDbVersion}
+                                DB Schema{" "}
+                                {release.internalDetails.masterDbVersion}
                             </span>
                         )}
                     </div>
                 )}
 
                 {/* Actions */}
-                <div className="mt-6 flex flex-wrap items-center gap-3 pt-3 border-t border-[var(--border-light)]">
+                <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-[var(--border-light)] pt-3">
                     <Link
                         href="/downloads"
                         className="btn btn-filled btn-small inline-flex items-center gap-1.5"
@@ -124,7 +141,10 @@ export function CurrentReleaseHero({ release }: CurrentReleaseHeroProps) {
                         className="btn btn-outline btn-small inline-flex items-center gap-1.5"
                     >
                         <span>Release Details</span>
-                        <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                        <ArrowRight
+                            className="h-3.5 w-3.5"
+                            aria-hidden="true"
+                        />
                     </Link>
 
                     <Link
@@ -135,7 +155,10 @@ export function CurrentReleaseHero({ release }: CurrentReleaseHeroProps) {
                     >
                         <BookOpen className="h-3.5 w-3.5" aria-hidden="true" />
                         <span>Documentation</span>
-                        <ExternalLink className="h-3 w-3 opacity-60" aria-hidden="true" />
+                        <ExternalLink
+                            className="h-3 w-3 opacity-60"
+                            aria-hidden="true"
+                        />
                     </Link>
 
                     {release.githubUrl && (
@@ -146,7 +169,10 @@ export function CurrentReleaseHero({ release }: CurrentReleaseHeroProps) {
                             className="btn btn-ghost btn-small inline-flex items-center gap-1.5 text-[var(--text-dim)]"
                         >
                             <span>GitHub Release</span>
-                            <ExternalLink className="h-3 w-3 opacity-60" aria-hidden="true" />
+                            <ExternalLink
+                                className="h-3 w-3 opacity-60"
+                                aria-hidden="true"
+                            />
                         </Link>
                     )}
                 </div>

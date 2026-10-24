@@ -43,3 +43,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 out.zip
+
+#Agents
+/.agents
+
+#Skills
+skills-lock.json

@@ -12,7 +12,10 @@ export function MilestonesSection({ milestones }: MilestonesSectionProps) {
     if (milestones.length === 0) return null;
 
     return (
-        <section aria-labelledby="architecture-milestones-heading" className="space-y-6">
+        <section
+            aria-labelledby="architecture-milestones-heading"
+            className="space-y-6"
+        >
             <div>
                 <span className="editorial-badge mb-2 border border-[var(--border-light)] bg-[var(--card-bg)] text-[var(--accent-light)]">
                     Architecture &amp; History
@@ -24,7 +27,8 @@ export function MilestonesSection({ milestones }: MilestonesSectionProps) {
                     Major Architectural Milestones
                 </h2>
                 <p className="mt-1.5 text-sm text-[var(--text-muted)] sm:text-base">
-                    Documented architectural shifts and foundational transitions across Passcodes&apos; open-source history.
+                    Documented architectural shifts and foundational transitions
+                    across Passcodes&apos; open-source history.
                 </p>
             </div>
 
@@ -36,8 +40,12 @@ export function MilestonesSection({ milestones }: MilestonesSectionProps) {
                     return (
                         <div
                             key={milestone.slug}
-                            className="subtle-card group flex flex-col justify-between rounded-xl border border-[var(--border-light)] bg-[var(--card-bg)] p-5 transition-all hover:border-[var(--accent-border)]"
+                            className="subtle-card group relative flex flex-col justify-between overflow-hidden rounded-xl border border-[var(--border-light)] bg-[var(--card-bg)] p-5 transition-all hover:border-[var(--accent-border)] hover:shadow-sm"
                         >
+                            <div
+                                className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[var(--accent-light)] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                                aria-hidden="true"
+                            />
                             <div>
                                 <div className="mb-2.5 flex flex-wrap items-center gap-2">
                                     {isExplicitMilestone ? (
@@ -65,7 +73,7 @@ export function MilestonesSection({ milestones }: MilestonesSectionProps) {
                                     </span>
                                 </div>
 
-                                <h3 className="text-base font-bold tracking-tight text-[var(--text)] group-hover:text-[var(--accent-light)] transition-colors">
+                                <h3 className="text-base font-bold tracking-tight text-[var(--text)] transition-colors group-hover:text-[var(--accent-light)]">
                                     <Link href={`/changelog/${milestone.slug}`}>
                                         {milestone.title}
                                     </Link>
@@ -75,29 +83,37 @@ export function MilestonesSection({ milestones }: MilestonesSectionProps) {
                                     {milestone.summary}
                                 </p>
 
-                                {milestone.highlights && milestone.highlights.length > 0 && (
-                                    <ul className="mt-3 space-y-1.5 border-t border-[var(--border-lighter)] pt-2.5">
-                                        {milestone.highlights.slice(0, 2).map((item, idx) => (
-                                            <li
-                                                key={idx}
-                                                className="flex items-start gap-2 text-xs text-[var(--text-dim)]"
-                                            >
-                                                <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-[var(--accent-light)]" />
-                                                <span className="line-clamp-2">{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
+                                {milestone.highlights &&
+                                    milestone.highlights.length > 0 && (
+                                        <ul className="mt-3 space-y-1.5 border-t border-[var(--border-lighter)] pt-2.5">
+                                            {milestone.highlights
+                                                .slice(0, 2)
+                                                .map((item, idx) => (
+                                                    <li
+                                                        key={idx}
+                                                        className="flex items-start gap-2 text-xs text-[var(--text-dim)]"
+                                                    >
+                                                        <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-[var(--accent-light)]" />
+                                                        <span className="line-clamp-2">
+                                                            {item}
+                                                        </span>
+                                                    </li>
+                                                ))}
+                                        </ul>
+                                    )}
                             </div>
 
-                            <div className="mt-4 pt-3 border-t border-[var(--border-light)]">
+                            <div className="mt-4 border-t border-[var(--border-light)] pt-3">
                                 <Link
                                     href={`/changelog/${milestone.slug}`}
                                     aria-label={`Read details for ${milestone.version}`}
                                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--accent-light)] transition-all hover:gap-2"
                                 >
                                     <span>Read details</span>
-                                    <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                                    <ArrowRight
+                                        className="h-3 w-3 transition-transform group-hover:translate-x-0.5"
+                                        aria-hidden="true"
+                                    />
                                 </Link>
                             </div>
                         </div>

@@ -90,15 +90,30 @@ export default function ChangelogEntryPage({
                     <nav aria-label="Breadcrumb">
                         <ol className="flex flex-wrap items-center gap-1.5 text-xs text-[var(--text-dim)]">
                             <li>
-                                <Link href="/" className="transition-colors hover:text-[var(--text)]">Home</Link>
+                                <Link
+                                    href="/"
+                                    className="transition-colors hover:text-[var(--text)]"
+                                >
+                                    Home
+                                </Link>
                             </li>
                             <li aria-hidden="true">/</li>
                             <li>
-                                <Link href="/changelog" className="transition-colors hover:text-[var(--text)]">Project Updates</Link>
+                                <Link
+                                    href="/changelog"
+                                    className="transition-colors hover:text-[var(--text)]"
+                                >
+                                    Project Updates
+                                </Link>
                             </li>
                             <li aria-hidden="true">/</li>
                             <li>
-                                <span aria-current="page" className="font-mono text-[var(--text)]">{entry.version}</span>
+                                <span
+                                    aria-current="page"
+                                    className="font-mono text-[var(--text)]"
+                                >
+                                    {entry.version}
+                                </span>
                             </li>
                         </ol>
                     </nav>
@@ -123,7 +138,8 @@ export default function ChangelogEntryPage({
                             <span
                                 className={cn(
                                     "tag",
-                                    entry.releaseType === "Stable" && "tag stable",
+                                    entry.releaseType === "Stable" &&
+                                        "tag stable",
                                     entry.releaseType === "Beta" && "tag beta",
                                     entry.releaseType === "Alpha" && "tag alpha"
                                 )}
@@ -140,7 +156,10 @@ export default function ChangelogEntryPage({
                         )}
 
                         <span className="inline-flex items-center gap-1 rounded-md border border-[var(--border-light)] bg-[var(--card-bg)] px-2.5 py-1 text-xs text-[var(--text-muted)]">
-                            <Calendar className="h-3.5 w-3.5 text-[var(--text-dim)]" aria-hidden="true" />
+                            <Calendar
+                                className="h-3.5 w-3.5 text-[var(--text-dim)]"
+                                aria-hidden="true"
+                            />
                             <time dateTime={entry.date}>
                                 {formatDate(entry.date)}
                             </time>
@@ -177,24 +196,35 @@ export default function ChangelogEntryPage({
 
                     {/* Action Links */}
                     <div className="flex flex-wrap items-center gap-3 pt-2">
-                        {!isDeprecated && !entry.isYanked && !entry.isMilestone && (
-                            <Link
-                                href="/downloads"
-                                className="btn btn-filled btn-small inline-flex items-center gap-1.5"
-                            >
-                                <Download className="h-3.5 w-3.5" aria-hidden="true" />
-                                <span>Get {entry.version} APK</span>
-                            </Link>
-                        )}
+                        {!isDeprecated &&
+                            !entry.isYanked &&
+                            !entry.isMilestone && (
+                                <Link
+                                    href="/downloads"
+                                    className="btn btn-filled btn-small inline-flex items-center gap-1.5"
+                                >
+                                    <Download
+                                        className="h-3.5 w-3.5"
+                                        aria-hidden="true"
+                                    />
+                                    <span>Get {entry.version} APK</span>
+                                </Link>
+                            )}
                         <Link
                             href={USER_GUIDE_URL}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn btn-outline btn-small inline-flex items-center gap-1.5"
                         >
-                            <BookOpen className="h-3.5 w-3.5" aria-hidden="true" />
+                            <BookOpen
+                                className="h-3.5 w-3.5"
+                                aria-hidden="true"
+                            />
                             <span>Setup Guide</span>
-                            <ExternalLink className="h-3 w-3 opacity-60" aria-hidden="true" />
+                            <ExternalLink
+                                className="h-3 w-3 opacity-60"
+                                aria-hidden="true"
+                            />
                         </Link>
                         {entry.githubUrl && (
                             <Link
@@ -203,9 +233,15 @@ export default function ChangelogEntryPage({
                                 rel="noopener noreferrer"
                                 className="btn btn-ghost btn-small"
                             >
-                                <GitCommit className="h-3.5 w-3.5" aria-hidden="true" />
+                                <GitCommit
+                                    className="h-3.5 w-3.5"
+                                    aria-hidden="true"
+                                />
                                 <span>GitHub Release</span>
-                                <ExternalLink className="h-3 w-3 opacity-60" aria-hidden="true" />
+                                <ExternalLink
+                                    className="h-3 w-3 opacity-60"
+                                    aria-hidden="true"
+                                />
                             </Link>
                         )}
                         {entry.compareUrl && (
@@ -215,9 +251,15 @@ export default function ChangelogEntryPage({
                                 rel="noopener noreferrer"
                                 className="btn btn-ghost btn-small"
                             >
-                                <GitCompare className="h-3.5 w-3.5" aria-hidden="true" />
+                                <GitCompare
+                                    className="h-3.5 w-3.5"
+                                    aria-hidden="true"
+                                />
                                 <span>Compare Diffs</span>
-                                <ExternalLink className="h-3 w-3 opacity-60" aria-hidden="true" />
+                                <ExternalLink
+                                    className="h-3 w-3 opacity-60"
+                                    aria-hidden="true"
+                                />
                             </Link>
                         )}
                     </div>
@@ -227,20 +269,36 @@ export default function ChangelogEntryPage({
                 {isDeprecated && (
                     <div className="mb-8 rounded-xl border border-red-500/30 bg-red-500/10 p-5 text-sm text-red-700 dark:text-red-300">
                         <div className="flex items-center gap-2 font-semibold text-red-600 dark:text-red-400">
-                            <AlertTriangle className="h-4 w-4 shrink-0" aria-hidden="true" />
+                            <AlertTriangle
+                                className="h-4 w-4 shrink-0"
+                                aria-hidden="true"
+                            />
                             <span>Deprecated Release Notice</span>
                         </div>
-                        <p className="mt-1.5 leading-relaxed text-xs sm:text-sm text-[var(--text-muted)]">
+                        <p className="mt-1.5 text-xs leading-relaxed text-[var(--text-muted)] sm:text-sm">
                             {entry.deprecatedReason ||
                                 "This release is no longer supported. Superseded by the newer database architecture introduced in later releases. Please use a current release instead."}
                         </p>
                         <div className="mt-3.5 flex flex-wrap items-center gap-4">
                             <Link
                                 href="/downloads"
-                                className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 dark:text-red-300 underline hover:no-underline"
+                                className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 underline hover:no-underline dark:text-red-300"
                             >
                                 <span>View current production downloads</span>
-                                <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                                <ArrowRight
+                                    className="h-3 w-3"
+                                    aria-hidden="true"
+                                />
+                            </Link>
+                            <Link
+                                href="/upgrade"
+                                className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 underline hover:no-underline dark:text-red-300"
+                            >
+                                <span>Upgrade &amp; Migration Guidance</span>
+                                <ArrowRight
+                                    className="h-3 w-3"
+                                    aria-hidden="true"
+                                />
                             </Link>
                             <Link
                                 href="/upgrade"
@@ -257,20 +315,26 @@ export default function ChangelogEntryPage({
                 {entry.isYanked && (
                     <div className="mb-8 rounded-xl border border-amber-500/30 bg-amber-500/10 p-5 text-sm text-amber-700 dark:text-amber-300">
                         <div className="flex items-center gap-2 font-semibold">
-                            <AlertTriangle className="h-4 w-4" aria-hidden="true" />
+                            <AlertTriangle
+                                className="h-4 w-4"
+                                aria-hidden="true"
+                            />
                             <span>Yanked Release Notice</span>
                         </div>
-                        <p className="mt-1.5 leading-relaxed text-xs sm:text-sm">
+                        <p className="mt-1.5 text-xs leading-relaxed sm:text-sm">
                             {entry.yankedReason ||
                                 "This release has been explicitly yanked from active distribution. It is preserved here strictly for documentation and project history."}
                         </p>
                         <div className="mt-3.5 flex flex-wrap items-center gap-3">
                             <Link
                                 href="/downloads"
-                                className="inline-flex items-center gap-1 text-xs font-semibold text-amber-800 dark:text-amber-200 underline hover:no-underline"
+                                className="inline-flex items-center gap-1 text-xs font-semibold text-amber-800 underline hover:no-underline dark:text-amber-200"
                             >
                                 <span>View current production downloads</span>
-                                <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                                <ArrowRight
+                                    className="h-3 w-3"
+                                    aria-hidden="true"
+                                />
                             </Link>
                         </div>
                     </div>
@@ -285,38 +349,62 @@ export default function ChangelogEntryPage({
                         <div className="grid grid-cols-2 gap-4 font-mono text-xs sm:grid-cols-4">
                             {entry.internalDetails.packageName && (
                                 <div>
-                                    <span className="block text-[var(--text-dim)]">Package</span>
-                                    <span className="font-semibold text-[var(--text)]">{entry.internalDetails.packageName}</span>
+                                    <span className="block text-[var(--text-dim)]">
+                                        Package
+                                    </span>
+                                    <span className="font-semibold text-[var(--text)]">
+                                        {entry.internalDetails.packageName}
+                                    </span>
                                 </div>
                             )}
                             {entry.internalDetails.expoSdk && (
                                 <div>
-                                    <span className="block text-[var(--text-dim)]">Expo SDK</span>
-                                    <span className="font-semibold text-[var(--text)]">v{entry.internalDetails.expoSdk}</span>
+                                    <span className="block text-[var(--text-dim)]">
+                                        Expo SDK
+                                    </span>
+                                    <span className="font-semibold text-[var(--text)]">
+                                        v{entry.internalDetails.expoSdk}
+                                    </span>
                                 </div>
                             )}
                             {entry.internalDetails.minAndroid && (
                                 <div>
-                                    <span className="block text-[var(--text-dim)]">Min Android</span>
-                                    <span className="font-semibold text-[var(--text)]">{entry.internalDetails.minAndroid}</span>
+                                    <span className="block text-[var(--text-dim)]">
+                                        Min Android
+                                    </span>
+                                    <span className="font-semibold text-[var(--text)]">
+                                        {entry.internalDetails.minAndroid}
+                                    </span>
                                 </div>
                             )}
                             {entry.internalDetails.maxAndroid && (
                                 <div>
-                                    <span className="block text-[var(--text-dim)]">Max Android</span>
-                                    <span className="font-semibold text-[var(--text)]">{entry.internalDetails.maxAndroid}</span>
+                                    <span className="block text-[var(--text-dim)]">
+                                        Max Android
+                                    </span>
+                                    <span className="font-semibold text-[var(--text)]">
+                                        {entry.internalDetails.maxAndroid}
+                                    </span>
                                 </div>
                             )}
                             {entry.internalDetails.versionCode && (
                                 <div>
-                                    <span className="block text-[var(--text-dim)]">Version Code</span>
-                                    <span className="font-semibold text-[var(--text)]">{entry.internalDetails.versionCode}</span>
+                                    <span className="block text-[var(--text-dim)]">
+                                        Version Code
+                                    </span>
+                                    <span className="font-semibold text-[var(--text)]">
+                                        {entry.internalDetails.versionCode}
+                                    </span>
                                 </div>
                             )}
                             {entry.internalDetails.masterDbVersion && (
                                 <div>
-                                    <span className="block text-[var(--text-dim)]">Database Schema</span>
-                                    <span className="font-semibold text-[var(--text)]">{entry.internalDetails.masterDbVersion}</span>
+                                    <span className="block text-[var(--text-dim)]">
+                                        Database Schema
+                                    </span>
+                                    <span className="font-semibold text-[var(--text)]">
+                                        {entry.internalDetails.masterDbVersion}
+                                    </span>
                                 </div>
                             )}
                         </div>
@@ -331,7 +419,10 @@ export default function ChangelogEntryPage({
                     {entry.highlights && entry.highlights.length > 0 && (
                         <div className="mb-10 rounded-xl border border-[var(--border-light)] bg-[var(--card-bg)] p-6 sm:p-8">
                             <h2 className="mb-4 flex items-center gap-2 text-base font-semibold text-[var(--text)]">
-                                <CheckCircle2 className="h-4 w-4 text-[var(--accent-light)]" aria-hidden="true" />
+                                <CheckCircle2
+                                    className="h-4 w-4 text-[var(--accent-light)]"
+                                    aria-hidden="true"
+                                />
                                 <span>Release Highlights</span>
                             </h2>
                             <ul className="space-y-3">
@@ -379,7 +470,10 @@ export default function ChangelogEntryPage({
                     {/* Documentation & Resources Box */}
                     <div className="mt-12 rounded-xl border border-[var(--border-light)] bg-[var(--card-bg)] p-5">
                         <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--text-dim)]">
-                            <BookOpen className="h-3.5 w-3.5 text-[var(--accent-light)]" aria-hidden="true" />
+                            <BookOpen
+                                className="h-3.5 w-3.5 text-[var(--accent-light)]"
+                                aria-hidden="true"
+                            />
                             <span>Relevant Documentation &amp; Resources</span>
                         </div>
                         <div className="flex flex-wrap gap-3 text-xs">
@@ -390,7 +484,10 @@ export default function ChangelogEntryPage({
                                 className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--border-light)] bg-[var(--card-bg-solid)] px-3 py-2 text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
                             >
                                 <span>Official Docs Release Notes</span>
-                                <ExternalLink className="h-3 w-3 opacity-60" aria-hidden="true" />
+                                <ExternalLink
+                                    className="h-3 w-3 opacity-60"
+                                    aria-hidden="true"
+                                />
                             </Link>
                             <Link
                                 href={USER_GUIDE_URL}
@@ -399,7 +496,10 @@ export default function ChangelogEntryPage({
                                 className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--border-light)] bg-[var(--card-bg-solid)] px-3 py-2 text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
                             >
                                 <span>Installation &amp; Setup Guide</span>
-                                <ExternalLink className="h-3 w-3 opacity-60" aria-hidden="true" />
+                                <ExternalLink
+                                    className="h-3 w-3 opacity-60"
+                                    aria-hidden="true"
+                                />
                             </Link>
                             <Link
                                 href={GITHUB_REPO_URL}
@@ -408,7 +508,10 @@ export default function ChangelogEntryPage({
                                 className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--border-light)] bg-[var(--card-bg-solid)] px-3 py-2 text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
                             >
                                 <span>Passcodes GitHub Repository</span>
-                                <ExternalLink className="h-3 w-3 opacity-60" aria-hidden="true" />
+                                <ExternalLink
+                                    className="h-3 w-3 opacity-60"
+                                    aria-hidden="true"
+                                />
                             </Link>
                         </div>
                     </div>
@@ -434,7 +537,10 @@ export default function ChangelogEntryPage({
                                     href="/downloads"
                                     className="btn btn-filled btn-small inline-flex items-center gap-1.5"
                                 >
-                                    <Download className="h-3.5 w-3.5" aria-hidden="true" />
+                                    <Download
+                                        className="h-3.5 w-3.5"
+                                        aria-hidden="true"
+                                    />
                                     <span>Download APK</span>
                                 </Link>
                                 <Link
@@ -443,16 +549,25 @@ export default function ChangelogEntryPage({
                                     rel="noopener noreferrer"
                                     className="btn btn-outline btn-small inline-flex items-center gap-1.5"
                                 >
-                                    <BookOpen className="h-3.5 w-3.5" aria-hidden="true" />
+                                    <BookOpen
+                                        className="h-3.5 w-3.5"
+                                        aria-hidden="true"
+                                    />
                                     <span>Documentation</span>
-                                    <ExternalLink className="h-3 w-3 opacity-60" aria-hidden="true" />
+                                    <ExternalLink
+                                        className="h-3 w-3 opacity-60"
+                                        aria-hidden="true"
+                                    />
                                 </Link>
                                 <Link
                                     href="/changelog"
                                     className="btn btn-ghost btn-small inline-flex items-center gap-1.5"
                                 >
                                     <span>All Updates</span>
-                                    <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                                    <ArrowRight
+                                        className="h-3 w-3"
+                                        aria-hidden="true"
+                                    />
                                 </Link>
                             </div>
                         </div>
@@ -472,7 +587,10 @@ export default function ChangelogEntryPage({
                             className="subtle-card group flex flex-col gap-1 text-left"
                         >
                             <span className="flex items-center gap-1.5 text-xs text-[var(--text-dim)]">
-                                <ArrowLeft className="h-3 w-3 transition-transform group-hover:-translate-x-0.5" aria-hidden="true" />
+                                <ArrowLeft
+                                    className="h-3 w-3 transition-transform group-hover:-translate-x-0.5"
+                                    aria-hidden="true"
+                                />
                                 <span>Previous Release</span>
                             </span>
                             <span className="text-sm font-semibold text-[var(--text)] transition-colors group-hover:text-[var(--accent-light)]">
@@ -486,11 +604,14 @@ export default function ChangelogEntryPage({
                     {next ? (
                         <Link
                             href={`/changelog/${next.slug}`}
-                            className="subtle-card group flex flex-col gap-1 text-left sm:text-right sm:items-end"
+                            className="subtle-card group flex flex-col gap-1 text-left sm:items-end sm:text-right"
                         >
                             <span className="flex items-center gap-1.5 text-xs text-[var(--text-dim)] sm:justify-end">
                                 <span>Next Release</span>
-                                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                                <ArrowRight
+                                    className="h-3 w-3 transition-transform group-hover:translate-x-0.5"
+                                    aria-hidden="true"
+                                />
                             </span>
                             <span className="text-sm font-semibold text-[var(--text)] transition-colors group-hover:text-[var(--accent-light)]">
                                 {next.version} — {next.title}

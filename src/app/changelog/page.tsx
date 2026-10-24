@@ -97,7 +97,7 @@ export default function ChangelogPage() {
     };
 
     return (
-        <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-20 space-y-16">
+        <div className="mx-auto max-w-5xl space-y-16 px-4 py-12 sm:px-6 sm:py-20">
             {/* 1. Editorial Header */}
             <ScrollReveal delay={0}>
                 <div className="border-b border-[var(--border-light)] pb-10">
@@ -110,10 +110,11 @@ export default function ChangelogPage() {
                                 Release Highlights &amp; Milestones
                             </h1>
                             <p className="section-subheading max-w-2xl">
-                                Curated milestones, architecture transitions, and
-                                feature updates across Passcodes releases. Complete
-                                historical notes and tags are maintained in our official
-                                documentation and GitHub releases.
+                                Curated milestones, architecture transitions,
+                                and feature updates across Passcodes releases.
+                                Complete historical notes and tags are
+                                maintained in our official documentation and
+                                GitHub releases.
                             </p>
                         </div>
                         <div className="flex flex-wrap items-center gap-2.5 text-xs text-[var(--text-muted)]">
@@ -123,9 +124,15 @@ export default function ChangelogPage() {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--border-light)] bg-[var(--card-bg)] px-3 py-1.5 transition-colors hover:border-[var(--border)] hover:text-[var(--text)]"
                             >
-                                <GitCommit className="h-3.5 w-3.5" aria-hidden="true" />
+                                <GitCommit
+                                    className="h-3.5 w-3.5"
+                                    aria-hidden="true"
+                                />
                                 <span>GitHub Tags</span>
-                                <ExternalLink className="h-3 w-3 opacity-60" aria-hidden="true" />
+                                <ExternalLink
+                                    className="h-3 w-3 opacity-60"
+                                    aria-hidden="true"
+                                />
                             </Link>
                             <Link
                                 href={DOCS_RELEASE_NOTES_URL}
@@ -134,14 +141,19 @@ export default function ChangelogPage() {
                                 className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--border-light)] bg-[var(--card-bg)] px-3 py-1.5 transition-colors hover:border-[var(--border)] hover:text-[var(--text)]"
                             >
                                 <span>Docs Notes</span>
-                                <ExternalLink className="h-3 w-3 opacity-60" aria-hidden="true" />
+                                <ExternalLink
+                                    className="h-3 w-3 opacity-60"
+                                    aria-hidden="true"
+                                />
                             </Link>
                         </div>
                     </div>
 
                     {/* Quick navigation anchor bar */}
                     <div className="mt-8 flex flex-wrap items-center gap-2 border-t border-[var(--border-lighter)] pt-4 text-xs">
-                        <span className="font-semibold text-[var(--text-dim)]">Jump to:</span>
+                        <span className="font-semibold text-[var(--text-dim)]">
+                            Jump to:
+                        </span>
                         <a
                             href="#current-release"
                             className="rounded-md border border-[var(--border-light)] bg-[var(--card-bg)] px-2.5 py-1 text-[var(--text-muted)] transition-colors hover:border-[var(--border)] hover:text-[var(--text)]"
@@ -198,7 +210,10 @@ export default function ChangelogPage() {
             )}
 
             {/* 5. Historical Release Archive & Timeline */}
-            <div id="archive" className="scroll-mt-24 pt-6 border-t border-[var(--border-light)]">
+            <div
+                id="archive"
+                className="scroll-mt-24 border-t border-[var(--border-light)] pt-6"
+            >
                 <ScrollReveal delay={70}>
                     <div className="mb-8">
                         <span className="editorial-badge mb-2 border border-[var(--border-light)] bg-[var(--card-bg)] text-[var(--accent-light)]">
@@ -208,7 +223,9 @@ export default function ChangelogPage() {
                             Full Release History &amp; Timeline
                         </h2>
                         <p className="mt-1.5 text-sm text-[var(--text-muted)] sm:text-base">
-                            Explore the complete chronological stream of production builds, preview releases, and archived tags.
+                            Explore the complete chronological stream of
+                            production builds, preview releases, and archived
+                            tags.
                         </p>
                     </div>
 
@@ -217,7 +234,10 @@ export default function ChangelogPage() {
                         {/* Top row: Search input & summary */}
                         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                             <div className="relative w-full sm:max-w-md">
-                                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--text-dim)]" aria-hidden="true" />
+                                <Search
+                                    className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--text-dim)]"
+                                    aria-hidden="true"
+                                />
                                 <input
                                     type="text"
                                     placeholder="Filter updates by version, keyword, state, or build..."
@@ -233,14 +253,21 @@ export default function ChangelogPage() {
                                         className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[var(--text-dim)] hover:text-[var(--text)]"
                                         aria-label="Clear search"
                                     >
-                                        <X className="h-3.5 w-3.5" aria-hidden="true" />
+                                        <X
+                                            className="h-3.5 w-3.5"
+                                            aria-hidden="true"
+                                        />
                                     </button>
                                 )}
                             </div>
 
                             <div className="flex items-center justify-between gap-3 text-xs text-[var(--text-muted)]">
                                 <span>
-                                    Showing <strong className="text-[var(--text)]">{filteredEntries.length}</strong> of {CHANGELOG_ENTRIES.length} entries
+                                    Showing{" "}
+                                    <strong className="text-[var(--text)]">
+                                        {filteredEntries.length}
+                                    </strong>{" "}
+                                    of {CHANGELOG_ENTRIES.length} entries
                                 </span>
                                 {isFilterActive && (
                                     <button
@@ -271,7 +298,9 @@ export default function ChangelogPage() {
                                             key={cat}
                                             role="tab"
                                             aria-selected={isSelected}
-                                            onClick={() => setActiveCategory(cat)}
+                                            onClick={() =>
+                                                setActiveCategory(cat)
+                                            }
                                             className={cn(
                                                 "rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-150",
                                                 isSelected
@@ -291,19 +320,25 @@ export default function ChangelogPage() {
                             <div className="mb-2 text-xs font-semibold text-[var(--text-dim)]">
                                 Release State &amp; Channel:
                             </div>
-                            <div className="flex flex-wrap gap-1.5" aria-label="Filter by release channel">
+                            <div
+                                className="flex flex-wrap gap-1.5"
+                                aria-label="Filter by release channel"
+                            >
                                 {RELEASE_CHANNEL_FILTERS.map((channel) => {
-                                    const isSelected = activeChannel === channel;
+                                    const isSelected =
+                                        activeChannel === channel;
                                     return (
                                         <button
                                             key={channel}
                                             type="button"
                                             aria-pressed={isSelected}
-                                            onClick={() => setActiveChannel(channel)}
+                                            onClick={() =>
+                                                setActiveChannel(channel)
+                                            }
                                             className={cn(
                                                 "rounded-lg px-2.5 py-1 text-xs font-medium transition-all duration-150",
                                                 isSelected
-                                                    ? "border border-[var(--accent-light)] bg-[var(--accent-subtle)] text-[var(--accent-light)] font-semibold"
+                                                    ? "border border-[var(--accent-light)] bg-[var(--accent-subtle)] font-semibold text-[var(--accent-light)]"
                                                     : "border border-[var(--border-light)] bg-[var(--card-bg-solid)] text-[var(--text-dim)] hover:text-[var(--text)]"
                                             )}
                                         >
@@ -323,7 +358,8 @@ export default function ChangelogPage() {
                             No updates match your filter
                         </p>
                         <p className="mt-1 text-sm text-[var(--text-muted)]">
-                            Try clearing your search query or selecting &quot;All&quot; categories.
+                            Try clearing your search query or selecting
+                            &quot;All&quot; categories.
                         </p>
                         <button
                             type="button"
@@ -349,7 +385,7 @@ export default function ChangelogPage() {
                                         delay={Math.min(index * 30, 150)}
                                         distance={16}
                                     >
-                                        <div className="relative overflow-hidden rounded-2xl border border-[var(--accent-border)] bg-gradient-to-r from-[var(--card-bg)] via-[var(--accent-subtle)]/30 to-[var(--card-bg)] p-6 sm:p-8">
+                                        <div className="via-[var(--accent-subtle)]/30 relative overflow-hidden rounded-2xl border border-[var(--accent-border)] bg-gradient-to-r from-[var(--card-bg)] to-[var(--card-bg)] p-6 sm:p-8">
                                             <div className="mb-3 flex flex-wrap items-center gap-2.5">
                                                 <span className="editorial-badge border-[var(--accent-light)]/40 bg-[var(--accent-light)]/15 font-semibold text-[var(--accent-light)]">
                                                     Architecture Milestone
@@ -398,9 +434,13 @@ export default function ChangelogPage() {
                                                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--accent-light)] transition-all hover:gap-2"
                                                 >
                                                     <span>
-                                                        Read architectural overview
+                                                        Read architectural
+                                                        overview
                                                     </span>
-                                                    <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                                                    <ArrowRight
+                                                        className="h-3.5 w-3.5"
+                                                        aria-hidden="true"
+                                                    />
                                                 </Link>
                                             </div>
                                         </div>
@@ -458,11 +498,12 @@ export default function ChangelogPage() {
                                                             Latest
                                                         </span>
                                                     )}
-                                                    {entry.isMajor && !isLatest && (
-                                                        <span className="editorial-badge border-[var(--border-light)] bg-[var(--card-bg)] text-[var(--text-muted)]">
-                                                            Major
-                                                        </span>
-                                                    )}
+                                                    {entry.isMajor &&
+                                                        !isLatest && (
+                                                            <span className="editorial-badge border-[var(--border-light)] bg-[var(--card-bg)] text-[var(--text-muted)]">
+                                                                Major
+                                                            </span>
+                                                        )}
                                                 </div>
 
                                                 <div className="flex items-center gap-2">
@@ -479,7 +520,10 @@ export default function ChangelogPage() {
                                                 </div>
 
                                                 <div className="flex items-center gap-1.5 text-xs text-[var(--text-dim)]">
-                                                    <Calendar className="h-3.5 w-3.5" aria-hidden="true" />
+                                                    <Calendar
+                                                        className="h-3.5 w-3.5"
+                                                        aria-hidden="true"
+                                                    />
                                                     <time dateTime={entry.date}>
                                                         {formatDate(entry.date)}
                                                     </time>
@@ -500,12 +544,29 @@ export default function ChangelogPage() {
                                                 </div>
 
                                                 {entry.internalDetails && (
-                                                    <div className="mt-1 font-mono text-[11px] text-[var(--text-dim)] space-y-0.5">
-                                                        {entry.internalDetails.expoSdk && (
-                                                            <div>Expo SDK {entry.internalDetails.expoSdk}</div>
+                                                    <div className="mt-1 space-y-0.5 font-mono text-[11px] text-[var(--text-dim)]">
+                                                        {entry.internalDetails
+                                                            .expoSdk && (
+                                                            <div>
+                                                                Expo SDK{" "}
+                                                                {
+                                                                    entry
+                                                                        .internalDetails
+                                                                        .expoSdk
+                                                                }
+                                                            </div>
                                                         )}
-                                                        {entry.internalDetails.minAndroid && (
-                                                            <div>Android {entry.internalDetails.minAndroid.split(" ")[0]}+</div>
+                                                        {entry.internalDetails
+                                                            .minAndroid && (
+                                                            <div>
+                                                                Android{" "}
+                                                                {
+                                                                    entry.internalDetails.minAndroid.split(
+                                                                        " "
+                                                                    )[0]
+                                                                }
+                                                                +
+                                                            </div>
                                                         )}
                                                     </div>
                                                 )}
@@ -513,7 +574,9 @@ export default function ChangelogPage() {
                                                 {entry.githubUrl && (
                                                     <div className="mt-2 border-t border-[var(--border-light)] pt-2">
                                                         <Link
-                                                            href={entry.githubUrl}
+                                                            href={
+                                                                entry.githubUrl
+                                                            }
                                                             target="_blank"
                                                             rel="noopener noreferrer"
                                                             className="inline-flex items-center gap-1 text-xs text-[var(--text-dim)] transition-colors hover:text-[var(--accent-light)]"
@@ -521,7 +584,10 @@ export default function ChangelogPage() {
                                                             <span>
                                                                 GitHub Release
                                                             </span>
-                                                            <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                                                            <ExternalLink
+                                                                className="h-3 w-3"
+                                                                aria-hidden="true"
+                                                            />
                                                         </Link>
                                                     </div>
                                                 )}
@@ -542,8 +608,13 @@ export default function ChangelogPage() {
                                             {isDeprecated && (
                                                 <div className="mt-3 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-xs leading-relaxed text-red-700 dark:text-red-300">
                                                     <div className="flex items-center gap-1.5 font-semibold text-red-600 dark:text-red-400">
-                                                        <AlertTriangle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                                                        <span>Deprecated Release</span>
+                                                        <AlertTriangle
+                                                            className="h-3.5 w-3.5 shrink-0"
+                                                            aria-hidden="true"
+                                                        />
+                                                        <span>
+                                                            Deprecated Release
+                                                        </span>
                                                     </div>
                                                     <p className="mt-1 text-[var(--text-muted)]">
                                                         {entry.deprecatedReason ||
@@ -552,12 +623,15 @@ export default function ChangelogPage() {
                                                 </div>
                                             )}
 
-                                            {entry.isYanked && entry.yankedReason && (
-                                                <div className="mt-3 rounded-lg border border-amber-500/30 bg-amber-500/10 p-3 text-xs leading-relaxed text-amber-700 dark:text-amber-300">
-                                                    <span className="font-semibold">Release Notice: </span>
-                                                    {entry.yankedReason}
-                                                </div>
-                                            )}
+                                            {entry.isYanked &&
+                                                entry.yankedReason && (
+                                                    <div className="mt-3 rounded-lg border border-amber-500/30 bg-amber-500/10 p-3 text-xs leading-relaxed text-amber-700 dark:text-amber-300">
+                                                        <span className="font-semibold">
+                                                            Release Notice:{" "}
+                                                        </span>
+                                                        {entry.yankedReason}
+                                                    </div>
+                                                )}
 
                                             <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)] sm:text-base">
                                                 {entry.summary}
@@ -568,14 +642,19 @@ export default function ChangelogPage() {
                                                 entry.highlights.length > 0 && (
                                                     <div className="mt-5 space-y-2.5">
                                                         {entry.highlights.map(
-                                                            (highlight, hIdx) => (
+                                                            (
+                                                                highlight,
+                                                                hIdx
+                                                            ) => (
                                                                 <div
                                                                     key={hIdx}
                                                                     className="flex items-start gap-2.5 text-sm text-[var(--text-muted)]"
                                                                 >
                                                                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent-light)]" />
                                                                     <span className="leading-relaxed">
-                                                                        {highlight}
+                                                                        {
+                                                                            highlight
+                                                                        }
                                                                     </span>
                                                                 </div>
                                                             )
@@ -593,7 +672,10 @@ export default function ChangelogPage() {
                                                     <span>
                                                         Read full release notes
                                                     </span>
-                                                    <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                                                    <ArrowRight
+                                                        className="h-3.5 w-3.5"
+                                                        aria-hidden="true"
+                                                    />
                                                 </Link>
                                             </div>
                                         </div>

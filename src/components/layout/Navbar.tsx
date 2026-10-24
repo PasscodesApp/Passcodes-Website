@@ -35,15 +35,17 @@ export function Navbar() {
                 <Link
                     href="/"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center gap-2.5 rounded-lg text-base font-bold tracking-tight text-[var(--text)] transition-opacity hover:opacity-90"
+                    className="group flex items-center gap-2.5 rounded-lg text-base font-bold tracking-tight text-[var(--text)] transition-all hover:opacity-95"
                     aria-label="Passcodes Home"
                 >
-                    <Logo className="h-7 w-7 rounded-lg shadow-sm" />
-                    <span className="text-lg font-bold">Passcodes</span>
+                    <Logo className="shadow-xs h-7 w-7 rounded-lg transition-transform duration-200 group-hover:scale-105" />
+                    <span className="text-lg font-bold tracking-tight">
+                        Passcodes
+                    </span>
                 </Link>
 
                 {/* Desktop Nav Items */}
-                <div className="hidden items-center gap-1 md:flex">
+                <div className="bg-[var(--card-bg)]/50 hidden items-center gap-1 rounded-full border border-[var(--border-light)] p-1 backdrop-blur-md lg:flex">
                     {NAV_ROUTES.map((route) => {
                         const active = isActive(route.href);
                         return (
@@ -51,7 +53,7 @@ export function Navbar() {
                                 key={route.href}
                                 href={route.href}
                                 className={cn(
-                                    "nav-btn text-sm font-medium",
+                                    "nav-btn px-2.5 py-1.5 text-xs font-medium lg:px-3.5 lg:text-sm",
                                     active && "active-nav"
                                 )}
                                 aria-current={active ? "page" : undefined}
@@ -63,12 +65,12 @@ export function Navbar() {
                 </div>
 
                 {/* Desktop Right Actions */}
-                <div className="hidden items-center gap-2 md:flex">
+                <div className="hidden items-center gap-1.5 lg:flex lg:gap-2">
                     <Link
                         href={GITHUB_REPO_URL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="nav-btn !px-2.5 !py-2"
+                        className="nav-btn !p-2"
                         aria-label="Passcodes GitHub Repository"
                         title="GitHub Repository"
                     >
@@ -82,13 +84,16 @@ export function Navbar() {
                         className="btn btn-filled btn-small ml-1"
                         aria-label="Get App - Download Passcodes"
                     >
-                        <Download className="h-3.5 w-3.5" aria-hidden="true" />
+                        <Download
+                            className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-y-0.5"
+                            aria-hidden="true"
+                        />
                         <span>Get App</span>
                     </Link>
                 </div>
 
                 {/* Mobile Menu & Theme Button */}
-                <div className="flex items-center gap-2 md:hidden">
+                <div className="flex items-center gap-2 lg:hidden">
                     <ThemeToggle />
                     <button
                         type="button"
@@ -113,9 +118,9 @@ export function Navbar() {
             {isMobileMenuOpen && (
                 <div
                     id="mobile-menu"
-                    className="animate-fade-in border-b border-[var(--border-light)] bg-[var(--nav-bg)] px-4 pb-5 pt-2 backdrop-blur-xl md:hidden"
+                    className="animate-fade-in border-b border-[var(--border-light)] bg-[var(--nav-bg)] px-4 pb-5 pt-2 backdrop-blur-2xl lg:hidden"
                 >
-                    <div className="flex flex-col gap-1">
+                    <div className="flex flex-col gap-1.5">
                         {NAV_ROUTES.map((route) => {
                             const active = isActive(route.href);
                             return (
@@ -124,14 +129,17 @@ export function Navbar() {
                                     href={route.href}
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className={cn(
-                                        "flex items-center rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                                        "flex items-center justify-between rounded-xl px-3.5 py-2.5 text-sm font-medium transition-all duration-150",
                                         active
-                                            ? "bg-[var(--card-bg-hover)] font-semibold text-[var(--text)]"
+                                            ? "shadow-xs border border-[var(--border-light)] bg-[var(--card-bg-hover)] font-semibold text-[var(--text)]"
                                             : "text-[var(--text-muted)] hover:bg-[var(--card-bg)] hover:text-[var(--text)]"
                                     )}
                                     aria-current={active ? "page" : undefined}
                                 >
-                                    {route.label}
+                                    <span>{route.label}</span>
+                                    {active && (
+                                        <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-light)]" />
+                                    )}
                                 </Link>
                             );
                         })}
@@ -142,14 +150,14 @@ export function Navbar() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-[var(--text-muted)] hover:bg-[var(--card-bg)] hover:text-[var(--text)]"
+                                className="flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium text-[var(--text-muted)] hover:bg-[var(--card-bg)] hover:text-[var(--text)]"
                             >
                                 <Github className="h-4 w-4" />
                                 <span>View on GitHub</span>
                             </Link>
                         </div>
 
-                        <div className="pt-1">
+                        <div className="pt-1.5">
                             <Link
                                 href="/downloads"
                                 onClick={() => setIsMobileMenuOpen(false)}
