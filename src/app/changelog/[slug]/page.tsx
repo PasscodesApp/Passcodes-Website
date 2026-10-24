@@ -300,6 +300,13 @@ export default function ChangelogEntryPage({
                                     aria-hidden="true"
                                 />
                             </Link>
+                            <Link
+                                href="/upgrade"
+                                className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 dark:text-red-300 underline hover:no-underline"
+                            >
+                                <span>Upgrade &amp; Migration Guidance</span>
+                                <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                            </Link>
                         </div>
                     </div>
                 )}

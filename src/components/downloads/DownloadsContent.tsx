@@ -243,6 +243,13 @@ export function DownloadsContent() {
                                     >
                                         Upgrade &amp; Migration Center
                                     </Link>
+                                    {" "}or visit the{" "}
+                                    <Link
+                                        href="/upgrade"
+                                        className="font-medium text-[var(--accent-light)] underline hover:no-underline"
+                                    >
+                                        Upgrade &amp; Migration Center
+                                    </Link>
                                     .
                                 </p>
                             </div>
