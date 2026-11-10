@@ -30,6 +30,7 @@ import {
     USER_GUIDE_URL,
 } from "@/lib/constants";
 import Link from "next/link";
+import { InstallationGuide } from "@/components/downloads/InstallationGuide";
 
 type FilterChannel =
     "all" | "stable" | "beta" | "alpha" | "deprecated" | "yanked";
@@ -213,7 +214,7 @@ export function DownloadsContent() {
                                         className="inline-flex items-center gap-1 text-xs font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--accent-light)]"
                                     >
                                         <span>
-                                            Release notes &amp; milestones
+                                            Release notes & milestones
                                         </span>
                                         <ArrowRight
                                             className="h-3 w-3"
@@ -234,24 +235,22 @@ export function DownloadsContent() {
                                         rel="noopener noreferrer"
                                         className="font-medium text-[var(--accent-light)] underline hover:no-underline"
                                     >
-                                        Installation &amp; Setup Guide
+                                        Installation & Setup Guide
                                     </Link>{" "}
                                     or visit the{" "}
                                     <Link
                                         href="/upgrade"
                                         className="font-medium text-[var(--accent-light)] underline hover:no-underline"
                                     >
-                                        Upgrade &amp; Migration Center
-                                    </Link>
-                                    {" "}or visit the{" "}
-                                    <Link
-                                        href="/upgrade"
-                                        className="font-medium text-[var(--accent-light)] underline hover:no-underline"
-                                    >
-                                        Upgrade &amp; Migration Center
+                                        Upgrade & Migration Center
                                     </Link>
                                     .
                                 </p>
+
+                                {/* Inline Android Installation & Troubleshooting Guide */}
+                                <ScrollReveal delay={120}>
+                                    <InstallationGuide />
+                                </ScrollReveal>
                             </div>
                         </ScrollReveal>
                     )
@@ -268,7 +267,7 @@ export function DownloadsContent() {
                                     </span>
                                 </div>
                                 <h2 className="text-base font-semibold text-[var(--text)]">
-                                    Upgrade &amp; Migration Center
+                                    Upgrade & Migration Center
                                 </h2>
                                 <p className="max-w-xl text-xs text-[var(--text-muted)] sm:text-sm">
                                     Need help deciding how to update safely,
