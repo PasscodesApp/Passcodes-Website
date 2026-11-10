@@ -1,5 +1,90 @@
 [
   {
+    "slug": "end-of-android-only",
+    "version": "Architecture Transition",
+    "title": "End of Android-Only Codebase — Migration to Expo & React Native",
+    "date": "2026-05-20",
+    "releaseType": "Stable",
+    "category": "Architecture",
+    "isMilestone": true,
+    "isMajor": true,
+    "summary": "Passcodes officially concluded development on the native Android (Kotlin / Compose) codebase and transitioned to a unified Expo / React Native architecture with local SQLite and Drizzle ORM.",
+    "highlights": [
+      "Concluded 20 months of native Android development (v0.1.0 through v2.1.1).",
+      "Transitioned foundation to Expo and React Native for modern cross-platform capability.",
+      "Replaced native Room/SQLite schema with expo-sqlite and Drizzle ORM.",
+      "Maintained 100% offline-first local device credential storage."
+    ],
+    "sections": [
+      {
+        "title": "Architectural Shift",
+        "items": [
+          "Officially retired the legacy Kotlin Multiplatform / native Android codebase.",
+          "Adopted Expo SDK and React Native runtime for declarative, fluid UI.",
+          "Migrated local persistence to SQLite using Drizzle ORM.",
+          "Established unified design language across all supported form factors."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "v4-0-0-stable",
+    "version": "v4.0.0",
+    "title": "v4.0.0 — Password Generator, Autofill & Search",
+    "date": "2026-10-21",
+    "releaseType": "Stable",
+    "category": "Features",
+    "summary": "Major v4 update featuring an in-app password generator, Android autofill module, password search, and category-based password organizing, plus APK size optimization through split architecture builds.",
+    "highlights": [
+      "Feat: Enhance User Experience For Passwords Manager by @07RehanAli in https://github.com/PasscodesApp/Passcodes/pull/220",
+      "Feat: Search Password & Consistent UI / UX. by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/221",
+      "Feat: Password Generator by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/222",
+      "Feat: Added Autofill Module. V1. (Android) by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/223",
+      "Feat: Enhance UX. by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/225"
+    ],
+    "sections": [
+      {
+        "title": "🚀 New Features",
+        "items": [
+          "Feat: Enhance User Experience For Passwords Manager by @07RehanAli in https://github.com/PasscodesApp/Passcodes/pull/220",
+          "Feat: Search Password & Consistent UI / UX. by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/221",
+          "Feat: Password Generator by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/222",
+          "Feat: Added Autofill Module. V1. (Android) by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/223",
+          "Feat: Enhance UX. by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/225",
+          "Feat: Enhance Password Generator by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/227",
+          "Feat: Category-Based Password Organizing by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/229",
+          "Feat: Improve Import & Export Passwords. by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/230",
+          "Refactor: Screenshots Protection Feature by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/231",
+          "Migrate: Unix Timestamp by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/233",
+          "Chore: v4.0.0 & APK Size Optimization by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/234"
+        ]
+      },
+      {
+        "title": "🐛 Bug Fixes",
+        "items": [
+          "Fix(settings): correct Telegram social link by @harsha-vardhan-burra in https://github.com/PasscodesApp/Passcodes/pull/219",
+          "Fix: Autofill Styling Errors. by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/224"
+        ]
+      },
+      {
+        "title": "🛠 Code Refactoring",
+        "items": [
+          "Refactor: Database Access Layer by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/226",
+          "Chore: Update To Latest Dependencies by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/228",
+          "Refactor: Optimization & Enhancements by @JeelDobariya38 in https://github.com/PasscodesApp/Passcodes/pull/232",
+          "@harsha-vardhan-burra made their first contribution in https://github.com/PasscodesApp/Passcodes/pull/219",
+          "@07RehanAli made their first contribution in https://github.com/PasscodesApp/Passcodes/pull/220"
+        ]
+      }
+    ],
+    "githubUrl": "https://github.com/PasscodesApp/Passcodes/releases/tag/v4.0.0",
+    "isMajor": true,
+    "isYanked": false,
+    "isDeprecated": false,
+    "assetsCount": 6,
+    "downloadCount": 46
+  },
+  {
     "slug": "v3-2-1-stable",
     "version": "v3.2.1",
     "title": "v3.2.1 — Split ABIs & Screenshot Prevention",
@@ -195,34 +280,6 @@
     "isDeprecated": false,
     "assetsCount": 5,
     "downloadCount": 66
-  },
-  {
-    "slug": "end-of-android-only",
-    "version": "Architecture Transition",
-    "title": "End of Android-Only Codebase — Migration to Expo & React Native",
-    "date": "2026-05-20",
-    "releaseType": "Stable",
-    "category": "Architecture",
-    "isMilestone": true,
-    "isMajor": true,
-    "summary": "Passcodes officially concluded development on the native Android (Kotlin / Compose) codebase and transitioned to a unified Expo / React Native architecture with local SQLite and Drizzle ORM.",
-    "highlights": [
-      "Concluded 20 months of native Android development (v0.1.0 through v2.1.1).",
-      "Transitioned foundation to Expo and React Native for modern cross-platform capability.",
-      "Replaced native Room/SQLite schema with expo-sqlite and Drizzle ORM.",
-      "Maintained 100% offline-first local device credential storage."
-    ],
-    "sections": [
-      {
-        "title": "Architectural Shift",
-        "items": [
-          "Officially retired the legacy Kotlin Multiplatform / native Android codebase.",
-          "Adopted Expo SDK and React Native runtime for declarative, fluid UI.",
-          "Migrated local persistence to SQLite using Drizzle ORM.",
-          "Established unified design language across all supported form factors."
-        ]
-      }
-    ]
   },
   {
     "slug": "v2-1-1-beta",
@@ -435,7 +492,7 @@
     "isDeprecated": true,
     "deprecatedReason": "Superseded by the newer database architecture introduced in later releases.",
     "assetsCount": 6,
-    "downloadCount": 49
+    "downloadCount": 57
   },
   {
     "slug": "v1-2-0-alpha-yanked",
