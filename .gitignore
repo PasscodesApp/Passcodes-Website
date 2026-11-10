@@ -46,6 +46,7 @@ out.zip
 
 #Agents
 /.agents
+/.claude
 
 #Skills
 skills-lock.json
