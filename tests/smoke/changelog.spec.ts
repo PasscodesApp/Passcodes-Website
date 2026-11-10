@@ -29,10 +29,10 @@ test.describe("Changelog Smoke & Detail Page Tests", () => {
         // Top production heading
         const heroHeading = page.locator("#current-release");
         await expect(heroHeading).toBeVisible();
-        await expect(heroHeading.getByRole("heading", { level: 2 })).toContainText("v3.2.1");
+        await expect(heroHeading.getByRole("heading", { level: 2 })).toContainText("v4.0.0");
 
         // Action links
-        const downloadBtn = heroHeading.getByRole("link", { name: /Get v3\.2\.1 APK/i });
+        const downloadBtn = heroHeading.getByRole("link", { name: /Get v4\.0\.0 APK/i });
         await expect(downloadBtn).toBeVisible();
         await expect(downloadBtn).toHaveAttribute("href", /\/downloads\/?/);
 
