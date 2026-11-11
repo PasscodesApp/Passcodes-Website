@@ -40,9 +40,12 @@ export function useArchDetection(): ArchDetection {
                     const bits = h.bitness;
                     const android = platform.includes("android") || isAndroidUA;
 
+                    // Only trust high entropy hints if it is definitely an Android device.
                     if (android) {
                         let a: ArchKey = "arm64";
                         let src: ArchDetection["source"] = "ua-heuristic";
+
+                        // Heuristic refinement
                         if (arch.includes("arm")) {
                             a = bits === "32" ? "armv7" : "arm64";
                             src = "client-hints";
@@ -50,6 +53,7 @@ export function useArchDetection(): ArchDetection {
                             a = bits === "32" ? "x86" : "x86_64";
                             src = "client-hints";
                         }
+
                         if (!cancelled)
                             setState({
                                 arch: a,
@@ -59,12 +63,13 @@ export function useArchDetection(): ArchDetection {
                             });
                         return;
                     }
-                    // Desktop: do NOT trust the host arch for an Android APK.
+
+                    // Not an Android device
                     if (!cancelled)
                         setState({
                             arch: null,
                             isAndroid: false,
-                            source: "client-hints",
+                            source: "none",
                             isDetecting: false,
                         });
                     return;

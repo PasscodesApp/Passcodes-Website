@@ -19,8 +19,8 @@ export function supportsViewTransitions(): boolean {
 
 /**
  * Pick the best APK asset for a release, preferring the *universal* build so a
- * normal user gets a one‑click download that works on any device (no GitHub
- * release page, no architecture guessing). Falls back gracefully.
+ * normal user gets a one‑click download that works on any device.
+ * Excludes non-APK assets (like AAB).
  */
 export function pickApkAsset(
     assets: GithubReleaseAsset[]
@@ -28,7 +28,8 @@ export function pickApkAsset(
     if (!assets?.length) return undefined;
     const apks = assets.filter(
         (a) =>
-            a.name.toLowerCase().endsWith(".apk") ||
+            (a.name.toLowerCase().endsWith(".apk") &&
+             !a.name.toLowerCase().includes(".aab")) ||
             a.content_type === "application/vnd.android.package-archive"
     );
     if (!apks.length) return undefined;
@@ -69,6 +70,8 @@ export const ARCH_META: Record<
 /** Map an asset filename to an architecture key. Order matters (arm64 before armeabi, x86_64 before x86). */
 export function archOfAsset(name: string): ArchKey {
     const n = name.toLowerCase();
+    // Exclude AAB files definitively
+    if (n.includes(".aab")) return "unknown";
     if (n.includes("universal")) return "universal";
     if (n.includes("arm64") || n.includes("aarch64")) return "arm64";
     if (
@@ -87,15 +90,17 @@ export interface ArchVariant {
     asset: GithubReleaseAsset;
 }
 
-/** One representative APK per architecture present in the release. */
+/** One representative APK per architecture present in the release. Excludes AAB. */
 export function groupApksByArch(assets: GithubReleaseAsset[]): ArchVariant[] {
     const map = new Map<ArchKey, GithubReleaseAsset>();
     for (const a of assets) {
         const isApk =
-            a.name.toLowerCase().endsWith(".apk") ||
+            (a.name.toLowerCase().endsWith(".apk") &&
+             !a.name.toLowerCase().includes(".aab")) ||
             a.content_type === "application/vnd.android.package-archive";
         if (!isApk) continue;
         const k = archOfAsset(a.name);
+        if (k === "unknown") continue;
         if (!map.has(k)) map.set(k, a);
     }
     return Array.from(map.entries()).map(([key, asset]) => ({ key, asset }));

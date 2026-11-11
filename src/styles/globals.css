@@ -446,10 +446,15 @@ html.light .active-nav {
 .subtle-card:hover {
     border-color: var(--border);
     background: var(--card-bg-hover);
-    transform: translateY(-2px);
     box-shadow:
         0 8px 24px -2px var(--shadow-hover),
         inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .subtle-card:hover {
+        transform: translateY(-2px);
+    }
 }
 
 /* ============================= */
@@ -1369,5 +1374,27 @@ dialog[open]::backdrop {
             border-color 160ms ease,
             color 160ms ease !important;
         transform: none !important;
+    }
+}
+
+/* ============================= */
+/* ===== TOUCH-SAFE HOVER ====== */
+/* ============================= */
+/* Gate lifted/transformed hover states behind fine-pointer devices so touch
+   interactions do not leave components stuck in a transformed hover state.
+   Active/pressed feedback remains available on touch devices. */
+@media (hover: hover) and (pointer: fine) {
+    .arch-chip-hover:hover,
+    .variant-row-hover:hover,
+    .download-card-hover:hover {
+        transform: translateY(-2px);
+    }
+}
+
+@media (pointer: coarse) {
+    .arch-chip-hover:active,
+    .variant-row-hover:active,
+    .download-card-hover:active {
+        transform: scale(0.98);
     }
 }

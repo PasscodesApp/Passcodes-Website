@@ -318,6 +318,12 @@ const EDITORIAL_METADATA = {
         yankedReason: "Yanked prototype release: very early premature prototype published under com.passwordmanager. Kept strictly for documentation and project history.",
         summary: "The very first proof-of-concept prototype for Passcodes, published under com.passwordmanager. Offline-first local password storage prototype.",
     },
+    "v4.0.0": {
+        title: "v4.0.0 — Password Generator, Autofill & Search",
+        category: "Features",
+        isMajor: true,
+        summary: "Major v4 update featuring an in-app password generator, Android autofill module, password search, and category-based password organizing, plus APK size optimization through split architecture builds.",
+    },
 };
 
 const ARCHITECTURE_MILESTONE = {
@@ -349,6 +355,132 @@ const ARCHITECTURE_MILESTONE = {
     ],
 };
 
+/**
+ * Derive a release channel from a raw GitHub release when the documentation
+ * changelog does not yet contain an entry for the tag.
+ *
+ * GitHub is authoritative for version, tag, date, assets and the prerelease
+ * flag. Editorial presentation (title, summary, highlights) falls back to
+ * the release body and optional EDITORIAL_METADATA overrides.
+ */
+function classifyReleaseType(ghRelease) {
+    const text = `${ghRelease.name || ""} ${ghRelease.tag_name || ""}`.toLowerCase();
+
+    if (text.includes("alpha")) return "Alpha";
+    if (text.includes("beta")) return "Beta";
+    if (text.includes("stable") || text.includes("release")) return "Stable";
+    if (ghRelease.prerelease) return "Beta";
+    return "Stable";
+}
+
+/**
+ * Extract a short plain-language summary from a raw GitHub release body when
+ * no editorial summary is available. Uses the first substantive paragraph or
+ * bullet list, stripped of markdown links and contributor mentions.
+ */
+function synthesizeSummary(ghRelease, editorial) {
+    if (editorial?.summary) return editorial.summary;
+    if (!ghRelease?.body) return `Passcodes ${ghRelease?.tag_name || "release"} update.`;
+
+    const lines = ghRelease.body.split("\n");
+    let paragraph = "";
+    let inList = false;
+    let listItems = [];
+
+    for (const raw of lines) {
+        const line = raw.trim();
+        if (!line) {
+            if (paragraph) break;
+            inList = false;
+            continue;
+        }
+        if (line.startsWith("#")) {
+            inList = false;
+            continue;
+        }
+        if (line.startsWith("- ") || line.startsWith("* ")) {
+            inList = true;
+            listItems.push(line.replace(/^[-*]\s+/, ""));
+            continue;
+        }
+        if (inList) continue;
+        paragraph += (paragraph ? " " : "") + line;
+    }
+
+    const cleanedParagraph = (paragraph || listItems.join(" "))
+        .replace(/\[[^\]]+\]\([^)]+\)/g, "")
+        .replace(/<[^>]+>/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+    if (!cleanedParagraph) return `Passcodes ${ghRelease.tag_name} release update.`;
+
+    return cleanedParagraph.length > 220
+        ? `${cleanedParagraph.slice(0, 217)}…`
+        : cleanedParagraph;
+}
+
+/**
+ * Build highlights from a raw GitHub release body, capped at 5 items.
+ */
+function synthesizeHighlights(ghRelease) {
+    if (!ghRelease?.body) return undefined;
+    const items = [];
+    for (const raw of ghRelease.body.split("\n")) {
+        const line = raw.trim();
+        if (!line.startsWith("- ") && !line.startsWith("* ")) continue;
+        const cleaned = cleanMarkdownItem(line.replace(/^[-*]\s+/, ""));
+        if (
+            cleaned &&
+            !cleaned.startsWith("Checkout Release") &&
+            !cleaned.startsWith("Release Notes") &&
+            !cleaned.startsWith("Full Changelog") &&
+            items.length < 5
+        ) {
+            items.push(cleaned);
+        }
+    }
+    return items.length > 0 ? items : undefined;
+}
+
+/**
+ * Build changelog sections from a raw GitHub release body when the docs
+ * changelog does not yet contain a structured entry for the tag.
+ */
+function synthesizeSections(ghRelease) {
+    if (!ghRelease?.body) return undefined;
+    const lines = ghRelease.body.split("\n");
+    const sections = [];
+    let currentTitle = null;
+    let currentItems = [];
+
+    for (const raw of lines) {
+        const line = raw.trim();
+        if (line.startsWith("## ")) {
+            if (currentTitle && currentItems.length > 0) {
+                sections.push({ title: currentTitle, items: currentItems });
+            }
+            currentTitle = line.replace(/^##\s+/, "").trim();
+            currentItems = [];
+        } else if (line.startsWith("- ") || line.startsWith("* ")) {
+            if (!currentTitle) currentTitle = "Highlights";
+            const cleaned = cleanMarkdownItem(line.replace(/^[-*]\s+/, ""));
+            if (
+                cleaned &&
+                !cleaned.startsWith("Checkout Release") &&
+                !cleaned.startsWith("Release Notes") &&
+                !cleaned.startsWith("Full Changelog")
+            ) {
+                currentItems.push(cleaned);
+            }
+        }
+    }
+    if (currentTitle && currentItems.length > 0) {
+        sections.push({ title: currentTitle, items: currentItems });
+    }
+    return sections.length > 0 ? sections : undefined;
+}
+
 async function main() {
     const { releases, changelogMd, releaseNotesMd } = await getSourceData();
 
@@ -371,30 +503,46 @@ async function main() {
 
     const normalizedEntries = [];
 
+    // Build a map of every changelog section keyed by its version tag so that
+    // GitHub releases without a matching docs entry can still be normalized.
+    const clByTag = new Map();
+    let hasArchitectureMilestone = false;
     for (const s of clSections) {
         const firstLine = s.split("\n")[0].trim();
-
         if (firstLine.includes("End Of Android Only")) {
-            normalizedEntries.push(ARCHITECTURE_MILESTONE);
+            hasArchitectureMilestone = true;
             continue;
         }
-
         const tagMatch = firstLine.match(/v[\d\.]+/);
-        if (!tagMatch) continue;
+        if (tagMatch) clByTag.set(tagMatch[0], s);
+    }
 
-        const version = tagMatch[0];
-        const ghRelease = ghMap.get(version);
+    // Include the Architecture Transition Milestone from changelog if present
+    if (hasArchitectureMilestone) {
+        normalizedEntries.push(ARCHITECTURE_MILESTONE);
+    }
+
+    // Iterate over every GitHub release so that a release is never silently
+    // dropped just because the documentation changelog has not been updated.
+    // GitHub is authoritative for version, tag, date, assets and classification.
+    for (const ghRelease of releases) {
+        const version = ghRelease.tag_name;
+
+        const s = clByTag.get(version) || "";
         const rnSection = rnMap.get(version) || "";
 
-        const headerMatch = firstLine.match(/^##\s+(v[\d\.]+)\s*-\s*([A-Za-z]+)(?:\s*\(([^)]+)\))?(?:\s*\[([^\]]+)\])?/i);
-        const releaseType = headerMatch ? headerMatch[2] : "Alpha";
+        const firstLine = s ? s.split("\n")[0].trim() : "";
+        const headerMatch = firstLine
+            ? firstLine.match(/^##\s+(v[\d\.]+)\s*-\s*([A-Za-z]+)(?:\s*\(([^)]+)\))?(?:\s*\[([^\]]+)\])?/i)
+            : null;
+        const releaseType = headerMatch ? headerMatch[2] : classifyReleaseType(ghRelease);
         const isYankedHeader = firstLine.toLowerCase().includes("yanked");
 
         const editorial = EDITORIAL_METADATA[version] || {};
         const isYanked = editorial.isYanked ?? isYankedHeader;
         const slug = `${version.replace(/\./g, "-")}-${releaseType.toLowerCase()}${isYanked ? "-yanked" : ""}`;
 
-        let date = ghRelease ? ghRelease.published_at.slice(0, 10) : "";
+        let date = ghRelease.published_at ? ghRelease.published_at.slice(0, 10) : "";
         if (!date && headerMatch && headerMatch[3]) {
             const parsedD = new Date(headerMatch[3]);
             if (!isNaN(parsedD.getTime())) {
@@ -410,7 +558,7 @@ async function main() {
         }
 
         const internalDetails = parseInternalDetails(s) || (rnSection ? parseInternalDetails(rnSection) : undefined);
-        const parsedSections = parseChangelogSections(s);
+        let parsedSections = parseChangelogSections(s);
 
         let highlights = [];
         for (const sec of parsedSections) {
@@ -419,6 +567,17 @@ async function main() {
                     highlights.push(item);
                 }
             }
+        }
+
+        // When the docs changelog is missing for this tag, synthesize presentation
+        // from the authoritative GitHub release body so the website still shows
+        // a complete, accurate entry for every published release.
+        if (!highlights.length) {
+            highlights = synthesizeHighlights(ghRelease);
+        }
+        if (!parsedSections.length) {
+            const synthSections = synthesizeSections(ghRelease);
+            if (synthSections) parsedSections = synthSections;
         }
 
         let compareUrl = undefined;
@@ -448,7 +607,7 @@ async function main() {
             date,
             releaseType,
             category,
-            summary: editorial.summary || (tldr ? `Passcodes ${version}: ${tldr}` : `Passcodes ${version} release update.`),
+            summary: editorial.summary || synthesizeSummary(ghRelease, editorial),
             highlights: highlights.length > 0 ? highlights : undefined,
             sections: parsedSections.length > 0 ? parsedSections : undefined,
             internalDetails,
